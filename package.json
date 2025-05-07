@@ -1,13 +1,16 @@
 {
   "name": "Conexa",
   "version": "1.0.0",
+  "packageManager": "yarn@1.22.22",
   "private": true,
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
-  "scripts": {                    
-    "dev": "turbo run dev",
+  "scripts": {
+    "dev": "concurrently \"yarn workspace web dev\" \"yarn workspace api start:dev\"",
+    "dev:web": "yarn workspace web dev",
+    "dev:api": "yarn workspace api start:dev",
     "build": "turbo run build",
     "lint": "turbo run lint",
     "test": "turbo run test"
@@ -17,6 +20,7 @@
   "author": "Adel djahnit <adeldjahnita@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "turbo": "^2.5.3"
+    "turbo": "^2.5.3",
+    "concurrently": "^7.6.0"
   }
 }
