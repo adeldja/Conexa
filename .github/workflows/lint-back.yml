@@ -1,0 +1,20 @@
+name: Lint Backend
+
+on:
+  push: []
+  pull_request: []
+
+jobs:
+  lint-back:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "${{ matrix.node-version }}"
+          cache: 'yarn'
+      - run: yarn install --frozen-lockfile
+      - run: yarn workspace api lint
