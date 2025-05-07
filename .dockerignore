@@ -1,0 +1,11 @@
+# Ignore node_modules partout
+**/node_modules
+node_modules
+
+# Ignorer Git et Docker
+.git
+.dockerignore
+
+# Ignorer les artefacts de build
+**/.next
+**/dist

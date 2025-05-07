@@ -8,6 +8,8 @@
     "packages/*"
   ],
   "scripts": {
+    "deux": "docker-compose up --build -d",
+    "down": "docker-compose down",
     "dev": "concurrently \"yarn workspace web dev\" \"yarn workspace api start:dev\"",
     "dev:web": "yarn workspace web dev",
     "dev:api": "yarn workspace api start:dev",
