@@ -6,6 +6,12 @@
     "apps/*",
     "packages/*"
   ],
+  "scripts": {                    
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "test": "turbo run test"
+  },
   "main": "index.js",
   "repository": "https://github.com/adeldja/Conexa.git",
   "author": "Adel djahnit <adeldjahnita@gmail.com>",

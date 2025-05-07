@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+      "target": "ES2021",
+      "module": "ESNext",
+      "lib": ["DOM", "ESNext"],
+      "jsx": "react-jsx",
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "strict": true,
+      "baseUrl": ".",
+      "paths": {
+        "@conexa/ui": ["packages/ui/src"]
+      }
+    }
+  }
+  
