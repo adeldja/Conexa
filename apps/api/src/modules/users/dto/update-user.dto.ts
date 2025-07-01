@@ -9,7 +9,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   @IsOptional()
   fullName?: string;
 
-  @ApiProperty({ enum: Role, example: Role.PROVIDER, required: false })
+  @ApiProperty({ enum: Role, example: 'PROVIDER', required: false })
   @IsEnum(Role)
   @IsOptional()
   role?: Role;

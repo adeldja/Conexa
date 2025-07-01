@@ -9,12 +9,7 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiResponse,
-  ApiParam,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -42,7 +37,7 @@ export class UsersController {
 
   @Get(':id')
   @ApiOperation({ summary: 'Obtenir un utilisateur par ID' })
-  @ApiParam({ name: 'id', description: 'ID de l\'utilisateur' })
+  @ApiParam({ name: 'id', description: "ID de l'utilisateur" })
   @ApiResponse({ status: 200, description: 'Utilisateur trouvé' })
   @ApiResponse({ status: 404, description: 'Utilisateur non trouvé' })
   findOne(@Param('id') id: string) {
@@ -51,7 +46,7 @@ export class UsersController {
 
   @Patch(':id')
   @ApiOperation({ summary: 'Mettre à jour un utilisateur' })
-  @ApiParam({ name: 'id', description: 'ID de l\'utilisateur' })
+  @ApiParam({ name: 'id', description: "ID de l'utilisateur" })
   @ApiResponse({ status: 200, description: 'Utilisateur mis à jour' })
   @ApiResponse({ status: 404, description: 'Utilisateur non trouvé' })
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
@@ -61,7 +56,7 @@ export class UsersController {
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ summary: 'Supprimer un utilisateur' })
-  @ApiParam({ name: 'id', description: 'ID de l\'utilisateur' })
+  @ApiParam({ name: 'id', description: "ID de l'utilisateur" })
   @ApiResponse({ status: 204, description: 'Utilisateur supprimé' })
   @ApiResponse({ status: 404, description: 'Utilisateur non trouvé' })
   remove(@Param('id') id: string) {
