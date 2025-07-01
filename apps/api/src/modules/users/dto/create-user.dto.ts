@@ -28,6 +28,7 @@ export class CreateUserDto {
     example: 'CLIENT',
     required: false,
   })
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   @IsEnum(Role)
   @IsOptional()
   role?: Role;
