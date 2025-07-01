@@ -4,15 +4,20 @@
 FROM node:20-slim AS builder
 WORKDIR /app
 
-# 1) Copier le manifest de l’API
+# 1) Copier le manifest de l'API
 COPY apps/api/package.json apps/api/
 
-# 2) Installer les dépendances (dev+prod) de l’API
+# 2) Installer les dépendances (dev+prod) de l'API
 RUN yarn install --cwd apps/api --frozen-lockfile
 
-# 3) Copier le code source et builder l’API
+# 3) Copier le code source et générer le client Prisma
 COPY apps/api ./apps/api
 WORKDIR /app/apps/api
+
+# 4) Générer le client Prisma
+RUN npx prisma generate
+
+# 5) Builder l'API
 RUN yarn build
 
 # --- Production Stage ---
