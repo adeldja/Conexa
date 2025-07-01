@@ -1,21 +1,4 @@
-import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsString, IsEnum, IsOptional } from 'class-validator';
-import { Role } from '@prisma/client';
+import { PartialType } from '@nestjs/swagger';
 import { CreateUserDto } from './create-user.dto';
 
-export class UpdateUserDto extends PartialType(CreateUserDto) {
-  @ApiProperty({ example: 'Jane Doe', required: false })
-  @IsString()
-  @IsOptional()
-  fullName?: string;
-
-  @ApiProperty({ enum: Role, example: 'PROVIDER', required: false })
-  @IsEnum(Role)
-  @IsOptional()
-  role?: Role;
-
-  @ApiProperty({ example: 'America/New_York', required: false })
-  @IsString()
-  @IsOptional()
-  timezone?: string;
-}
+export class UpdateUserDto extends PartialType(CreateUserDto) {}

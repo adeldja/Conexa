@@ -50,8 +50,8 @@ export class UsersService {
     return user;
   }
 
-  async findAll() {
-    return this.prisma.user.findMany({
+  async findAll(): Promise<UserResponse[]> {
+    return await this.prisma.user.findMany({
       select: {
         id: true,
         email: true,
@@ -63,7 +63,31 @@ export class UsersService {
     });
   }
 
-  async findOne(id: string) {
+  async findOne(id: string): Promise<
+    UserResponse & {
+      slots: Array<{
+        id: string;
+        startTime: Date;
+        endTime: Date;
+        isAvailable: boolean;
+      }>;
+      bookings: Array<{
+        id: string;
+        status: string;
+        createdAt: Date;
+        slot: {
+          id: string;
+          startTime: Date;
+          endTime: Date;
+          provider: {
+            id: string;
+            fullName: string | null;
+            email: string;
+          };
+        };
+      }>;
+    }
+  > {
     const user = await this.prisma.user.findUnique({
       where: { id },
       select: {
@@ -112,7 +136,10 @@ export class UsersService {
     return user;
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto) {
+  async update(
+    id: string,
+    updateUserDto: UpdateUserDto,
+  ): Promise<UserResponse> {
     const user = await this.prisma.user.findUnique({
       where: { id },
     });
@@ -135,7 +162,7 @@ export class UsersService {
     });
   }
 
-  async remove(id: string) {
+  async remove(id: string): Promise<{ message: string }> {
     const user = await this.prisma.user.findUnique({
       where: { id },
     });
