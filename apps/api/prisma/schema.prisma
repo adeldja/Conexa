@@ -8,33 +8,33 @@ generator client {
 }
 
 model User {
-  id          String   @id @default(uuid())
-  email       String   @unique
+  id          String    @id @default(uuid())
+  email       String    @unique
   password    String
   fullName    String?
-  role        Role     @default(CLIENT)
-  timezone    String   @default("UTC")
-  slots       Slot[]   @relation("ProviderSlots")
-  bookings    Booking[] 
-  createdAt   DateTime @default(now())
+  role        Role      @default(CLIENT)
+  timezone    String    @default("UTC")
+  slots       Slot[]    @relation("ProviderSlots")
+  bookings    Booking[] @relation("ClientBookings")
+  createdAt   DateTime  @default(now())
 }
 
 model Slot {
-  id          String   @id @default(uuid())
-  provider    User     @relation("ProviderSlots", fields: [providerId], references: [id])
+  id          String    @id @default(uuid())
+  provider    User      @relation("ProviderSlots", fields: [providerId], references: [id])
   providerId  String
   startTime   DateTime
   endTime     DateTime
-  isAvailable Boolean  @default(true)
-  bookings    Booking[]
-  createdAt   DateTime @default(now())
+  isAvailable Boolean   @default(true)
+  bookings    Booking[] @relation("SlotBookings")
+  createdAt   DateTime  @default(now())
 }
 
 model Booking {
   id        String   @id @default(uuid())
-  slot      Slot     @relation(fields: [slotId], references: [id])
+  slot      Slot     @relation("SlotBookings", fields: [slotId], references: [id])
   slotId    String
-  client    User     @relation(fields: [clientId], references: [id])
+  client    User     @relation("ClientBookings", fields: [clientId], references: [id])
   clientId  String
   status    Status   @default(PENDING)
   createdAt DateTime @default(now())
