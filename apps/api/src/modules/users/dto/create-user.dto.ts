@@ -24,8 +24,8 @@ export class CreateUserDto {
   fullName?: string;
 
   @ApiProperty({
-    enum: Role,
-    example: Role.CLIENT,
+    enum: Object.values(Role),
+    example: 'CLIENT',
     enumName: 'Role',
     required: false,
   })
