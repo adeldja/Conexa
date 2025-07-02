@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return */
 import {
   Injectable,
   NotFoundException,
@@ -7,8 +6,18 @@ import {
 import { PrismaService } from '../../prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
+
+// Types locaux basés sur le schéma Prisma
+interface User {
+  id: string;
+  email: string;
+  password: string;
+  fullName: string | null;
+  role: 'ADMIN' | 'PROVIDER' | 'CLIENT';
+  timezone: string;
+  createdAt: Date;
+}
 
 type UserResponse = Omit<User, 'password'>;
 
@@ -49,6 +58,12 @@ export class UsersService {
     });
 
     return user;
+  }
+
+  async findByEmail(email: string): Promise<User | null> {
+    return await this.prisma.user.findUnique({
+      where: { email },
+    });
   }
 
   async findAll(): Promise<UserResponse[]> {
