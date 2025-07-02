@@ -27,7 +27,7 @@ export class AuthController {
     type: 'object',
   })
   @ApiResponse({ status: 401, description: 'Identifiants invalides' })
-  async login(@Body() loginDto: LoginDto, @Request() req: any): Promise<LoginResponse> {
+  async login(@Body() _loginDto: LoginDto, @Request() req: any): Promise<LoginResponse> {
     return this.authService.login(req.user);
   }
 
