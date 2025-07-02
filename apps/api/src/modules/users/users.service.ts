@@ -6,8 +6,18 @@ import {
 import { PrismaService } from '../../prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
+
+// Types locaux basés sur le schéma Prisma
+interface User {
+  id: string;
+  email: string;
+  password: string;
+  fullName: string | null;
+  role: 'ADMIN' | 'PROVIDER' | 'CLIENT';
+  timezone: string;
+  createdAt: Date;
+}
 
 type UserResponse = Omit<User, 'password'>;
 
