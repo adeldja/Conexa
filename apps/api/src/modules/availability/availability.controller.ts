@@ -1,19 +1,30 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { AvailabilityService } from './availability.service';
 import { CreateSlotDto } from './dto/create-slot.dto';
 import { UpdateSlotDto } from './dto/update-slot.dto';
 
 @ApiTags('availability')
 @Controller('availability')
+@UseGuards(JwtAuthGuard)
+@ApiBearerAuth()
 export class AvailabilityController {
   constructor(private readonly availabilityService: AvailabilityService) {}
 
   @Post()
   @ApiOperation({ summary: 'Create a new availability slot' })
   @ApiResponse({ status: 201, description: 'Slot created successfully' })
-  create(@Body() createSlotDto: CreateSlotDto) {
-    return this.availabilityService.create(createSlotDto);
+  async create(@Body() createSlotDto: CreateSlotDto) {
+    console.log('Received request to create slot:', createSlotDto);
+    try {
+      const result = await this.availabilityService.create(createSlotDto);
+      console.log('Slot created successfully:', result);
+      return result;
+    } catch (error) {
+      console.error('Error in create slot controller:', error);
+      throw error;
+    }
   }
 
   @Get('provider/:providerId')

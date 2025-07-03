@@ -35,6 +35,13 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
+  @Get('providers')
+  @ApiOperation({ summary: 'Lister tous les prestataires' })
+  @ApiResponse({ status: 200, description: 'Liste des prestataires' })
+  findProviders() {
+    return this.usersService.findByRole('PROVIDER');
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Obtenir un utilisateur par ID' })
   @ApiParam({ name: 'id', description: "ID de l'utilisateur" })

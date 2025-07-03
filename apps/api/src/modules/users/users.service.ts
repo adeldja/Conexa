@@ -79,6 +79,20 @@ export class UsersService {
     });
   }
 
+  async findByRole(role: 'ADMIN' | 'PROVIDER' | 'CLIENT'): Promise<UserResponse[]> {
+    return await this.prisma.user.findMany({
+      where: { role },
+      select: {
+        id: true,
+        email: true,
+        fullName: true,
+        role: true,
+        timezone: true,
+        createdAt: true,
+      },
+    });
+  }
+
   async findOne(id: string): Promise<
     UserResponse & {
       slots: Array<{

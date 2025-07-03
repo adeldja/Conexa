@@ -77,8 +77,8 @@ export default function SlotForm({ slot, onSuccess, onCancel }: SlotFormProps) {
       if (slot) {
         // Mise à jour d'un créneau existant
         const updateData: UpdateSlotDto = {
-          startTime: formData.startTime,
-          endTime: formData.endTime,
+          startTime: new Date(formData.startTime).toISOString(),
+          endTime: new Date(formData.endTime).toISOString(),
           isAvailable: formData.isAvailable
         };
         await availabilityService.updateSlot(slot.id, updateData);
@@ -86,10 +86,11 @@ export default function SlotForm({ slot, onSuccess, onCancel }: SlotFormProps) {
         // Création d'un nouveau créneau
         const createData: CreateSlotDto = {
           providerId: user.id,
-          startTime: formData.startTime,
-          endTime: formData.endTime,
+          startTime: new Date(formData.startTime).toISOString(),
+          endTime: new Date(formData.endTime).toISOString(),
           isAvailable: formData.isAvailable
         };
+        console.log('Sending create slot request with data:', createData);
         await availabilityService.createSlot(createData);
       }
 
