@@ -2,6 +2,7 @@
 
 import { useAuth } from '@/contexts/AuthContext';
 import ProtectedRoute from '@/components/ProtectedRoute';
+import Link from 'next/link';
 
 export default function DashboardPage() {
   const { user, logout } = useAuth();
@@ -37,7 +38,7 @@ export default function DashboardPage() {
 
         <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
           <div className="px-4 py-6 sm:px-0">
-            <div className="border-4 border-dashed border-gray-200 rounded-lg h-96 p-8">
+            <div className="border-4 border-dashed border-gray-200 rounded-lg p-8">
               <div className="text-center">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">
                   Bienvenue sur Conexa !
@@ -66,6 +67,55 @@ export default function DashboardPage() {
                       </dd>
                     </div>
                   </dl>
+                </div>
+
+                {/* Section des fonctionnalités disponibles selon le rôle */}
+                <div className="mt-8">
+                  <h3 className="text-lg font-medium text-gray-900 mb-4">
+                    Fonctionnalités disponibles
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
+                    
+                    {user?.role === 'PROVIDER' && (
+                      <div className="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500">
+                        <h4 className="font-semibold text-gray-900 mb-2">Gestion des créneaux</h4>
+                        <p className="text-sm text-gray-600 mb-4">
+                          Créez et gérez vos créneaux horaires pour permettre aux clients de prendre rendez-vous.
+                        </p>
+                        <Link href="/dashboard/slots">
+                          <span className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700">
+                            Gérer mes créneaux
+                          </span>
+                        </Link>
+                      </div>
+                    )}
+                    
+                    {user?.role === 'CLIENT' && (
+                      <div className="bg-white rounded-lg shadow p-6 border-l-4 border-green-500">
+                        <h4 className="font-semibold text-gray-900 mb-2">Prise de rendez-vous</h4>
+                        <p className="text-sm text-gray-600 mb-4">
+                          Consultez les disponibilités et prenez rendez-vous avec un prestataire.
+                        </p>
+                        <Link href="/dashboard/bookings">
+                          <span className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700">
+                            Prendre rendez-vous
+                          </span>
+                        </Link>
+                      </div>
+                    )}
+                    
+                    {user?.role === 'ADMIN' && (
+                      <div className="bg-white rounded-lg shadow p-6 border-l-4 border-purple-500">
+                        <h4 className="font-semibold text-gray-900 mb-2">Administration</h4>
+                        <p className="text-sm text-gray-600 mb-4">
+                          Gérez les utilisateurs et les paramètres de la plateforme.
+                        </p>
+                        <button disabled className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-400">
+                          Bientôt disponible
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

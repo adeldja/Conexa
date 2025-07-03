@@ -1,5 +1,5 @@
 {
-  "name": "Conexa",
+  "name": "conexa",
   "version": "1.0.0",
   "packageManager": "yarn@1.22.22",
   "private": true,
@@ -8,11 +8,13 @@
     "packages/*"
   ],
   "scripts": {
-    "deux": "docker-compose up --build -d",
-    "down": "docker-compose down",
-    "dev": "concurrently \"yarn workspace web dev\" \"yarn workspace api start:dev\"",
-    "dev:web": "yarn workspace web dev",
+    "dev": "concurrently \"yarn dev:api\" \"yarn dev:web\"",
     "dev:api": "yarn workspace api start:dev",
+    "dev:web": "yarn workspace web dev",
+    "db:start": "docker-compose -f docker-compose.dev.yml up -d",
+    "db:stop": "docker-compose -f docker-compose.dev.yml down",
+    "db:reset": "docker-compose -f docker-compose.dev.yml down -v && docker-compose -f docker-compose.dev.yml up -d",
+    "start": "yarn db:start && sleep 3 && yarn dev",
     "build": "turbo run build",
     "lint": "turbo run lint",
     "test": "turbo run test"

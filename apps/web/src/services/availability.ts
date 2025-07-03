@@ -1,0 +1,145 @@
+import { User } from '@/types/auth';
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+// Log pour déboguer l'URL de l'API
+console.log('API_BASE_URL:', API_BASE_URL);
+
+export interface Slot {
+  id: string;
+  providerId: string;
+  startTime: string;
+  endTime: string;
+  isAvailable: boolean;
+  createdAt: string;
+}
+
+export interface CreateSlotDto {
+  providerId: string;
+  startTime: string;
+  endTime: string;
+  isAvailable?: boolean;
+}
+
+export interface UpdateSlotDto {
+  startTime?: string;
+  endTime?: string;
+  isAvailable?: boolean;
+}
+
+class AvailabilityService {
+  private getAuthHeader(): Headers {
+    const token = localStorage.getItem('conexa_token');
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+    });
+    
+    if (token) {
+      headers.append('Authorization', `Bearer ${token}`);
+    }
+    
+    return headers;
+  }
+
+  async getProviderSlots(providerId: string): Promise<Slot[]> {
+    const response = await fetch(`${API_BASE_URL}/availability/provider/${providerId}`, {
+      headers: this.getAuthHeader(),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Erreur lors de la récupération des créneaux');
+    }
+
+    return response.json();
+  }
+
+  async getSlot(id: string): Promise<Slot> {
+    const response = await fetch(`${API_BASE_URL}/availability/${id}`, {
+      headers: this.getAuthHeader(),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Erreur lors de la récupération du créneau');
+    }
+
+    return response.json();
+  }
+
+  async createSlot(slotData: CreateSlotDto): Promise<Slot> {
+    console.log('Creating slot with data:', slotData);
+    console.log('API URL:', `${API_BASE_URL}/availability`);
+    
+    try {
+      const headers = this.getAuthHeader();
+      console.log('Request headers:', Array.from(headers.entries()));
+      
+      const response = await fetch(`${API_BASE_URL}/availability`, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(slotData),
+      });
+
+      console.log('Response status:', response.status);
+      
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ message: 'Unknown error' }));
+        console.error('Error response:', errorData);
+        throw new Error(errorData.message || `Erreur lors de la création du créneau: ${response.status}`);
+      }
+
+      return response.json();
+    } catch (error) {
+      console.error('Exception during createSlot:', error);
+      throw error;
+    }
+  }
+
+  async updateSlot(id: string, slotData: UpdateSlotDto): Promise<Slot> {
+    const response = await fetch(`${API_BASE_URL}/availability/${id}`, {
+      method: 'PATCH',
+      headers: this.getAuthHeader(),
+      body: JSON.stringify(slotData),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Erreur lors de la mise à jour du créneau');
+    }
+
+    return response.json();
+  }
+
+  async deleteSlot(id: string): Promise<void> {
+    const response = await fetch(`${API_BASE_URL}/availability/${id}`, {
+      method: 'DELETE',
+      headers: this.getAuthHeader(),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Erreur lors de la suppression du créneau');
+    }
+  }
+
+  // Helper methods for date formatting
+  formatDate(date: Date | string): string {
+    const d = new Date(date);
+    return d.toISOString();
+  }
+
+  formatDateForDisplay(date: string): string {
+    const d = new Date(date);
+    return d.toLocaleDateString('fr-FR') + ' ' + d.toLocaleTimeString('fr-FR', {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  }
+
+  formatTimeForInput(date: string): string {
+    const d = new Date(date);
+    return d.toISOString().slice(0, 16); // Format: YYYY-MM-DDTHH:MM
+  }
+}
+
+export const availabilityService = new AvailabilityService();
