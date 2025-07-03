@@ -38,7 +38,7 @@ export default function SlotList({ onEditSlot, onDeleteSlot, refreshTrigger }: S
 
   if (loading) {
     return (
-      <div className="my-4 p-4 flex justify-center">
+      <div className="my-4 p-4 flex justify-center" role="status">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
       </div>
     );

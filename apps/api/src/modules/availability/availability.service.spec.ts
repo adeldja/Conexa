@@ -39,7 +39,7 @@ describe('AvailabilityService', () => {
   });
 
   describe('create', () => {
-    it('should create a slot', async () => {
+    it('should create a slot with proper date conversion', async () => {
       // Arrange
       const createSlotDto: CreateSlotDto = {
         providerId: 'provider-id',
@@ -65,8 +65,62 @@ describe('AvailabilityService', () => {
       // Assert
       expect(result).toEqual(expectedSlot);
       expect(mockPrismaService.slot.create).toHaveBeenCalledWith({
-        data: createSlotDto,
+        data: expect.objectContaining({
+          providerId: createSlotDto.providerId,
+          isAvailable: createSlotDto.isAvailable
+        }),
       });
+      
+      // Vérifier que les dates sont bien converties en objets Date
+      const createCall = mockPrismaService.slot.create.mock.calls[0][0];
+      expect(createCall.data.startTime).toBeInstanceOf(Date);
+      expect(createCall.data.endTime).toBeInstanceOf(Date);
+    });
+    
+    it('should handle isAvailable being undefined', async () => {
+      // Arrange
+      const createSlotDto: CreateSlotDto = {
+        providerId: 'provider-id',
+        startTime: '2025-07-01T09:00:00.000Z',
+        endTime: '2025-07-01T10:00:00.000Z',
+        // isAvailable non spécifié
+      };
+
+      const expectedSlot = {
+        id: 'slot-id',
+        providerId: 'provider-id',
+        startTime: new Date('2025-07-01T09:00:00.000Z'),
+        endTime: new Date('2025-07-01T10:00:00.000Z'),
+        isAvailable: true, // Valeur par défaut
+        createdAt: new Date(),
+      };
+
+      mockPrismaService.slot.create.mockResolvedValue(expectedSlot);
+
+      // Act
+      const result = await service.create(createSlotDto);
+
+      // Assert
+      expect(result).toEqual(expectedSlot);
+      
+      // Vérifier que isAvailable est défini à true par défaut
+      const createCall = mockPrismaService.slot.create.mock.calls[0][0];
+      expect(createCall.data.isAvailable).toBe(true);
+    });
+    
+    it('should handle error during slot creation', async () => {
+      // Arrange
+      const createSlotDto: CreateSlotDto = {
+        providerId: 'provider-id',
+        startTime: '2025-07-01T09:00:00.000Z',
+        endTime: '2025-07-01T10:00:00.000Z',
+      };
+
+      const error = new Error('Erreur de création');
+      mockPrismaService.slot.create.mockRejectedValue(error);
+
+      // Act & Assert
+      await expect(service.create(createSlotDto)).rejects.toThrow(error);
     });
   });
 

@@ -1,10 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
-
-interface CreateBookingDto {
-  slotId: string;
-  clientId: string;
-}
+import { CreateBookingDto } from './dto/create-booking.dto';
 
 @Injectable()
 export class BookingService {

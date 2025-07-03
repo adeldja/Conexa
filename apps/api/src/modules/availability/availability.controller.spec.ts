@@ -37,7 +37,7 @@ describe('AvailabilityController', () => {
   });
 
   describe('create', () => {
-    it('should create a slot', async () => {
+    it('should create a slot and handle successful response', async () => {
       // Arrange
       const createSlotDto: CreateSlotDto = {
         providerId: 'provider-id',
@@ -63,6 +63,22 @@ describe('AvailabilityController', () => {
       // Assert
       expect(result).toEqual(expectedSlot);
       expect(mockAvailabilityService.create).toHaveBeenCalledWith(createSlotDto);
+    });
+    
+    it('should handle errors during slot creation', async () => {
+      // Arrange
+      const createSlotDto: CreateSlotDto = {
+        providerId: 'provider-id',
+        startTime: '2025-07-01T09:00:00.000Z',
+        endTime: '2025-07-01T10:00:00.000Z',
+        isAvailable: true
+      };
+
+      const error = new Error('Test error');
+      mockAvailabilityService.create.mockRejectedValue(error);
+
+      // Act & Assert
+      await expect(controller.create(createSlotDto)).rejects.toThrow(error);
     });
   });
 

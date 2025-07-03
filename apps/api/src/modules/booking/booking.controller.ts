@@ -2,11 +2,7 @@ import { Controller, Get, Post, Body, Param, Patch, UseGuards } from '@nestjs/co
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { BookingService } from './booking.service';
-
-interface CreateBookingDto {
-  slotId: string;
-  clientId: string;
-}
+import { CreateBookingDto } from './dto/create-booking.dto';
 
 @ApiTags('bookings')
 @Controller('bookings')
