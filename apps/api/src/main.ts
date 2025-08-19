@@ -22,20 +22,10 @@ async function bootstrap() {
     .filter(Boolean);
 
   app.enableCors({
-    origin: (
-      origin: string | undefined,
-      callback: (err: Error | null, allow?: boolean) => void,
-    ) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-      return callback(new Error('Not allowed by CORS'));
-    },
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: false,
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
+  origin: true, // accepte tout, équivalent à '*'
+  methods: ['GET','HEAD','PUT','PATCH','POST','DELETE','OPTIONS'],
+  allowedHeaders: ['Content-Type','Authorization'],
+  credentials: false,
   });
 
   app.use((req: Request, res: Response, next: NextFunction) => {
