@@ -1,7 +1,7 @@
 import { User } from '@/types/auth';
 import { Slot } from './availability';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export interface Provider extends User {
   // Ajoutez d'autres propriétés spécifiques au provider si nécessaire

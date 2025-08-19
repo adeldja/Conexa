@@ -1,6 +1,6 @@
 import { User } from '@/types/auth';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 // Log pour déboguer l'URL de l'API
 console.log('API_BASE_URL:', API_BASE_URL);
 
