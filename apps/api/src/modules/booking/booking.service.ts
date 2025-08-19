@@ -61,6 +61,36 @@ export class BookingService {
     });
   }
 
+  async findByProvider(providerId: string) {
+    return this.prisma.booking.findMany({
+      where: {
+        slot: {
+          providerId: providerId
+        }
+      },
+      include: {
+        client: {
+          select: {
+            id: true,
+            email: true,
+            fullName: true,
+          },
+        },
+        slot: {
+          select: {
+            id: true,
+            startTime: true,
+            endTime: true,
+            isAvailable: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+  }
+
   async findBySlot(slotId: string) {
     return this.prisma.booking.findMany({
       where: { slotId },

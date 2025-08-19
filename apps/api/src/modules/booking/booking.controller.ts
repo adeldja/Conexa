@@ -33,6 +33,13 @@ export class BookingController {
     return this.bookingService.findByClient(clientId);
   }
 
+  @Get('provider/:providerId')
+  @ApiOperation({ summary: 'Get all bookings for a provider' })
+  @ApiResponse({ status: 200, description: 'List of bookings returned successfully' })
+  findByProvider(@Param('providerId') providerId: string) {
+    return this.bookingService.findByProvider(providerId);
+  }
+
   @Get('slot/:slotId')
   @ApiOperation({ summary: 'Get all bookings for a slot' })
   @ApiResponse({ status: 200, description: 'List of bookings returned successfully' })
