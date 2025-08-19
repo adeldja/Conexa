@@ -1,6 +1,6 @@
 import { User, LoginRequest, RegisterRequest, AuthResponse } from '@/types/auth';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ;
 const TOKEN_KEY = 'conexa_token';
 const USER_KEY = 'conexa_user';
 
