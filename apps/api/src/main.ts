@@ -16,13 +16,14 @@ async function bootstrap() {
   );
 
   app.enableCors({
-    origin: true,
+    origin: true, // autorise tout
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: false,
     preflightContinue: false,
     optionsSuccessStatus: 204,
   });
+
 
   app.getHttpAdapter().getInstance().options('*', (req: Request, res: Response) => {
     res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
