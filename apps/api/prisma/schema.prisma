@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(uuid())
+  email     String    @unique
+  password  String
+  fullName  String?
+  role      Role      @default(CLIENT)
+  timezone  String    @default("UTC")
+  createdAt DateTime  @default(now())
+  bookings  Booking[] @relation("ClientBookings")
+  slots     Slot[]    @relation("ProviderSlots")
+}
+
+model Slot {
+  id          String    @id @default(uuid())
+  providerId  String
+  startTime   DateTime
+  endTime     DateTime
+  isAvailable Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  bookings    Booking[] @relation("SlotBookings")
+  provider    User      @relation("ProviderSlots", fields: [providerId], references: [id])
+}
+
+model Booking {
+  id        String   @id @default(uuid())
+  slotId    String
+  clientId  String
+  status    Status   @default(PENDING)
+  createdAt DateTime @default(now())
+  client    User     @relation("ClientBookings", fields: [clientId], references: [id])
+  slot      Slot     @relation("SlotBookings", fields: [slotId], references: [id])
+}
+
+enum Role {
+  PROVIDER
+  CLIENT
+  ADMIN
+}
+
+enum Status {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
