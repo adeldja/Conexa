@@ -15,12 +15,20 @@ async function bootstrap() {
   );
 
   app.enableCors({
-    origin: true,
+    origin: true, // autorise tout
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: false,
     preflightContinue: false,
     optionsSuccessStatus: 204,
+  });
+
+  // Force express à répondre aux OPTIONS si jamais Nest ne le fait pas
+  app.getHttpAdapter().getInstance().options('*', (req, res) => {
+    res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
+    res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    return res.sendStatus(204);
   });
 
   const config = new DocumentBuilder()
