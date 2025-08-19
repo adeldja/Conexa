@@ -25,13 +25,6 @@ async function bootstrap() {
   });
 
 
-  app.getHttpAdapter().getInstance().options('*', (req: Request, res: Response) => {
-    res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
-    res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    return res.sendStatus(204);
-  });
-
   const config = new DocumentBuilder()
     .setTitle('Conexa API')
     .setDescription('API de la plateforme de prise de rendez-vous Conexa')
@@ -40,13 +33,13 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api/docs', app, document);
+  SwaggerModule.setup('docs', app, document);
 
   const port = Number(process.env.PORT) || 3001;
   await app.listen(port, '0.0.0.0');
 
   const publicUrl = process.env.RENDER_EXTERNAL_URL ?? `http://localhost:${port}`;
   console.log(`🚀 API started on ${publicUrl}`);
-  console.log(`📚 Swagger docs: ${publicUrl}/api/docs`);
+  console.log(`📚 Swagger docs: ${publicUrl}/docs`);
 }
 void bootstrap();
