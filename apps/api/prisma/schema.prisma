@@ -1,49 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
-}
-
 model User {
-  id          String    @id @default(uuid())
-  email       String    @unique
-  password    String
-  fullName    String?
-  role        Role      @default(CLIENT)
-  timezone    String    @default("UTC")
-  slots       Slot[]    @relation("ProviderSlots")
-  bookings    Booking[] @relation("ClientBookings")
-  createdAt   DateTime  @default(now())
+  id        String    @id @default(uuid())
+  email     String    @unique
+  password  String
+  fullName  String?
+  role      Role      @default(CLIENT)
+  timezone  String    @default("UTC")
+  createdAt DateTime  @default(now())
+  bookings  Booking[] @relation("ClientBookings")
+  slots     Slot[]    @relation("ProviderSlots")
 }
 
 model Slot {
   id          String    @id @default(uuid())
-  provider    User      @relation("ProviderSlots", fields: [providerId], references: [id])
   providerId  String
   startTime   DateTime
   endTime     DateTime
   isAvailable Boolean   @default(true)
-  bookings    Booking[] @relation("SlotBookings")
   createdAt   DateTime  @default(now())
+  bookings    Booking[] @relation("SlotBookings")
+  provider    User      @relation("ProviderSlots", fields: [providerId], references: [id])
 }
 
 model Booking {
   id        String   @id @default(uuid())
-  slot      Slot     @relation("SlotBookings", fields: [slotId], references: [id])
   slotId    String
-  client    User     @relation("ClientBookings", fields: [clientId], references: [id])
   clientId  String
   status    Status   @default(PENDING)
   createdAt DateTime @default(now())
+  client    User     @relation("ClientBookings", fields: [clientId], references: [id])
+  slot      Slot     @relation("SlotBookings", fields: [slotId], references: [id])
 }
 
 enum Role {
-  ADMIN
   PROVIDER
   CLIENT
+  ADMIN
 }
 
 enum Status {

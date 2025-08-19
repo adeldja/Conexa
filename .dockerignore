@@ -1,11 +1,51 @@
-# Ignore node_modules partout
-**/node_modules
+# -----------------------------
+# Node / PNPM / Yarn
+# -----------------------------
 node_modules
+**/node_modules
+.pnpm-debug.log*
+yarn-error.log*
+yarn-debug.log*
+npm-debug.log*
 
-# Ignorer Git et Docker
-.git
-.dockerignore
-
-# Ignorer les artefacts de build
-**/.next
+# -----------------------------
+# Build outputs
+# -----------------------------
+dist
 **/dist
+.next
+**/.next
+out
+coverage
+*.tsbuildinfo
+
+# -----------------------------
+# Env files (NE JAMAIS PUSHER)
+# -----------------------------
+.env
+.env.*
+!.env.example
+
+# -----------------------------
+# Logs
+# -----------------------------
+*.log
+logs
+*.pid
+*.seed
+*.pid.lock
+
+# -----------------------------
+# Prisma
+# -----------------------------
+.prisma
+*.db
+*.sqlite
+
+# -----------------------------
+# Docker / Git artefacts
+# -----------------------------
+.dockerignore
+Dockerfile*
+.git
+.gitignore
