@@ -53,6 +53,12 @@ export interface ProviderProfile {
   updatedAt: string;
   
   // Relations
+  user?: {
+    id: string;
+    email: string;
+    fullName?: string;
+    role: string;
+  };
   specialties?: ProviderSpecialty[];
 }
 
