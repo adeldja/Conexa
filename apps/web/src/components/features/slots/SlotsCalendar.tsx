@@ -137,7 +137,7 @@ export default function SlotsCalendar({ slots, onSlotStatusChange }: SlotsCalend
                       
                       return (
                         <button
-                          key={`${slot.startTime}-${slot.endTime}`}
+                          key={`${slot.date}-${slot.startTime}-${slot.endTime}`}
                           onClick={() => handleSlotClick(slot, globalIndex)}
                           className={`
                             px-3 py-2 text-xs font-medium rounded-lg border transition-colors
