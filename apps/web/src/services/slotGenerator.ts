@@ -1,4 +1,4 @@
-import { WeeklySchedule, CreateSlotRequest } from '../types';
+import { WeeklySchedule, CreateSlotRequest } from '../types/types';
 
 export class SlotGenerator {
   static generate(
