@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { WeeklySchedule, GeneratedSlot, DEFAULT_WEEKLY_SCHEDULE } from '@/types/types';
+import { WeeklySchedule, GeneratedSlot, DEFAULT_WEEKLY_SCHEDULE, CreateSlotRequest } from '@/types/types';
 import { advancedSlotsService } from '@/services/advancedSlotsService';
 import WeeklyScheduleEditor from './WeeklyScheduleEditor';
 import SlotsCalendar from './SlotsCalendar';
@@ -68,7 +68,7 @@ export default function AdvancedSlotsManager() {
       const generatedSlots = advancedSlotsService.generateSlotsFromSchedule(
         weeklySchedule,
         effectiveStartDate,
-        endDate,
+        endDate
       );
 
       if (generatedSlots.length === 0) {
@@ -76,13 +76,38 @@ export default function AdvancedSlotsManager() {
         return;
       }
 
-      // Convertir les GeneratedSlot en CreateSlotRequest
-      const slotsToCreate = generatedSlots.map(slot => ({
-        providerId: user.id,
-        startTime: slot.startTime,
-        endTime: slot.endTime,
-        isAvailable: slot.status === 'available'
-      }));
+      // Convertir les GeneratedSlot en CreateSlotRequest pour l'API
+      const slotsToCreate: CreateSlotRequest[] = generatedSlots.map(slot => {
+        // Utiliser les valeurs ISO stockées si disponibles, sinon reconstruire
+        if ('_startTimeISO' in slot && '_endTimeISO' in slot) {
+          return {
+            providerId: user.id,
+            startTime: slot._startTimeISO as string,
+            endTime: slot._endTimeISO as string,
+            isAvailable: slot.status === 'available'
+          };
+        }
+        
+        // Fallback: recréer les dates complètes à partir de la date et des heures
+        const [day, month, year] = slot.date.split('/').map(Number);
+        const slotDate = new Date(year, month - 1, day);
+        
+        const [startHour, startMinute] = slot.startTime.split(':').map(Number);
+        const [endHour, endMinute] = slot.endTime.split(':').map(Number);
+        
+        const startDateTime = new Date(slotDate);
+        startDateTime.setHours(startHour, startMinute, 0, 0);
+        
+        const endDateTime = new Date(slotDate);
+        endDateTime.setHours(endHour, endMinute, 0, 0);
+        
+        return {
+          providerId: user.id,
+          startTime: startDateTime.toISOString(),
+          endTime: endDateTime.toISOString(),
+          isAvailable: slot.status === 'available'
+        };
+      });
 
       // Créer les créneaux dans le backend
       const createdSlots = await advancedSlotsService.createMultipleSlots(slotsToCreate);
@@ -137,19 +162,91 @@ export default function AdvancedSlotsManager() {
       setIsLoading(true);
       setError(null);
 
-      // Supprimer tous les créneaux
+      // Supprimer les créneaux un par un et gérer les erreurs individuellement
+      let deletedCount = 0;
+      let failedCount = 0;
+      const failedSlots: string[] = [];
+
       for (const slot of generatedSlots) {
         if (slot.backendId) {
-          await advancedSlotsService.deleteSlot(slot.backendId);
+          try {
+            await advancedSlotsService.deleteSlot(slot.backendId);
+            deletedCount++;
+          } catch (error) {
+            failedCount++;
+            // Si le créneau a une réservation, l'ajouter à la liste des échecs
+            if (slot.booking) {
+              failedSlots.push(`${slot.date} ${slot.startTime}-${slot.endTime} (réservé par ${slot.booking.clientName})`);
+            } else {
+              failedSlots.push(`${slot.date} ${slot.startTime}-${slot.endTime}`);
+            }
+            console.warn(`Impossible de supprimer le créneau ${slot.backendId}:`, error);
+          }
         }
       }
 
-      // Vider l'état local
-      setGeneratedSlots([]);
+      // Recharger les créneaux pour avoir l'état à jour
+      await loadExistingSlots();
+
+      // Afficher un message informatif
+      if (deletedCount > 0 && failedCount === 0) {
+        console.log(`${deletedCount} créneaux supprimés avec succès`);
+      } else if (deletedCount > 0 && failedCount > 0) {
+        setError(`${deletedCount} créneaux supprimés. ${failedCount} créneaux n'ont pas pu être supprimés car ils ont des réservations.`);
+      } else if (failedCount > 0) {
+        setError(`Aucun créneau supprimé. ${failedCount} créneaux ont des réservations et ne peuvent pas être supprimés.`);
+      }
 
     } catch (error) {
       console.error('Erreur lors de la suppression des créneaux:', error);
       setError(error instanceof Error ? error.message : 'Erreur lors de la suppression des créneaux');
+      // Recharger en cas d'erreur pour avoir l'état correct
+      await loadExistingSlots();
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleDeleteAvailableSlots = async () => {
+    if (!user?.id) return;
+
+    const availableSlots = generatedSlots.filter(slot => slot.status === 'available' && !slot.booking);
+    
+    if (availableSlots.length === 0) {
+      setError('Aucun créneau disponible à supprimer');
+      return;
+    }
+
+    if (!confirm(`Êtes-vous sûr de vouloir supprimer les ${availableSlots.length} créneaux disponibles ? Cette action est irréversible.`)) {
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      setError(null);
+
+      let deletedCount = 0;
+
+      // Supprimer seulement les créneaux disponibles
+      for (const slot of availableSlots) {
+        if (slot.backendId) {
+          try {
+            await advancedSlotsService.deleteSlot(slot.backendId);
+            deletedCount++;
+          } catch (error) {
+            console.warn(`Impossible de supprimer le créneau ${slot.backendId}:`, error);
+          }
+        }
+      }
+
+      // Recharger les créneaux pour avoir l'état à jour
+      await loadExistingSlots();
+
+      console.log(`${deletedCount} créneaux disponibles supprimés avec succès`);
+
+    } catch (error) {
+      console.error('Erreur lors de la suppression des créneaux disponibles:', error);
+      setError(error instanceof Error ? error.message : 'Erreur lors de la suppression des créneaux disponibles');
       // Recharger en cas d'erreur pour avoir l'état correct
       await loadExistingSlots();
     } finally {
@@ -225,6 +322,19 @@ export default function AdvancedSlotsManager() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
             </svg>
             Supprimer tous les créneaux
+          </button>
+        )}
+
+        {generatedSlots.length > 0 && (
+          <button
+            onClick={handleDeleteAvailableSlots}
+            disabled={isLoading}
+            className="inline-flex items-center px-4 py-2 border border-red-300 text-sm font-medium rounded-lg text-red-700 bg-white hover:bg-red-50 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+            Supprimer créneaux disponibles
           </button>
         )}
       </div>
