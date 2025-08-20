@@ -2,9 +2,12 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
 import { RegisterRequest } from '@/types/auth';
+import { Input } from '@/components/forms/Input';
+import { Select } from '@/components/forms/Select';
+import { Button } from '@/components/ui/Button';
+import AuthLayout from '@/components/layout/AuthLayout';
 
 export default function RegisterPage() {
   const [formData, setFormData] = useState<RegisterRequest>({
@@ -40,111 +43,99 @@ export default function RegisterPage() {
     }
   };
 
+  const roleOptions = [
+    { value: 'CLIENT', label: 'Client - Je recherche des prestations' },
+    { value: 'PROVIDER', label: 'Prestataire - Je propose mes services' },
+    { value: 'ADMIN', label: 'Administrateur' }
+  ];
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Créer un compte Conexa
-          </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            Ou{' '}
-            <Link
-              href="/login"
-              className="font-medium text-blue-600 hover:text-blue-500"
-            >
-              connectez-vous à votre compte existant
-            </Link>
-          </p>
-        </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="space-y-4">
-            <div>
-              <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
-                Nom complet
-              </label>
-              <input
-                id="fullName"
-                name="fullName"
-                type="text"
-                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder="John Doe"
-                value={formData.fullName}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder="john@example.com"
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Mot de passe
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="new-password"
-                required
-                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder="Minimum 6 caractères"
-                value={formData.password}
-                onChange={handleChange}
-                minLength={6}
-              />
-            </div>
-            <div>
-              <label htmlFor="role" className="block text-sm font-medium text-gray-700">
-                Type de compte
-              </label>
-              <select
-                id="role"
-                name="role"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                value={formData.role}
-                onChange={handleChange}
-              >
-                <option value="CLIENT">Client</option>
-                <option value="PROVIDER">Prestataire</option>
-                <option value="ADMIN">Administrateur</option>
-              </select>
+    <AuthLayout
+      title="Rejoignez Conexa"
+      subtitle="Créez votre compte en quelques secondes"
+      alternativeLink={{
+        text: "Déjà un compte ?",
+        href: "/login",
+        linkText: "Se connecter"
+      }}
+    >
+      <form className="space-y-6" onSubmit={handleSubmit}>
+        <Input
+          label="Nom complet"
+          type="text"
+          name="fullName"
+          required
+          placeholder="John Doe"
+          value={formData.fullName}
+          onChange={handleChange}
+          icon={
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+          }
+        />
+
+        <Input
+          label="Adresse email"
+          type="email"
+          name="email"
+          autoComplete="email"
+          required
+          placeholder="votre@email.com"
+          value={formData.email}
+          onChange={handleChange}
+          icon={
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+            </svg>
+          }
+        />
+
+        <Input
+          label="Mot de passe"
+          type="password"
+          name="password"
+          autoComplete="new-password"
+          required
+          placeholder="Minimum 6 caractères"
+          value={formData.password}
+          onChange={handleChange}
+          minLength={6}
+          icon={
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+          }
+        />
+
+        <Select
+          label="Type de compte"
+          name="role"
+          value={formData.role}
+          onChange={handleChange}
+          options={roleOptions}
+        />
+
+        {error && (
+          <div className="rounded-xl bg-red-50 border border-red-200 p-4">
+            <div className="flex items-center">
+              <svg className="w-5 h-5 text-red-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+              </svg>
+              <span className="text-sm text-red-700">{error}</span>
             </div>
           </div>
+        )}
 
-          {error && (
-            <div className="rounded-md bg-red-50 p-4">
-              <div className="text-sm text-red-700">{error}</div>
-            </div>
-          )}
-
-          <div>
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isLoading ? (
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-              ) : (
-                'Créer mon compte'
-              )}
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+        <Button
+          type="submit"
+          isLoading={isLoading}
+          className="w-full"
+          size="lg"
+        >
+          Créer mon compte
+        </Button>
+      </form>
+    </AuthLayout>
   );
 }
