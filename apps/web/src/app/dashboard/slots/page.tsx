@@ -1,8 +1,8 @@
 'use client';
 
 import { useAuth } from '@/contexts/AuthContext';
-import ProtectedRoute from '@/components/ProtectedRoute';
-import AdvancedSlotsManagerNew from '@/components/slots/advanced/AdvancedSlotsManagerNew';
+import ProtectedRoute from '@/components/shared/ProtectedRoute';
+import AdvancedSlotsManagerNew from '@/components/features/slots/AdvancedSlotsManager';
 
 export default function SlotsPage() {
   const { user } = useAuth();
