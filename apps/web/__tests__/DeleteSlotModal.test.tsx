@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import DeleteSlotModal from '../src/components/slots/DeleteSlotModal';
+import DeleteSlotModal from '../src/components/modals/DeleteSlotModal';
 import { availabilityService } from '../src/services/availability';
 
 // Mock du service

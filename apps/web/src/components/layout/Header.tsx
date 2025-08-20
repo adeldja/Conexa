@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronDownIcon, CogIcon, LogoutIcon } from './Icons';
-import { getInitials } from './utils';
+import { ChevronDownIcon, CogIcon, LogoutIcon } from '../features/dashboard';
+import { getInitials } from '../features/dashboard/utils';
 
 interface User {
   id: string;
