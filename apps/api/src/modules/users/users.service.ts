@@ -40,21 +40,45 @@ export class UsersService {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create user
-    const user = await this.prisma.user.create({
-      data: {
-        email,
-        password: hashedPassword,
-        ...userData,
-      },
-      select: {
-        id: true,
-        email: true,
-        fullName: true,
-        role: true,
-        timezone: true,
-        createdAt: true,
-      },
+    // Create user with transaction to ensure profile creation
+    const user = await this.prisma.$transaction(async (prisma) => {
+      // Create user
+      const createdUser = await prisma.user.create({
+        data: {
+          email,
+          password: hashedPassword,
+          ...userData,
+        },
+        select: {
+          id: true,
+          email: true,
+          fullName: true,
+          role: true,
+          timezone: true,
+          createdAt: true,
+        },
+      });
+
+      // Automatically create profiles based on role
+      if (createdUser.role === 'PROVIDER') {
+        await prisma.providerProfile.create({
+          data: {
+            userId: createdUser.id,
+            description: 'Profil prestataire nouvellement créé',
+            defaultPrice: 50.0,
+            isVerified: false,
+          },
+        });
+      } else if (createdUser.role === 'CLIENT') {
+        await prisma.clientProfile.create({
+          data: {
+            userId: createdUser.id,
+            preferences: {},
+          },
+        });
+      }
+
+      return createdUser;
     });
 
     return user;

@@ -128,7 +128,7 @@ export class SpecialtiesService {
   async addProviderSpecialty(providerId: string, currentUserId: string, addProviderSpecialtyDto: AddProviderSpecialtyDto) {
     // Vérifier que le prestataire existe et appartient à l'utilisateur connecté
     const provider = await this.prisma.providerProfile.findUnique({
-      where: { id: providerId },
+      where: { userId: providerId }, // Utiliser userId au lieu de id
     });
 
     if (!provider) {
@@ -152,7 +152,7 @@ export class SpecialtiesService {
     const existingAssociation = await this.prisma.providerSpecialty.findUnique({
       where: {
         providerId_specialtyId: {
-          providerId,
+          providerId: provider.id, // Utiliser provider.id
           specialtyId: addProviderSpecialtyDto.specialtyId,
         },
       },
@@ -164,7 +164,7 @@ export class SpecialtiesService {
 
     return this.prisma.providerSpecialty.create({
       data: {
-        providerId,
+        providerId: provider.id, // Utiliser provider.id
         specialtyId: addProviderSpecialtyDto.specialtyId,
         level: addProviderSpecialtyDto.level,
         certification: addProviderSpecialtyDto.certification,
@@ -188,7 +188,7 @@ export class SpecialtiesService {
   async removeProviderSpecialty(providerId: string, specialtyId: string, currentUserId: string) {
     // Vérifier que le prestataire existe et appartient à l'utilisateur connecté
     const provider = await this.prisma.providerProfile.findUnique({
-      where: { id: providerId },
+      where: { userId: providerId }, // Utiliser userId au lieu de id
     });
 
     if (!provider) {
@@ -202,7 +202,7 @@ export class SpecialtiesService {
     const association = await this.prisma.providerSpecialty.findUnique({
       where: {
         providerId_specialtyId: {
-          providerId,
+          providerId: provider.id, // Utiliser provider.id
           specialtyId,
         },
       },
@@ -215,7 +215,7 @@ export class SpecialtiesService {
     return this.prisma.providerSpecialty.delete({
       where: {
         providerId_specialtyId: {
-          providerId,
+          providerId: provider.id, // Utiliser provider.id
           specialtyId,
         },
       },
@@ -224,7 +224,7 @@ export class SpecialtiesService {
 
   async getProviderSpecialties(providerId: string) {
     const provider = await this.prisma.providerProfile.findUnique({
-      where: { id: providerId },
+      where: { userId: providerId }, // Chercher par userId au lieu de id
       include: {
         specialties: {
           include: {

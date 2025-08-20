@@ -42,13 +42,18 @@ export const specialtyService = {
 
   // Ajouter une spécialité à un prestataire
   async addToProvider(providerId: string, data: AddProviderSpecialtyRequest): Promise<ProviderSpecialty> {
-    const response = await api.post(`${API_CONFIG.ENDPOINTS.SPECIALTIES}/provider/${providerId}`, data);
+    const response = await api.post(`${API_CONFIG.ENDPOINTS.SPECIALTIES}/provider/${providerId}`, {
+      ...data,
+      userId: providerId // Ajouter l'userId pour l'autorisation temporaire
+    });
     return response.data;
   },
 
   // Supprimer une spécialité d'un prestataire
   async removeFromProvider(providerId: string, specialtyId: string): Promise<void> {
-    await api.delete(`${API_CONFIG.ENDPOINTS.SPECIALTIES}/provider/${providerId}/${specialtyId}`);
+    await api.delete(`${API_CONFIG.ENDPOINTS.SPECIALTIES}/provider/${providerId}/${specialtyId}`, {
+      data: { userId: providerId } // Ajouter l'userId pour l'autorisation temporaire
+    });
   },
 
   // Récupérer les spécialités d'un prestataire

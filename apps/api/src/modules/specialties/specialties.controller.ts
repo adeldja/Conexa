@@ -52,7 +52,7 @@ export class SpecialtiesController {
     @Request() req: any,
     @Body() addProviderSpecialtyDto: AddProviderSpecialtyDto,
   ) {
-    const currentUserId = req.user?.id || req.body.userId; // Temporaire pour les tests
+    const currentUserId = req.user?.id || req.body.userId || providerId; // Temporaire pour les tests
     return this.specialtiesService.addProviderSpecialty(providerId, currentUserId, addProviderSpecialtyDto);
   }
 
@@ -62,7 +62,7 @@ export class SpecialtiesController {
     @Param('specialtyId') specialtyId: string,
     @Request() req: any,
   ) {
-    const currentUserId = req.user?.id || req.body.userId; // Temporaire pour les tests
+    const currentUserId = req.user?.id || req.body.userId || providerId; // Temporaire pour les tests
     return this.specialtiesService.removeProviderSpecialty(providerId, specialtyId, currentUserId);
   }
 
