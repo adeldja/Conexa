@@ -1,10 +1,10 @@
 'use client';
 
-import ProtectedRoute from '@/components/ProtectedRoute';
+import ProtectedRoute from '../shared/ProtectedRoute';
 import Header from './Header';
-import WelcomeSection from './WelcomeSection';
-import UserProfileCard from './UserProfileCard';
-import FeaturesSection from './FeaturesSection';
+import WelcomeSection from '../features/dashboard/WelcomeSection';
+import UserProfileCard from '../features/dashboard/UserProfileCard';
+import FeaturesSection from '../features/dashboard/FeaturesSection';
 
 interface User {
   id: string;

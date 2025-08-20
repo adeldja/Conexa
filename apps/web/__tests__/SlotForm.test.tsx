@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import SlotForm from '../src/components/slots/SlotForm';
+import SlotForm from '../src/components/forms/SlotForm';
 import { availabilityService } from '../src/services/availability';
 import { AuthProvider } from '../src/contexts/AuthContext';
 

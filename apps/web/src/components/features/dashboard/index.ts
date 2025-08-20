@@ -1,5 +1,3 @@
-export { default as DashboardLayout } from './DashboardLayout';
-export { default as Header } from './Header';
 export { default as WelcomeSection } from './WelcomeSection';
 export { default as UserProfileCard } from './UserProfileCard';
 export { default as FeaturesSection } from './FeaturesSection';
