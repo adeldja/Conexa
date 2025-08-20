@@ -3,7 +3,8 @@ import {
   BackendBooking, 
   GeneratedSlot, 
   CreateSlotRequest, 
-  UpdateSlotRequest
+  UpdateSlotRequest,
+  WeeklySchedule
 } from '@/types/types';
 import { ApiClient } from '@/utils/apiClient';
 import { SlotGenerator } from '@/utils/slotGenerator';
@@ -46,7 +47,43 @@ class AdvancedSlotsService {
   }
 
   // Génération et gestion des créneaux
-  generateSlotsFromSchedule = SlotGenerator.generateSlotsFromSchedule;
+  generateSlotsFromSchedule(
+    schedule: WeeklySchedule, 
+    startDate: Date, 
+    endDate: Date
+  ): GeneratedSlot[] {
+    // Utiliser un providerId temporaire pour la génération
+    const tempProviderId = 'temp';
+    
+    // Générer les créneaux avec SlotGenerator
+    const createRequests = SlotGenerator.generate(schedule, startDate, endDate, tempProviderId);
+    
+    // Convertir les CreateSlotRequest en GeneratedSlot
+    return createRequests.map(request => {
+      const startDateTime = new Date(request.startTime);
+      const endDateTime = new Date(request.endTime);
+      
+      return {
+        date: startDateTime.toLocaleDateString('fr-FR', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric'
+        }),
+        startTime: startDateTime.toLocaleTimeString('fr-FR', { 
+          hour: '2-digit', 
+          minute: '2-digit' 
+        }),
+        endTime: endDateTime.toLocaleTimeString('fr-FR', { 
+          hour: '2-digit', 
+          minute: '2-digit' 
+        }),
+        status: 'available' as const,
+        // Stocker les valeurs ISO pour faciliter la conversion
+        _startTimeISO: request.startTime,
+        _endTimeISO: request.endTime
+      };
+    });
+  }
 
   async createMultipleSlots(slots: CreateSlotRequest[]): Promise<BackendSlot[]> {
     const results = await Promise.allSettled(
