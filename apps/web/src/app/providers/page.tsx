@@ -11,7 +11,7 @@ export default function ProvidersPage() {
   const [specialties, setSpecialties] = useState<Specialty[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchLoading, setSearchLoading] = useState(false);
-  
+
   // Filtres de recherche
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSpecialty, setSelectedSpecialty] = useState('');
@@ -96,12 +96,8 @@ export default function ProvidersPage() {
     <div className="container mx-auto px-4 py-8">
       {/* En-tête */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          Trouvez votre prestataire idéal
-        </h1>
-        <p className="text-gray-600">
-          Découvrez des professionnels qualifiés dans votre domaine
-        </p>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">Trouvez votre prestataire idéal</h1>
+        <p className="text-gray-600">Découvrez des professionnels qualifiés dans votre domaine</p>
       </div>
 
       {/* Filtres de recherche */}
@@ -117,8 +113,8 @@ export default function ProvidersPage() {
               type="text"
               placeholder="Nom, description, compétences..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+              onChange={e => setSearchQuery(e.target.value)}
+              onKeyPress={e => e.key === 'Enter' && handleSearch()}
             />
           </div>
 
@@ -130,10 +126,10 @@ export default function ProvidersPage() {
             <Select
               id="specialty"
               value={selectedSpecialty}
-              onChange={(e) => setSelectedSpecialty(e.target.value)}
+              onChange={e => setSelectedSpecialty(e.target.value)}
             >
               <option value="">Toutes les spécialités</option>
-              {specialties.map((specialty) => (
+              {specialties.map(specialty => (
                 <option key={specialty.id} value={specialty.id}>
                   {specialty.icon} {specialty.name}
                 </option>
@@ -143,18 +139,10 @@ export default function ProvidersPage() {
 
           {/* Actions */}
           <div className="flex gap-2">
-            <Button 
-              onClick={handleSearch}
-              disabled={searchLoading}
-              className="flex-1"
-            >
+            <Button onClick={handleSearch} disabled={searchLoading} className="flex-1">
               {searchLoading ? 'Recherche...' : 'Rechercher'}
             </Button>
-            <Button 
-              variant="outline" 
-              onClick={handleReset}
-              disabled={searchLoading}
-            >
+            <Button variant="outline" onClick={handleReset} disabled={searchLoading}>
               Reset
             </Button>
           </div>
@@ -174,17 +162,18 @@ export default function ProvidersPage() {
           {/* Nombre de résultats */}
           <div className="mb-6">
             <p className="text-gray-600">
-              {providers.length} prestataire{providers.length > 1 ? 's' : ''} trouvé{providers.length > 1 ? 's' : ''}
+              {providers.length} prestataire{providers.length > 1 ? 's' : ''} trouvé
+              {providers.length > 1 ? 's' : ''}
             </p>
           </div>
 
           {/* Grille des prestataires */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            {providers.map((provider) => (
+            {providers.map(provider => (
               <ProviderCard
                 key={provider.id}
                 provider={provider}
-                onViewProfile={(provider) => {
+                onViewProfile={provider => {
                   // TODO: Navigation vers le profil détaillé
                   console.log('Voir profil:', provider);
                 }}
@@ -203,7 +192,7 @@ export default function ProvidersPage() {
                 >
                   Précédent
                 </Button>
-                
+
                 <div className="flex items-center gap-1">
                   {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
                     const page = i + 1;

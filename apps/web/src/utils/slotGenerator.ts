@@ -2,13 +2,18 @@ import { WeeklySchedule, CreateSlotRequest, DaySchedule } from '../types/types';
 
 export class SlotGenerator {
   static generate(
-    schedule: WeeklySchedule, 
-    startDate: Date, 
-    endDate: Date, 
+    schedule: WeeklySchedule,
+    startDate: Date,
+    endDate: Date,
     providerId: string
   ): CreateSlotRequest[] {
-    console.log('🔧 SlotGenerator.generate appelé avec:', { schedule, startDate, endDate, providerId });
-    
+    console.log('🔧 SlotGenerator.generate appelé avec:', {
+      schedule,
+      startDate,
+      endDate,
+      providerId,
+    });
+
     const slots: CreateSlotRequest[] = [];
     const currentDate = new Date(startDate);
     const dayKeys = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
@@ -16,11 +21,11 @@ export class SlotGenerator {
     while (currentDate <= endDate) {
       const dayOfWeek = dayKeys[currentDate.getDay()];
       const daySchedule = schedule[dayOfWeek];
-      
-      console.log(`🔧 Jour ${currentDate.toISOString().split('T')[0]} (${dayOfWeek}):`, { 
-        enabled: daySchedule?.enabled, 
+
+      console.log(`🔧 Jour ${currentDate.toISOString().split('T')[0]} (${dayOfWeek}):`, {
+        enabled: daySchedule?.enabled,
         timeSlots: daySchedule?.timeSlots,
-        getDay: currentDate.getDay()
+        getDay: currentDate.getDay(),
       });
 
       if (daySchedule?.enabled) {
@@ -39,10 +44,18 @@ export class SlotGenerator {
     return slots;
   }
 
-  private static generateDaySlots(daySchedule: DaySchedule, date: Date, providerId: string): CreateSlotRequest[] {
+  private static generateDaySlots(
+    daySchedule: DaySchedule,
+    date: Date,
+    providerId: string
+  ): CreateSlotRequest[] {
     const slots: CreateSlotRequest[] = [];
-    
-    console.log('🔧 generateDaySlots appelé avec:', { daySchedule, date: date.toISOString(), providerId });
+
+    console.log('🔧 generateDaySlots appelé avec:', {
+      daySchedule,
+      date: date.toISOString(),
+      providerId,
+    });
 
     if (!daySchedule.timeSlots || daySchedule.timeSlots.length === 0) {
       console.log('🔧 Aucun timeSlot trouvé pour ce jour');
@@ -51,7 +64,7 @@ export class SlotGenerator {
 
     for (const timeSlot of daySchedule.timeSlots) {
       console.log('🔧 Traitement du timeSlot:', timeSlot);
-      
+
       const [startHour, startMinute] = timeSlot.start.split(':').map(Number);
       const [endHour, endMinute] = timeSlot.end.split(':').map(Number);
 
@@ -60,9 +73,9 @@ export class SlotGenerator {
       slotStart.setHours(startHour, startMinute, 0, 0);
       slotEnd.setHours(endHour, endMinute, 0, 0);
 
-      console.log('🔧 Plage horaire:', { 
-        start: slotStart.toISOString(), 
-        end: slotEnd.toISOString() 
+      console.log('🔧 Plage horaire:', {
+        start: slotStart.toISOString(),
+        end: slotEnd.toISOString(),
       });
 
       const current = new Date(slotStart);

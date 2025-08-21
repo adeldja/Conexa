@@ -15,7 +15,7 @@ jest.mock('../src/contexts/AuthContext', () => ({
 
 describe('Home page', () => {
   const mockPush = jest.fn();
-  
+
   beforeEach(() => {
     (useRouter as jest.Mock).mockReturnValue({
       push: mockPush,
@@ -30,30 +30,30 @@ describe('Home page', () => {
     });
 
     render(<Home />);
-    
+
     expect(screen.getByText('Conexa')).toBeInTheDocument();
     expect(screen.getByText('Chargement...')).toBeInTheDocument();
   });
 
-  it('redirige vers /dashboard quand l\'utilisateur est authentifié', () => {
+  it("redirige vers /dashboard quand l'utilisateur est authentifié", () => {
     (useAuth as jest.Mock).mockReturnValue({
       isAuthenticated: true,
       isLoading: false,
     });
 
     render(<Home />);
-    
+
     expect(mockPush).toHaveBeenCalledWith('/dashboard');
   });
 
-  it('redirige vers /login quand l\'utilisateur n\'est pas authentifié', () => {
+  it("redirige vers /login quand l'utilisateur n'est pas authentifié", () => {
     (useAuth as jest.Mock).mockReturnValue({
       isAuthenticated: false,
       isLoading: false,
     });
 
     render(<Home />);
-    
+
     expect(mockPush).toHaveBeenCalledWith('/login');
   });
 });

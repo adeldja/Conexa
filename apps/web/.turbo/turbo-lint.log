@@ -1,5 +1,29 @@
 
 [2K[1G[1myarn run v1.22.22[22m
 [2K[1G[2m$ next lint[22m
-[32m✔ No ESLint warnings or errors[39m
-[2K[1G✨  Done in 4.57s.
+
+[36m./src/app/dashboard/reviews/page.tsx[39m
+[33m78[39m:[33m3[39m  [33m[1mWarning[22m[39m: React Hook "useEffect" is called conditionally. React Hooks must be called in the exact same order in every component render.  [90m[1mreact-hooks/rules-of-hooks[22m[39m
+[33m80[39m:[33m6[39m  [33m[1mWarning[22m[39m: React Hook useEffect has a missing dependency: 'loadReviewsData'. Either include it or remove the dependency array.  [90m[1mreact-hooks/exhaustive-deps[22m[39m
+[33m388[39m:[33m29[39m  [33m[1mWarning[22m[39m: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  [90m[1m@next/next/no-img-element[22m[39m
+
+[36m./src/app/providers/[userId]/page.tsx[39m
+[33m89[39m:[33m17[39m  [33m[1mWarning[22m[39m: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  [90m[1m@next/next/no-img-element[22m[39m
+
+[36m./src/app/providers/page.tsx[39m
+[33m61[39m:[33m6[39m  [33m[1mWarning[22m[39m: React Hook useEffect has a missing dependency: 'performSearch'. Either include it or remove the dependency array.  [90m[1mreact-hooks/exhaustive-deps[22m[39m
+
+[36m./src/components/features/ProviderCard.tsx[39m
+[33m23[39m:[33m15[39m  [33m[1mWarning[22m[39m: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  [90m[1m@next/next/no-img-element[22m[39m
+
+[36m./src/components/features/slots/AdvancedSlotsManager.tsx[39m
+[33m28[39m:[33m6[39m  [33m[1mWarning[22m[39m: React Hook useEffect has a missing dependency: 'loadExistingSlots'. Either include it or remove the dependency array.  [90m[1mreact-hooks/exhaustive-deps[22m[39m
+
+[36m./src/components/features/slots/AdvancedSlotsManagerNew.tsx[39m
+[33m23[39m:[33m6[39m  [33m[1mWarning[22m[39m: React Hook useEffect has a missing dependency: 'loadExistingSlots'. Either include it or remove the dependency array.  [90m[1mreact-hooks/exhaustive-deps[22m[39m
+
+[36m./src/hooks/useSpecialties.ts[39m
+[33m50[39m:[33m6[39m  [33m[1mWarning[22m[39m: React Hook useEffect has a missing dependency: 'error'. Either include it or remove the dependency array.  [90m[1mreact-hooks/exhaustive-deps[22m[39m
+
+[36minfo[39m  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+[2K[1G✨  Done in 2.74s.

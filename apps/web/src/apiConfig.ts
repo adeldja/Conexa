@@ -24,7 +24,7 @@ export const api = axios.create({
 
 // Intercepteur pour ajouter le token d'authentification
 api.interceptors.request.use(
-  (config) => {
+  config => {
     // Récupérer le token depuis localStorage
     if (typeof window !== 'undefined') {
       const token = localStorage.getItem('conexa_token');
@@ -34,15 +34,15 @@ api.interceptors.request.use(
     }
     return config;
   },
-  (error) => {
+  error => {
     return Promise.reject(error);
   }
 );
 
 // Intercepteur pour gérer les erreurs de réponse
 api.interceptors.response.use(
-  (response) => response,
-  (error) => {
+  response => response,
+  error => {
     // Laisser les composants gérer les erreurs 401 eux-mêmes
     // Ne pas rediriger automatiquement
     return Promise.reject(error);

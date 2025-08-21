@@ -9,7 +9,7 @@ interface BadgeProps {
 
 export function Badge({ children, variant = 'primary', size = 'md', className }: BadgeProps) {
   const baseClasses = 'inline-flex items-center font-medium rounded-full';
-  
+
   const variantClasses = {
     primary: 'bg-blue-100 text-blue-800',
     secondary: 'bg-gray-100 text-gray-800',
@@ -26,14 +26,7 @@ export function Badge({ children, variant = 'primary', size = 'md', className }:
   };
 
   return (
-    <span
-      className={cn(
-        baseClasses,
-        variantClasses[variant],
-        sizeClasses[size],
-        className
-      )}
-    >
+    <span className={cn(baseClasses, variantClasses[variant], sizeClasses[size], className)}>
       {children}
     </span>
   );

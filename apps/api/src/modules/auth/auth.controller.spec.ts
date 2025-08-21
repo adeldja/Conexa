@@ -96,11 +96,11 @@ describe('AuthController', () => {
       };
 
       mockAuthService.register.mockRejectedValue(
-        new Error('Email already exists')
+        new Error('Email already exists'),
       );
 
       await expect(controller.register(registerDto)).rejects.toThrow(
-        'Email already exists'
+        'Email already exists',
       );
       expect(mockAuthService.register).toHaveBeenCalledWith(registerDto);
     });

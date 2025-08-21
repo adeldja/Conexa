@@ -26,17 +26,22 @@ export function SpecialtyCard({
 
   function getLevelNumber(level: string): number {
     const levelMap: Record<string, number> = {
-      'Débutant': 1,
-      'Intermédiaire': 2,
-      'Confirmé': 3,
-      'Avancé': 4,
-      'Expert': 5,
+      Débutant: 1,
+      Intermédiaire: 2,
+      Confirmé: 3,
+      Avancé: 4,
+      Expert: 5,
     };
     return levelMap[level] || 3;
   }
 
-  function getLevelString(level: number): 'Débutant' | 'Intermédiaire' | 'Confirmé' | 'Avancé' | 'Expert' {
-    const levelMap: Record<number, 'Débutant' | 'Intermédiaire' | 'Confirmé' | 'Avancé' | 'Expert'> = {
+  function getLevelString(
+    level: number
+  ): 'Débutant' | 'Intermédiaire' | 'Confirmé' | 'Avancé' | 'Expert' {
+    const levelMap: Record<
+      number,
+      'Débutant' | 'Intermédiaire' | 'Confirmé' | 'Avancé' | 'Expert'
+    > = {
       1: 'Débutant',
       2: 'Intermédiaire',
       3: 'Confirmé',
@@ -53,28 +58,25 @@ export function SpecialtyCard({
   };
 
   return (
-    <div className={`
+    <div
+      className={`
       bg-white rounded-lg border-2 transition-all duration-200 p-4
-      ${isAdded 
-        ? 'border-blue-200 bg-blue-50/50 shadow-sm' 
-        : 'border-gray-200 hover:border-gray-300 hover:shadow-sm'
+      ${
+        isAdded
+          ? 'border-blue-200 bg-blue-50/50 shadow-sm'
+          : 'border-gray-200 hover:border-gray-300 hover:shadow-sm'
       }
       ${loading ? 'opacity-50 pointer-events-none' : ''}
-    `}>
+    `}
+    >
       {/* Header avec icône et nom */}
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center space-x-3">
-          <div className="text-2xl">
-            {specialty.icon || '🔧'}
-          </div>
+          <div className="text-2xl">{specialty.icon || '🔧'}</div>
           <div>
-            <h3 className="font-semibold text-gray-900">
-              {specialty.name}
-            </h3>
+            <h3 className="font-semibold text-gray-900">{specialty.name}</h3>
             {specialty.description && (
-              <p className="text-sm text-gray-500 mt-1">
-                {specialty.description}
-              </p>
+              <p className="text-sm text-gray-500 mt-1">{specialty.description}</p>
             )}
           </div>
         </div>
@@ -94,18 +96,12 @@ export function SpecialtyCard({
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Niveau de compétence
             </label>
-            <SkillLevelSlider
-              value={levelNumber}
-              onChange={handleLevelChange}
-              disabled={loading}
-            />
+            <SkillLevelSlider value={levelNumber} onChange={handleLevelChange} disabled={loading} />
           </div>
 
           {providerSpecialty.certification && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Certification
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Certification</label>
               <p className="text-sm text-gray-600 bg-gray-50 p-2 rounded">
                 {providerSpecialty.certification}
               </p>
@@ -133,9 +129,7 @@ export function SpecialtyCard({
           </div>
         ) : (
           <div className="flex items-center justify-between w-full">
-            <div className="text-sm text-gray-500">
-              Cliquez pour ajouter à vos spécialités
-            </div>
+            <div className="text-sm text-gray-500">Cliquez pour ajouter à vos spécialités</div>
             <Button
               size="sm"
               onClick={() => onAdd?.(specialty)}
@@ -159,39 +153,34 @@ interface SpecialtyBadgeProps {
   className?: string;
 }
 
-export function SpecialtyBadge({ 
-  providerSpecialty, 
-  onRemove, 
+export function SpecialtyBadge({
+  providerSpecialty,
+  onRemove,
   showLevel = true,
-  className = '' 
+  className = '',
 }: SpecialtyBadgeProps) {
   const getLevelColor = (level: string) => {
     const colors = {
-      'Débutant': 'bg-red-100 text-red-800',
-      'Intermédiaire': 'bg-orange-100 text-orange-800',
-      'Confirmé': 'bg-yellow-100 text-yellow-800',
-      'Avancé': 'bg-blue-100 text-blue-800',
-      'Expert': 'bg-green-100 text-green-800',
+      Débutant: 'bg-red-100 text-red-800',
+      Intermédiaire: 'bg-orange-100 text-orange-800',
+      Confirmé: 'bg-yellow-100 text-yellow-800',
+      Avancé: 'bg-blue-100 text-blue-800',
+      Expert: 'bg-green-100 text-green-800',
     };
     return colors[level as keyof typeof colors] || 'bg-gray-100 text-gray-800';
   };
 
   return (
-    <div className={`
+    <div
+      className={`
       inline-flex items-center gap-2 px-3 py-2 rounded-lg border bg-white
       ${className}
-    `}>
-      <span className="text-lg">
-        {providerSpecialty.specialty.icon || '🔧'}
-      </span>
-      <span className="font-medium text-gray-900">
-        {providerSpecialty.specialty.name}
-      </span>
+    `}
+    >
+      <span className="text-lg">{providerSpecialty.specialty.icon || '🔧'}</span>
+      <span className="font-medium text-gray-900">{providerSpecialty.specialty.name}</span>
       {showLevel && providerSpecialty.level && (
-        <Badge 
-          variant="secondary" 
-          className={`text-xs ${getLevelColor(providerSpecialty.level)}`}
-        >
+        <Badge variant="secondary" className={`text-xs ${getLevelColor(providerSpecialty.level)}`}>
           {providerSpecialty.level}
         </Badge>
       )}

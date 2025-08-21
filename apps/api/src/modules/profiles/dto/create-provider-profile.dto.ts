@@ -1,4 +1,12 @@
-import { IsOptional, IsString, IsUrl, IsPhoneNumber, IsDecimal, IsBoolean, IsObject } from 'class-validator';
+import {
+  IsOptional,
+  IsString,
+  IsUrl,
+  IsPhoneNumber,
+  IsDecimal,
+  IsBoolean,
+  IsObject,
+} from 'class-validator';
 
 export class CreateProviderProfileDto {
   @IsOptional()

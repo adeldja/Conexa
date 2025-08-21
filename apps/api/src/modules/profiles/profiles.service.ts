@@ -16,7 +16,10 @@ export class ProfilesService {
 
   // === CLIENT PROFILES ===
 
-  async createClientProfile(userId: string, createClientProfileDto: CreateClientProfileDto) {
+  async createClientProfile(
+    userId: string,
+    createClientProfileDto: CreateClientProfileDto,
+  ) {
     // Vérifier que l'utilisateur existe et qu'il n'a pas déjà un profil client
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
@@ -28,15 +31,17 @@ export class ProfilesService {
     }
 
     if (user.clientProfile) {
-      throw new ConflictException('Un profil client existe déjà pour cet utilisateur');
+      throw new ConflictException(
+        'Un profil client existe déjà pour cet utilisateur',
+      );
     }
 
     const clientProfile = await this.prisma.clientProfile.create({
       data: {
         userId,
         ...createClientProfileDto,
-        dateOfBirth: createClientProfileDto.dateOfBirth 
-          ? new Date(createClientProfileDto.dateOfBirth) 
+        dateOfBirth: createClientProfileDto.dateOfBirth
+          ? new Date(createClientProfileDto.dateOfBirth)
           : undefined,
       },
       include: {
@@ -76,10 +81,16 @@ export class ProfilesService {
     return clientProfile;
   }
 
-  async updateClientProfile(userId: string, currentUserId: string, updateClientProfileDto: UpdateClientProfileDto) {
+  async updateClientProfile(
+    userId: string,
+    currentUserId: string,
+    updateClientProfileDto: UpdateClientProfileDto,
+  ) {
     // Vérifier que l'utilisateur peut modifier ce profil
     if (userId !== currentUserId) {
-      throw new ForbiddenException('Vous ne pouvez modifier que votre propre profil');
+      throw new ForbiddenException(
+        'Vous ne pouvez modifier que votre propre profil',
+      );
     }
 
     const existingProfile = await this.prisma.clientProfile.findUnique({
@@ -94,8 +105,8 @@ export class ProfilesService {
       where: { userId },
       data: {
         ...updateClientProfileDto,
-        dateOfBirth: updateClientProfileDto.dateOfBirth 
-          ? new Date(updateClientProfileDto.dateOfBirth) 
+        dateOfBirth: updateClientProfileDto.dateOfBirth
+          ? new Date(updateClientProfileDto.dateOfBirth)
           : undefined,
       },
       include: {
@@ -115,7 +126,10 @@ export class ProfilesService {
 
   // === PROVIDER PROFILES ===
 
-  async createProviderProfile(userId: string, createProviderProfileDto: CreateProviderProfileDto) {
+  async createProviderProfile(
+    userId: string,
+    createProviderProfileDto: CreateProviderProfileDto,
+  ) {
     // Vérifier que l'utilisateur existe et qu'il n'a pas déjà un profil prestataire
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
@@ -127,15 +141,17 @@ export class ProfilesService {
     }
 
     if (user.providerProfile) {
-      throw new ConflictException('Un profil prestataire existe déjà pour cet utilisateur');
+      throw new ConflictException(
+        'Un profil prestataire existe déjà pour cet utilisateur',
+      );
     }
 
     const providerProfile = await this.prisma.providerProfile.create({
       data: {
         userId,
         ...createProviderProfileDto,
-        defaultPrice: createProviderProfileDto.defaultPrice 
-          ? Number(createProviderProfileDto.defaultPrice) 
+        defaultPrice: createProviderProfileDto.defaultPrice
+          ? Number(createProviderProfileDto.defaultPrice)
           : undefined,
       },
       include: {
@@ -185,10 +201,16 @@ export class ProfilesService {
     return providerProfile;
   }
 
-  async updateProviderProfile(userId: string, currentUserId: string, updateProviderProfileDto: UpdateProviderProfileDto) {
+  async updateProviderProfile(
+    userId: string,
+    currentUserId: string,
+    updateProviderProfileDto: UpdateProviderProfileDto,
+  ) {
     // Vérifier que l'utilisateur peut modifier ce profil
     if (userId !== currentUserId) {
-      throw new ForbiddenException('Vous ne pouvez modifier que votre propre profil');
+      throw new ForbiddenException(
+        'Vous ne pouvez modifier que votre propre profil',
+      );
     }
 
     const existingProfile = await this.prisma.providerProfile.findUnique({
@@ -203,8 +225,8 @@ export class ProfilesService {
       where: { userId },
       data: {
         ...updateProviderProfileDto,
-        defaultPrice: updateProviderProfileDto.defaultPrice 
-          ? Number(updateProviderProfileDto.defaultPrice) 
+        defaultPrice: updateProviderProfileDto.defaultPrice
+          ? Number(updateProviderProfileDto.defaultPrice)
           : undefined,
       },
       include: {
@@ -229,11 +251,16 @@ export class ProfilesService {
 
   // === RECHERCHE PRESTATAIRES ===
 
-  async searchProviders(query?: string, specialtyId?: string, page: number = 1, limit: number = 10) {
+  async searchProviders(
+    query?: string,
+    specialtyId?: string,
+    page: number = 1,
+    limit: number = 10,
+  ) {
     const skip = (page - 1) * limit;
-    
+
     const whereClause: any = {};
-    
+
     if (query) {
       whereClause.OR = [
         { businessName: { contains: query, mode: 'insensitive' } },
@@ -269,10 +296,7 @@ export class ProfilesService {
         },
         skip,
         take: limit,
-        orderBy: [
-          { averageRating: 'desc' },
-          { totalBookings: 'desc' },
-        ],
+        orderBy: [{ averageRating: 'desc' }, { totalBookings: 'desc' }],
       }),
       this.prisma.providerProfile.count({ where: whereClause }),
     ]);

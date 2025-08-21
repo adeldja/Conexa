@@ -1,0 +1,253 @@
+
+[2K[1G[1myarn run v1.22.22[22m
+[2K[1G[2m$ jest[22m
+[1m[2mDetermining test suites to run...[22m[22m[999D[K
+
+[1mTest Suites: [22m0 of 10 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        0 s, estimated 3 s
+[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotForm.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mDeleteSlotModal.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1museSpecialties.test.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/components/ui/__tests__/[22m[1mStarRating.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotList.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mpage.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/__tests__/[22m[1msetup.test.tsx[22m
+
+[1mTest Suites: [22m0 of 10 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        0 s, estimated 3 s
+[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotForm.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mDeleteSlotModal.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1museSpecialties.test.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/components/ui/__tests__/[22m[1mStarRating.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotList.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mpage.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/__tests__/[22m[1msetup.test.tsx[22m
+
+[1mTest Suites: [22m0 of 10 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        1 s, estimated 3 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotForm.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mDeleteSlotModal.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1museSpecialties.test.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/components/ui/__tests__/[22m[1mStarRating.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotList.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mpage.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/__tests__/[22m[1msetup.test.tsx[22m
+
+[1mTest Suites: [22m0 of 10 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        2 s, estimated 3 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/[22m[1mpage.test.tsx[22m
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotForm.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mDeleteSlotModal.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1museSpecialties.test.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/components/ui/__tests__/[22m[1mStarRating.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotList.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mpage.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/__tests__/[22m[1msetup.test.tsx[22m
+
+[1mTest Suites: [22m0 of 10 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        2 s, estimated 3 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotForm.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mDeleteSlotModal.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1museSpecialties.test.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/components/ui/__tests__/[22m[1mStarRating.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotList.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mpage.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/__tests__/[22m[1msetup.test.tsx[22m
+
+[1mTest Suites: [22m0 of 10 total
+[1mTests:       [22m0 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        2 s, estimated 3 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotForm.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mDeleteSlotModal.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1museSpecialties.test.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/components/ui/__tests__/[22m[1mStarRating.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotList.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/__tests__/[22m[1msetup.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/services/__tests__/[22m[1mauthService.test.ts[22m
+
+[1mTest Suites: [22m[1m[32m1 passed[39m[22m, 1 of 10 total
+[1mTests:       [22m[1m[32m6 passed[39m[22m, 6 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        2 s, estimated 3 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[0m[7m[1m[32m PASS [39m[22m[27m[0m [2msrc/__tests__/[22m[1msetup.test.tsx[22m
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotForm.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mDeleteSlotModal.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1museSpecialties.test.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/components/ui/__tests__/[22m[1mStarRating.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotList.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/__tests__/[22m[1msetup.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/services/__tests__/[22m[1mauthService.test.ts[22m
+
+[1mTest Suites: [22m[1m[32m1 passed[39m[22m, 1 of 10 total
+[1mTests:       [22m[1m[32m6 passed[39m[22m, 6 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        2 s, estimated 3 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotForm.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mDeleteSlotModal.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1museSpecialties.test.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/components/ui/__tests__/[22m[1mStarRating.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotList.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/components/ui/__tests__/[22m[1mCard.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/services/__tests__/[22m[1mauthService.test.ts[22m
+
+[1mTest Suites: [22m[1m[32m2 passed[39m[22m, 2 of 10 total
+[1mTests:       [22m[1m[32m14 passed[39m[22m, 14 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        2 s, estimated 3 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/[22m[1museSpecialties.test.ts[22m
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotForm.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mDeleteSlotModal.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1museSpecialties.test.ts[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/components/ui/__tests__/[22m[1mStarRating.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotList.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/components/ui/__tests__/[22m[1mCard.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/services/__tests__/[22m[1mauthService.test.ts[22m
+
+[1mTest Suites: [22m[1m[32m2 passed[39m[22m, 2 of 10 total
+[1mTests:       [22m[1m[32m14 passed[39m[22m, 14 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        2 s, estimated 3 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotForm.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mDeleteSlotModal.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/components/ui/__tests__/[22m[1mStarRating.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotList.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/components/ui/__tests__/[22m[1mCard.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mauth-context.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/services/__tests__/[22m[1mauthService.test.ts[22m
+
+[1mTest Suites: [22m[1m[32m3 passed[39m[22m, 3 of 10 total
+[1mTests:       [22m[1m[32m20 passed[39m[22m, 20 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        2 s, estimated 3 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[0m[7m[1m[32m PASS [39m[22m[27m[0m [2msrc/services/__tests__/[22m[1mauthService.test.ts[22m
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotForm.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mDeleteSlotModal.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/components/ui/__tests__/[22m[1mStarRating.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotList.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/components/ui/__tests__/[22m[1mCard.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mauth-context.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/services/__tests__/[22m[1mauthService.test.ts[22m
+
+[1mTest Suites: [22m[1m[32m3 passed[39m[22m, 3 of 10 total
+[1mTests:       [22m[1m[32m20 passed[39m[22m, 20 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        2 s, estimated 3 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotForm.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mDeleteSlotModal.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/components/ui/__tests__/[22m[1mStarRating.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotList.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/components/ui/__tests__/[22m[1mCard.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mauth-context.test.tsx[22m
+
+[1mTest Suites: [22m[1m[32m4 passed[39m[22m, 4 of 10 total
+[1mTests:       [22m[1m[32m37 passed[39m[22m, 37 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        2 s, estimated 3 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[0m[7m[1m[32m PASS [39m[22m[27m[0m [2msrc/components/ui/__tests__/[22m[1mStarRating.test.tsx[22m
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotForm.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mDeleteSlotModal.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/components/ui/__tests__/[22m[1mStarRating.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotList.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/components/ui/__tests__/[22m[1mCard.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mauth-context.test.tsx[22m
+
+[1mTest Suites: [22m[1m[32m4 passed[39m[22m, 4 of 10 total
+[1mTests:       [22m[1m[32m37 passed[39m[22m, 37 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        2 s, estimated 3 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/[22m[1mSlotList.test.tsx[22m
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotForm.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mDeleteSlotModal.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/components/ui/__tests__/[22m[1mStarRating.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotList.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/components/ui/__tests__/[22m[1mCard.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mauth-context.test.tsx[22m
+
+[1mTest Suites: [22m[1m[32m4 passed[39m[22m, 4 of 10 total
+[1mTests:       [22m[1m[32m37 passed[39m[22m, 37 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        2 s, estimated 3 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/[22m[1mDeleteSlotModal.test.tsx[22m
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotForm.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mDeleteSlotModal.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/components/ui/__tests__/[22m[1mStarRating.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotList.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/components/ui/__tests__/[22m[1mCard.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mauth-context.test.tsx[22m
+
+[1mTest Suites: [22m[1m[32m4 passed[39m[22m, 4 of 10 total
+[1mTests:       [22m[1m[32m37 passed[39m[22m, 37 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        2 s, estimated 3 s
+[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[32m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[37m█[39m[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotForm.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/components/ui/__tests__/[22m[1mCard.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mauth-context.test.tsx[22m
+
+[1mTest Suites: [22m[1m[32m7 passed[39m[22m, 7 of 10 total
+[1mTests:       [22m[1m[32m51 passed[39m[22m, 51 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        3 s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[0m[7m[1m[32m PASS [39m[22m[27m[0m [2msrc/components/ui/__tests__/[22m[1mCard.test.tsx[22m
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotForm.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/components/ui/__tests__/[22m[1mCard.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mauth-context.test.tsx[22m
+
+[1mTest Suites: [22m[1m[32m7 passed[39m[22m, 7 of 10 total
+[1mTests:       [22m[1m[32m51 passed[39m[22m, 51 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        3 s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/[22m[1mauth-context.test.tsx[22m
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotForm.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2msrc/components/ui/__tests__/[22m[1mCard.test.tsx[22m
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mauth-context.test.tsx[22m
+
+[1mTest Suites: [22m[1m[32m7 passed[39m[22m, 7 of 10 total
+[1mTests:       [22m[1m[32m51 passed[39m[22m, 51 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        3 s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotForm.test.tsx[22m
+
+[1mTest Suites: [22m[1m[32m9 passed[39m[22m, 9 of 10 total
+[1mTests:       [22m[1m[32m56 passed[39m[22m, 56 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        3 s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[0m[7m[1m[32m PASS [39m[22m[27m[0m [2m__tests__/[22m[1mSlotForm.test.tsx[22m
+
+[0m[7m[33m[1m RUNS [22m[39m[27m[0m [2m__tests__/[22m[1mSlotForm.test.tsx[22m
+
+[1mTest Suites: [22m[1m[32m9 passed[39m[22m, 9 of 10 total
+[1mTests:       [22m[1m[32m56 passed[39m[22m, 56 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        3 s[K[1A[K[1A[K[1A[K[1A[K[1A[K[1A[999D[K
+[1mTest Suites: [22m[1m[32m10 passed[39m[22m, 10 total
+[1mTests:       [22m[1m[32m58 passed[39m[22m, 58 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        3.172 s
+[2mRan all test suites[22m[2m.[22m
+[2K[1G✨  Done in 4.16s.

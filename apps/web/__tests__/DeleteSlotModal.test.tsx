@@ -10,7 +10,7 @@ const mockAvailabilityService = availabilityService as jest.Mocked<typeof availa
 describe('DeleteSlotModal Component', () => {
   const mockOnClose = jest.fn();
   const mockOnSuccess = jest.fn();
-  
+
   const mockSlot = {
     id: 'slot1',
     providerId: 'provider1',
@@ -39,12 +39,7 @@ describe('DeleteSlotModal Component', () => {
 
   it('does not render when slot is null', () => {
     render(
-      <DeleteSlotModal
-        slot={null}
-        isOpen={true}
-        onClose={mockOnClose}
-        onSuccess={mockOnSuccess}
-      />
+      <DeleteSlotModal slot={null} isOpen={true} onClose={mockOnClose} onSuccess={mockOnSuccess} />
     );
 
     expect(screen.queryByText(/Confirmer la suppression/i)).not.toBeInTheDocument();
@@ -102,7 +97,9 @@ describe('DeleteSlotModal Component', () => {
   });
 
   it('displays error message when deletion fails', async () => {
-    mockAvailabilityService.deleteSlot.mockRejectedValue(new Error('Erreur lors de la suppression'));
+    mockAvailabilityService.deleteSlot.mockRejectedValue(
+      new Error('Erreur lors de la suppression')
+    );
 
     render(
       <DeleteSlotModal

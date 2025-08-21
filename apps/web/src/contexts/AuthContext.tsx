@@ -42,7 +42,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
           }
         }
       } catch (error) {
-        console.error('Erreur d\'initialisation de l\'auth:', error);
+        console.error("Erreur d'initialisation de l'auth:", error);
       } finally {
         setIsLoading(false);
       }

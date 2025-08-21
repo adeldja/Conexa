@@ -23,19 +23,16 @@ export function MySpecialtiesSection({
             Mes spécialités ({mySpecialties.length})
           </h2>
           <div className="text-sm text-gray-500">
-            {mySpecialties.length === 0 
+            {mySpecialties.length === 0
               ? 'Aucune spécialité configurée'
-              : 'Cliquez pour modifier le niveau'
-            }
+              : 'Cliquez pour modifier le niveau'}
           </div>
         </div>
 
         {mySpecialties.length === 0 ? (
           <div className="text-center py-12 text-gray-500">
             <div className="text-4xl mb-4">🎯</div>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">
-              Aucune spécialité configurée
-            </h3>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">Aucune spécialité configurée</h3>
             <p className="text-sm">
               Ajoutez vos compétences depuis le catalogue pour attirer les bons clients.
             </p>
@@ -45,14 +42,23 @@ export function MySpecialtiesSection({
             {mySpecialties
               .sort((a, b) => {
                 // Trier par niveau (Expert en premier)
-                const levelOrder = { 'Expert': 5, 'Avancé': 4, 'Confirmé': 3, 'Intermédiaire': 2, 'Débutant': 1 };
-                return (levelOrder[b.level || 'Intermédiaire'] || 0) - (levelOrder[a.level || 'Intermédiaire'] || 0);
+                const levelOrder = {
+                  Expert: 5,
+                  Avancé: 4,
+                  Confirmé: 3,
+                  Intermédiaire: 2,
+                  Débutant: 1,
+                };
+                return (
+                  (levelOrder[b.level || 'Intermédiaire'] || 0) -
+                  (levelOrder[a.level || 'Intermédiaire'] || 0)
+                );
               })
               .map((providerSpecialty, index) => {
                 const isProcessing = processingIds.has(providerSpecialty.specialtyId);
                 // Clé unique garantie avec plusieurs éléments
                 const uniqueKey = `my-${providerSpecialty.id}-${providerSpecialty.specialtyId}-${index}-${providerSpecialty.createdAt}`;
-                
+
                 return (
                   <SpecialtyCard
                     key={uniqueKey}

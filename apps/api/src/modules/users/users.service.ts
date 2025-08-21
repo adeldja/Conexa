@@ -103,7 +103,9 @@ export class UsersService {
     });
   }
 
-  async findByRole(role: 'ADMIN' | 'PROVIDER' | 'CLIENT'): Promise<UserResponse[]> {
+  async findByRole(
+    role: 'ADMIN' | 'PROVIDER' | 'CLIENT',
+  ): Promise<UserResponse[]> {
     return await this.prisma.user.findMany({
       where: { role },
       select: {

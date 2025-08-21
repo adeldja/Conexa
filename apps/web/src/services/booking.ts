@@ -27,11 +27,11 @@ class BookingService {
     const headers = new Headers({
       'Content-Type': 'application/json',
     });
-    
+
     if (token) {
       headers.append('Authorization', `Bearer ${token}`);
     }
-    
+
     return headers;
   }
 
@@ -97,7 +97,7 @@ class BookingService {
 
     if (!response.ok) {
       const error = await response.json();
-      throw new Error(error.message || 'Erreur lors de l\'annulation de la réservation');
+      throw new Error(error.message || "Erreur lors de l'annulation de la réservation");
     }
 
     return response.json();

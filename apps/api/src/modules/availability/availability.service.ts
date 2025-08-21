@@ -15,16 +15,16 @@ export class AvailabilityService {
         startTime: new Date(createSlotDto.startTime),
         endTime: new Date(createSlotDto.endTime),
         // Assurer que isAvailable est défini
-        isAvailable: createSlotDto.isAvailable !== undefined ? createSlotDto.isAvailable : true
+        isAvailable:
+          createSlotDto.isAvailable !== undefined
+            ? createSlotDto.isAvailable
+            : true,
       };
 
-      console.log('Creating slot with data:', data);
-      
       return await this.prisma.slot.create({
         data,
       });
     } catch (error) {
-      console.error('Error creating slot:', error);
       throw error;
     }
   }

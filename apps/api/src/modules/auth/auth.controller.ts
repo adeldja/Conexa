@@ -6,7 +6,12 @@ import {
   Request,
   Get,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
 import { AuthService, LoginResponse } from './auth.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
@@ -27,7 +32,10 @@ export class AuthController {
     type: 'object',
   })
   @ApiResponse({ status: 401, description: 'Identifiants invalides' })
-  async login(@Body() _loginDto: LoginDto, @Request() req: any): Promise<LoginResponse> {
+  async login(
+    @Body() _loginDto: LoginDto,
+    @Request() req: any,
+  ): Promise<LoginResponse> {
     return this.authService.login(req.user);
   }
 

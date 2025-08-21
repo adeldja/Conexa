@@ -27,7 +27,7 @@ jest.mock('../src/contexts/AuthContext', () => ({
 describe('SlotList Component', () => {
   const mockOnEditSlot = jest.fn();
   const mockOnDeleteSlot = jest.fn();
-  
+
   const mockSlots = [
     {
       id: 'slot1',
@@ -56,11 +56,7 @@ describe('SlotList Component', () => {
 
     render(
       <AuthProvider>
-        <SlotList
-          onEditSlot={mockOnEditSlot}
-          onDeleteSlot={mockOnDeleteSlot}
-          refreshTrigger={0}
-        />
+        <SlotList onEditSlot={mockOnEditSlot} onDeleteSlot={mockOnDeleteSlot} refreshTrigger={0} />
       </AuthProvider>
     );
 
@@ -72,11 +68,7 @@ describe('SlotList Component', () => {
 
     render(
       <AuthProvider>
-        <SlotList
-          onEditSlot={mockOnEditSlot}
-          onDeleteSlot={mockOnDeleteSlot}
-          refreshTrigger={0}
-        />
+        <SlotList onEditSlot={mockOnEditSlot} onDeleteSlot={mockOnDeleteSlot} refreshTrigger={0} />
       </AuthProvider>
     );
 
@@ -88,7 +80,7 @@ describe('SlotList Component', () => {
     // Vérifier que les créneaux sont affichés
     expect(screen.getByText('10/07/2025')).toBeInTheDocument();
     expect(screen.getByText('11/07/2025')).toBeInTheDocument();
-    
+
     // Vérifier les statuts de disponibilité
     const disponibleElements = screen.getAllByText(/^Disponible$/i);
     const indisponibleElement = screen.getByText(/^Indisponible$/i);
@@ -101,11 +93,7 @@ describe('SlotList Component', () => {
 
     render(
       <AuthProvider>
-        <SlotList
-          onEditSlot={mockOnEditSlot}
-          onDeleteSlot={mockOnDeleteSlot}
-          refreshTrigger={0}
-        />
+        <SlotList onEditSlot={mockOnEditSlot} onDeleteSlot={mockOnDeleteSlot} refreshTrigger={0} />
       </AuthProvider>
     );
 
@@ -119,11 +107,7 @@ describe('SlotList Component', () => {
 
     render(
       <AuthProvider>
-        <SlotList
-          onEditSlot={mockOnEditSlot}
-          onDeleteSlot={mockOnDeleteSlot}
-          refreshTrigger={0}
-        />
+        <SlotList onEditSlot={mockOnEditSlot} onDeleteSlot={mockOnDeleteSlot} refreshTrigger={0} />
       </AuthProvider>
     );
 
@@ -140,11 +124,7 @@ describe('SlotList Component', () => {
 
     render(
       <AuthProvider>
-        <SlotList
-          onEditSlot={mockOnEditSlot}
-          onDeleteSlot={mockOnDeleteSlot}
-          refreshTrigger={0}
-        />
+        <SlotList onEditSlot={mockOnEditSlot} onDeleteSlot={mockOnDeleteSlot} refreshTrigger={0} />
       </AuthProvider>
     );
 
@@ -157,15 +137,13 @@ describe('SlotList Component', () => {
   });
 
   it('handles API errors', async () => {
-    mockAvailabilityService.getProviderSlots.mockRejectedValue(new Error('Erreur lors de la récupération des créneaux'));
+    mockAvailabilityService.getProviderSlots.mockRejectedValue(
+      new Error('Erreur lors de la récupération des créneaux')
+    );
 
     render(
       <AuthProvider>
-        <SlotList
-          onEditSlot={mockOnEditSlot}
-          onDeleteSlot={mockOnDeleteSlot}
-          refreshTrigger={0}
-        />
+        <SlotList onEditSlot={mockOnEditSlot} onDeleteSlot={mockOnDeleteSlot} refreshTrigger={0} />
       </AuthProvider>
     );
 
@@ -179,11 +157,7 @@ describe('SlotList Component', () => {
 
     const { rerender } = render(
       <AuthProvider>
-        <SlotList
-          onEditSlot={mockOnEditSlot}
-          onDeleteSlot={mockOnDeleteSlot}
-          refreshTrigger={0}
-        />
+        <SlotList onEditSlot={mockOnEditSlot} onDeleteSlot={mockOnDeleteSlot} refreshTrigger={0} />
       </AuthProvider>
     );
 
@@ -196,11 +170,7 @@ describe('SlotList Component', () => {
     // Rerender with a different refreshTrigger
     rerender(
       <AuthProvider>
-        <SlotList
-          onEditSlot={mockOnEditSlot}
-          onDeleteSlot={mockOnDeleteSlot}
-          refreshTrigger={1}
-        />
+        <SlotList onEditSlot={mockOnEditSlot} onDeleteSlot={mockOnDeleteSlot} refreshTrigger={1} />
       </AuthProvider>
     );
 

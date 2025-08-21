@@ -56,9 +56,7 @@ export function ToastComponent({ toast, onRemove }: ToastProps) {
         <div className="text-lg mr-3">{getIcon()}</div>
         <div className="flex-1 min-w-0">
           <p className="font-medium">{toast.title}</p>
-          {toast.message && (
-            <p className="text-sm mt-1 opacity-90">{toast.message}</p>
-          )}
+          {toast.message && <p className="text-sm mt-1 opacity-90">{toast.message}</p>}
         </div>
         <button
           onClick={() => onRemove(toast.id)}
@@ -80,11 +78,7 @@ export function ToastContainer({ toasts, onRemove }: ToastContainerProps) {
   return (
     <div className="fixed top-4 right-4 z-50 space-y-2 max-w-sm">
       {toasts.map(toast => (
-        <ToastComponent
-          key={toast.id}
-          toast={toast}
-          onRemove={onRemove}
-        />
+        <ToastComponent key={toast.id} toast={toast} onRemove={onRemove} />
       ))}
     </div>
   );
