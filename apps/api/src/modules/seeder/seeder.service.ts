@@ -170,49 +170,31 @@ export class SeederService {
         businessName: 'Coaching Excellence',
         description: 'Coach sportif professionnel avec 10 ans d\'expérience. Spécialisé en musculation, cardio et préparation physique.',
         phone: '+33123456789',
-        defaultPrice: 60.00,
-        experience: '10 ans d\'expérience en coaching sportif',
-        certifications: 'Diplôme d\'État BPJEPS, Certification CrossFit Level 1',
       },
       {
         businessName: 'Cabinet Juridique Martin',
         description: 'Avocate spécialisée en droit des affaires, droit du travail et contentieux commercial.',
         phone: '+33123456790',
-        defaultPrice: 150.00,
-        experience: '15 ans d\'expérience en droit des affaires',
-        certifications: 'Master 2 Droit des Affaires, Barreau de Paris',
       },
       {
         businessName: 'DevWeb Solutions',
         description: 'Développeur full-stack spécialisé en React, Node.js et applications web modernes.',
         phone: '+33123456791',
-        defaultPrice: 80.00,
-        experience: '8 ans de développement web',
-        certifications: 'Certification AWS, Google Cloud Platform',
       },
       {
         businessName: 'Atelier Culinaire',
         description: 'Chef cuisinier proposant des cours de cuisine française et internationale.',
         phone: '+33123456792',
-        defaultPrice: 75.00,
-        experience: '12 ans en haute gastronomie',
-        certifications: 'CAP Cuisine, Formation Institut Paul Bocuse',
       },
       {
         businessName: 'Bien-être & Relaxation',
         description: 'Masseur thérapeutique certifié, spécialisé en massage suédois et deep tissue.',
         phone: '+33123456793',
-        defaultPrice: 70.00,
-        experience: '6 ans en massothérapie',
-        certifications: 'Certification FFMTR, Formation massage thérapeutique',
       },
       {
         businessName: 'École de Musique Harmony',
         description: 'Professeur de piano et guitare, tous niveaux. Méthode pédagogique adaptée.',
         phone: '+33123456794',
-        defaultPrice: 45.00,
-        experience: '20 ans d\'enseignement musical',
-        certifications: 'Diplôme du Conservatoire, Formation pédagogie musicale',
       },
     ];
 
@@ -226,7 +208,6 @@ export class SeederService {
         
         // Personnaliser selon le prestataire
         const customizedProfile = {
-          ...profileData,
           businessName: i < providerProfilesData.length 
             ? profileData.businessName 
             : `${provider.fullName} Services`,
