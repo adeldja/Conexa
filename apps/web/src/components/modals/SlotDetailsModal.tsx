@@ -13,16 +13,7 @@ interface SlotDetailsModalProps {
 }
 
 export default function SlotDetailsModal({ slot, isOpen, onClose }: SlotDetailsModalProps) {
-  console.log('🔧 Debug - SlotDetailsModal rendu:', { 
-    isOpen, 
-    slotId: slot?.id, 
-    slotStatus: slot?.status,
-    hasBooking: !!slot?.booking,
-    bookingData: slot?.booking 
-  });
-  
   if (!isOpen || !slot || !slot.booking) {
-    console.log('🔧 Debug - Modal fermée ou pas de booking');
     return null;
   }
 

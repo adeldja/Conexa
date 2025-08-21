@@ -2,3 +2,8 @@ export { Button } from './Button';
 export { Card, CardHeader, CardContent, CardFooter, CardTitle } from './Card';
 export { Input } from './Input';
 export { Select } from './Select';
+export { Badge } from './Badge';
+export { StarRating } from './StarRating';
+export { ToastContainer, ToastComponent, useToast } from './Toast';
+export { Skeleton, SkeletonText, SkeletonCard } from './Skeleton';
+export { Slider, SkillLevelSlider } from './Slider';

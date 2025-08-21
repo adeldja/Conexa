@@ -52,7 +52,13 @@ export interface ProviderProfile {
   createdAt: string;
   updatedAt: string;
   
-  // Relations
+
+  user?: {
+    id: string;
+    email: string;
+    fullName: string;
+    role: string;
+  };
   specialties?: ProviderSpecialty[];
 }
 
@@ -68,7 +74,7 @@ export interface ProviderSpecialty {
   id: string;
   providerId: string;
   specialtyId: string;
-  level?: 'Débutant' | 'Intermédiaire' | 'Expert';
+  level?: 'Débutant' | 'Intermédiaire' | 'Confirmé' | 'Avancé' | 'Expert';
   certification?: string;
   createdAt: string;
   specialty: Specialty;

@@ -10,6 +10,7 @@ import {
   Request,
   ParseIntPipe,
   DefaultValuePipe,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { ReviewsService } from './reviews.service';
 import { CreateReviewDto } from './dto/create-review.dto';
@@ -21,7 +22,10 @@ export class ReviewsController {
 
   @Post()
   create(@Request() req: any, @Body() createReviewDto: CreateReviewDto) {
-    const clientId = req.user?.id || req.body.clientId; // Temporaire pour les tests
+    const clientId = req.user?.id;
+    if (!clientId) {
+      throw new UnauthorizedException('Authentification requise');
+    }
     return this.reviewsService.create(clientId, createReviewDto);
   }
 
@@ -41,7 +45,10 @@ export class ReviewsController {
 
   @Get('client/my-reviews')
   findByClient(@Request() req: any) {
-    const clientId = req.user?.id || req.query.clientId; // Temporaire pour les tests
+    const clientId = req.user?.id;
+    if (!clientId) {
+      throw new UnauthorizedException('Authentification requise');
+    }
     return this.reviewsService.findByClient(clientId);
   }
 
@@ -61,13 +68,19 @@ export class ReviewsController {
     @Request() req: any,
     @Body() updateReviewDto: UpdateReviewDto,
   ) {
-    const clientId = req.user?.id || req.body.clientId; // Temporaire pour les tests
+    const clientId = req.user?.id;
+    if (!clientId) {
+      throw new UnauthorizedException('Authentification requise');
+    }
     return this.reviewsService.update(id, clientId, updateReviewDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string, @Request() req: any) {
-    const clientId = req.user?.id || req.body.clientId; // Temporaire pour les tests
+    const clientId = req.user?.id;
+    if (!clientId) {
+      throw new UnauthorizedException('Authentification requise');
+    }
     return this.reviewsService.remove(id, clientId);
   }
 }

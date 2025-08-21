@@ -9,6 +9,7 @@ import {
   Request,
   ParseIntPipe,
   DefaultValuePipe,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { ProfilesService } from './profiles.service';
 import { CreateClientProfileDto } from './dto/create-client-profile.dto';
@@ -31,7 +32,10 @@ export class ProfilesController {
     @Request() req: any,
     @Body() createClientProfileDto: CreateClientProfileDto,
   ) {
-    const userId = req.user?.id || req.body.userId; // Temporaire pour les tests
+    const userId = req.user?.id;
+    if (!userId) {
+      throw new UnauthorizedException('Authentification requise');
+    }
     return this.profilesService.createClientProfile(userId, createClientProfileDto);
   }
 
@@ -46,7 +50,10 @@ export class ProfilesController {
     @Request() req: any,
     @Body() updateClientProfileDto: UpdateClientProfileDto,
   ) {
-    const currentUserId = req.user?.id || userId; // Temporaire pour les tests
+    const currentUserId = req.user?.id;
+    if (!currentUserId) {
+      throw new UnauthorizedException('Authentification requise');
+    }
     return this.profilesService.updateClientProfile(userId, currentUserId, updateClientProfileDto);
   }
 
@@ -57,7 +64,10 @@ export class ProfilesController {
     @Request() req: any,
     @Body() createProviderProfileDto: CreateProviderProfileDto,
   ) {
-    const userId = req.user?.id || req.body.userId; // Temporaire pour les tests
+    const userId = req.user?.id;
+    if (!userId) {
+      throw new UnauthorizedException('Authentification requise');
+    }
     return this.profilesService.createProviderProfile(userId, createProviderProfileDto);
   }
 
@@ -72,7 +82,10 @@ export class ProfilesController {
     @Request() req: any,
     @Body() updateProviderProfileDto: UpdateProviderProfileDto,
   ) {
-    const currentUserId = req.user?.id || userId; // Temporaire pour les tests
+    const currentUserId = req.user?.id;
+    if (!currentUserId) {
+      throw new UnauthorizedException('Authentification requise');
+    }
     return this.profilesService.updateProviderProfile(userId, currentUserId, updateProviderProfileDto);
   }
 

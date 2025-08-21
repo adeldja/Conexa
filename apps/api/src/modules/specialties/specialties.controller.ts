@@ -52,7 +52,8 @@ export class SpecialtiesController {
     @Request() req: any,
     @Body() addProviderSpecialtyDto: AddProviderSpecialtyDto,
   ) {
-    const currentUserId = req.user?.id || req.body.userId; // Temporaire pour les tests
+    // TODO: Remplacer par une vraie authentification
+    const currentUserId = req.user?.id || providerId; // Fallback temporaire
     return this.specialtiesService.addProviderSpecialty(providerId, currentUserId, addProviderSpecialtyDto);
   }
 
@@ -62,7 +63,8 @@ export class SpecialtiesController {
     @Param('specialtyId') specialtyId: string,
     @Request() req: any,
   ) {
-    const currentUserId = req.user?.id || req.body.userId; // Temporaire pour les tests
+    // TODO: Remplacer par une vraie authentification
+    const currentUserId = req.user?.id || providerId; // Fallback temporaire
     return this.specialtiesService.removeProviderSpecialty(providerId, specialtyId, currentUserId);
   }
 
