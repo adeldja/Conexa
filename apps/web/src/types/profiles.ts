@@ -52,11 +52,11 @@ export interface ProviderProfile {
   createdAt: string;
   updatedAt: string;
   
-  // Relations
+
   user?: {
     id: string;
     email: string;
-    fullName?: string;
+    fullName: string;
     role: string;
   };
   specialties?: ProviderSpecialty[];

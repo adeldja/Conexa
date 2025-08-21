@@ -21,12 +21,12 @@ export function ProviderCard({ provider, onViewProfile, className }: ProviderCar
             {provider.avatar ? (
               <img
                 src={provider.avatar}
-                alt={businessName || user.fullName || 'Provider'}
+                alt={businessName || user?.fullName || 'Provider'}
                 className="w-16 h-16 rounded-full object-cover"
               />
             ) : (
               <span className="text-blue-600 font-medium text-lg">
-                {(businessName || user.fullName || 'P')[0].toUpperCase()}
+                {(businessName || user?.fullName || 'P')[0].toUpperCase()}
               </span>
             )}
           </div>
@@ -37,7 +37,7 @@ export function ProviderCard({ provider, onViewProfile, className }: ProviderCar
           <div className="flex items-start justify-between mb-2">
             <div>
               <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                {businessName || user.fullName}
+                {businessName || user?.fullName}
                 {isVerified && (
                   <span className="ml-2 text-green-500" title="Prestataire vérifié">
                     ✓
