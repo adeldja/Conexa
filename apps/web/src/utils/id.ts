@@ -7,7 +7,7 @@ export function generateUniqueId(): string {
   const highPrecision = performance.now().toString(36);
   const random1 = Math.random().toString(36).substring(2);
   const random2 = Math.random().toString(36).substring(2);
-  
+
   return `${timestamp}-${highPrecision}-${random1}${random2}`;
 }
 

@@ -82,7 +82,10 @@ export class SpecialtiesService {
     }
 
     // Vérifier l'unicité du nom si il est modifié
-    if (updateSpecialtyDto.name && updateSpecialtyDto.name !== existingSpecialty.name) {
+    if (
+      updateSpecialtyDto.name &&
+      updateSpecialtyDto.name !== existingSpecialty.name
+    ) {
       const nameExists = await this.prisma.specialty.findUnique({
         where: { name: updateSpecialtyDto.name },
       });
@@ -125,7 +128,11 @@ export class SpecialtiesService {
 
   // === PROVIDER SPECIALTIES ===
 
-  async addProviderSpecialty(providerId: string, currentUserId: string, addProviderSpecialtyDto: AddProviderSpecialtyDto) {
+  async addProviderSpecialty(
+    providerId: string,
+    currentUserId: string,
+    addProviderSpecialtyDto: AddProviderSpecialtyDto,
+  ) {
     // Vérifier que le prestataire existe et appartient à l'utilisateur connecté
     const provider = await this.prisma.providerProfile.findUnique({
       where: { userId: providerId }, // Utiliser userId au lieu de id
@@ -136,7 +143,9 @@ export class SpecialtiesService {
     }
 
     if (provider.userId !== currentUserId) {
-      throw new ForbiddenException('Vous ne pouvez modifier que votre propre profil');
+      throw new ForbiddenException(
+        'Vous ne pouvez modifier que votre propre profil',
+      );
     }
 
     // Vérifier que la spécialité existe
@@ -159,7 +168,9 @@ export class SpecialtiesService {
     });
 
     if (existingAssociation) {
-      throw new ConflictException('Cette spécialité est déjà associée à ce prestataire');
+      throw new ConflictException(
+        'Cette spécialité est déjà associée à ce prestataire',
+      );
     }
 
     return this.prisma.providerSpecialty.create({
@@ -185,7 +196,11 @@ export class SpecialtiesService {
     });
   }
 
-  async removeProviderSpecialty(providerId: string, specialtyId: string, currentUserId: string) {
+  async removeProviderSpecialty(
+    providerId: string,
+    specialtyId: string,
+    currentUserId: string,
+  ) {
     // Vérifier que le prestataire existe et appartient à l'utilisateur connecté
     const provider = await this.prisma.providerProfile.findUnique({
       where: { userId: providerId }, // Utiliser userId au lieu de id
@@ -196,7 +211,9 @@ export class SpecialtiesService {
     }
 
     if (provider.userId !== currentUserId) {
-      throw new ForbiddenException('Vous ne pouvez modifier que votre propre profil');
+      throw new ForbiddenException(
+        'Vous ne pouvez modifier que votre propre profil',
+      );
     }
 
     const association = await this.prisma.providerSpecialty.findUnique({

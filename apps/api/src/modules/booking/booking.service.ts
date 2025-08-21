@@ -14,11 +14,11 @@ export class BookingService {
       });
 
       if (!slot) {
-        throw new Error('Le créneau demandé n\'existe pas');
+        throw new Error("Le créneau demandé n'existe pas");
       }
 
       if (!slot.isAvailable) {
-        throw new Error('Ce créneau n\'est plus disponible');
+        throw new Error("Ce créneau n'est plus disponible");
       }
 
       // Créer la réservation
@@ -64,8 +64,8 @@ export class BookingService {
     return this.prisma.booking.findMany({
       where: {
         slot: {
-          providerId: providerId
-        }
+          providerId: providerId,
+        },
       },
       include: {
         client: {

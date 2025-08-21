@@ -30,11 +30,11 @@ class AvailabilityService {
     const headers = new Headers({
       'Content-Type': 'application/json',
     });
-    
+
     if (token) {
       headers.append('Authorization', `Bearer ${token}`);
     }
-    
+
     return headers;
   }
 
@@ -67,16 +67,18 @@ class AvailabilityService {
   async createSlot(slotData: CreateSlotDto): Promise<Slot> {
     try {
       const headers = this.getAuthHeader();
-      
+
       const response = await fetch(`${API_BASE_URL}/availability`, {
         method: 'POST',
         headers: headers,
         body: JSON.stringify(slotData),
       });
-      
+
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({ message: 'Unknown error' }));
-        throw new Error(errorData.message || `Erreur lors de la création du créneau: ${response.status}`);
+        throw new Error(
+          errorData.message || `Erreur lors de la création du créneau: ${response.status}`
+        );
       }
 
       return response.json();
@@ -120,10 +122,14 @@ class AvailabilityService {
 
   formatDateForDisplay(date: string): string {
     const d = new Date(date);
-    return d.toLocaleDateString('fr-FR') + ' ' + d.toLocaleTimeString('fr-FR', {
-      hour: '2-digit',
-      minute: '2-digit',
-    });
+    return (
+      d.toLocaleDateString('fr-FR') +
+      ' ' +
+      d.toLocaleTimeString('fr-FR', {
+        hour: '2-digit',
+        minute: '2-digit',
+      })
+    );
   }
 
   formatTimeForInput(date: string): string {

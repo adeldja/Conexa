@@ -29,7 +29,7 @@ export default function ReviewsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [filters, setFilters] = useState<ReviewFilters>({});
-  
+
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -38,13 +38,15 @@ export default function ReviewsPage() {
 
   // Vérifier si l'utilisateur est un provider
   const isProvider = user?.role === 'PROVIDER';
-  
+
   // Pour les tests: utiliser des données mock si pas d'utilisateur connecté
-  const mockUser = !user ? {
-    id: '59ebe6a2-6d07-4cb6-af9e-c8b153b70f3f',
-    role: 'PROVIDER' as const,
-    email: 'test@provider.com'
-  } : null;
+  const mockUser = !user
+    ? {
+        id: '59ebe6a2-6d07-4cb6-af9e-c8b153b70f3f',
+        role: 'PROVIDER' as const,
+        email: 'test@provider.com',
+      }
+    : null;
 
   if (!isProvider && !mockUser) {
     return (
@@ -59,8 +61,8 @@ export default function ReviewsPage() {
               <p className="text-gray-600 mb-6">
                 Cette section est uniquement accessible aux utilisateurs avec le rôle "PROVIDER".
               </p>
-              <a 
-                href="/dashboard" 
+              <a
+                href="/dashboard"
                 className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
               >
                 Retour au dashboard
@@ -119,11 +121,11 @@ export default function ReviewsPage() {
     if (filters.rating && review.rating.toString() !== filters.rating) {
       return false;
     }
-    
+
     if (filters.period) {
       const reviewDate = new Date(review.createdAt);
       const now = new Date();
-      
+
       switch (filters.period) {
         case 'week':
           return reviewDate >= new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
@@ -135,7 +137,7 @@ export default function ReviewsPage() {
           return true;
       }
     }
-    
+
     return true;
   });
 
@@ -147,7 +149,8 @@ export default function ReviewsPage() {
       return {
         rating,
         count: breakdown?.count || 0,
-        percentage: stats.totalReviews > 0 ? ((breakdown?.count || 0) / stats.totalReviews) * 100 : 0
+        percentage:
+          stats.totalReviews > 0 ? ((breakdown?.count || 0) / stats.totalReviews) * 100 : 0,
       };
     });
     return distribution;
@@ -160,9 +163,7 @@ export default function ReviewsPage() {
           {/* Header */}
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-gray-900">Avis Reçus</h1>
-            <p className="text-gray-600 mt-2">
-              Consultez les évaluations laissées par vos clients
-            </p>
+            <p className="text-gray-600 mt-2">Consultez les évaluations laissées par vos clients</p>
           </div>
 
           {/* Navigation breadcrumb */}
@@ -201,23 +202,19 @@ export default function ReviewsPage() {
                 </div>
               </div>
             </Card>
-            
+
             <Card className="p-6">
               <div className="flex items-center">
                 <div className="text-3xl text-blue-500 mr-4">💬</div>
                 <div>
                   <div className="text-2xl font-bold text-gray-900">
-                    {loading ? (
-                      <Skeleton className="w-12 h-8" />
-                    ) : (
-                      stats?.totalReviews || 0
-                    )}
+                    {loading ? <Skeleton className="w-12 h-8" /> : stats?.totalReviews || 0}
                   </div>
                   <div className="text-sm text-gray-500">Total avis</div>
                 </div>
               </div>
             </Card>
-            
+
             <Card className="p-6">
               <div className="flex items-center">
                 <div className="text-3xl text-green-500 mr-4">📈</div>
@@ -245,8 +242,16 @@ export default function ReviewsPage() {
                   <div className="text-2xl font-bold text-gray-900">
                     {loading ? (
                       <Skeleton className="w-12 h-8" />
+                    ) : stats ? (
+                      Math.round(
+                        (stats.ratingBreakdown
+                          .filter(r => r.rating >= 4)
+                          .reduce((sum, r) => sum + r.count, 0) /
+                          stats.totalReviews) *
+                          100
+                      ) + '%'
                     ) : (
-                      stats ? Math.round((stats.ratingBreakdown.filter(r => r.rating >= 4).reduce((sum, r) => sum + r.count, 0)) / stats.totalReviews * 100) + '%' : '0%'
+                      '0%'
                     )}
                   </div>
                   <div className="text-sm text-gray-500">Avis positifs</div>
@@ -258,9 +263,7 @@ export default function ReviewsPage() {
           {/* Distribution des notes */}
           {!loading && stats && stats.totalReviews > 0 && (
             <Card className="p-6 mb-8">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                Distribution des notes
-              </h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Distribution des notes</h3>
               <div className="space-y-3">
                 {getRatingDistribution().map(({ rating, count, percentage }) => (
                   <div key={rating} className="flex items-center gap-4">
@@ -270,15 +273,13 @@ export default function ReviewsPage() {
                     </div>
                     <div className="flex-1">
                       <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div 
+                        <div
                           className="bg-yellow-500 h-2 rounded-full transition-all duration-300"
                           style={{ width: `${percentage}%` }}
                         />
                       </div>
                     </div>
-                    <div className="text-sm text-gray-600 w-12 text-right">
-                      {count}
-                    </div>
+                    <div className="text-sm text-gray-600 w-12 text-right">{count}</div>
                   </div>
                 ))}
               </div>
@@ -289,16 +290,14 @@ export default function ReviewsPage() {
           <Card>
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-semibold text-gray-900">
-                  Liste des avis
-                </h2>
-                
+                <h2 className="text-xl font-semibold text-gray-900">Liste des avis</h2>
+
                 {/* Filtres */}
                 <div className="flex items-center space-x-4">
-                  <select 
+                  <select
                     className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     value={filters.rating || ''}
-                    onChange={(e) => handleFilterChange('rating', e.target.value)}
+                    onChange={e => handleFilterChange('rating', e.target.value)}
                   >
                     <option value="">Toutes les notes</option>
                     <option value="5">5 étoiles</option>
@@ -307,11 +306,11 @@ export default function ReviewsPage() {
                     <option value="2">2 étoiles</option>
                     <option value="1">1 étoile</option>
                   </select>
-                  
-                  <select 
+
+                  <select
                     className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     value={filters.period || ''}
-                    onChange={(e) => handleFilterChange('period', e.target.value)}
+                    onChange={e => handleFilterChange('period', e.target.value)}
                   >
                     <option value="">Toutes les périodes</option>
                     <option value="week">Cette semaine</option>
@@ -333,7 +332,7 @@ export default function ReviewsPage() {
                   )}
                 </div>
               </div>
-              
+
               {/* Liste des avis */}
               {loading ? (
                 <div className="space-y-4">
@@ -356,13 +355,12 @@ export default function ReviewsPage() {
                     <div className="text-4xl text-gray-400">📝</div>
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                    {filters.rating || filters.period ? 'Aucun avis trouvé' : 'Pas encore d\'avis'}
+                    {filters.rating || filters.period ? 'Aucun avis trouvé' : "Pas encore d'avis"}
                   </h3>
                   <p className="text-gray-600 mb-6 max-w-md mx-auto">
-                    {filters.rating || filters.period 
-                      ? "Aucun avis ne correspond aux critères sélectionnés. Essayez de modifier vos filtres."
-                      : "Vous n'avez pas encore reçu d'avis de vos clients. Une fois vos premiers services réalisés, les avis apparaîtront ici."
-                    }
+                    {filters.rating || filters.period
+                      ? 'Aucun avis ne correspond aux critères sélectionnés. Essayez de modifier vos filtres.'
+                      : "Vous n'avez pas encore reçu d'avis de vos clients. Une fois vos premiers services réalisés, les avis apparaîtront ici."}
                   </p>
                   {(filters.rating || filters.period) && (
                     <Button
@@ -378,14 +376,17 @@ export default function ReviewsPage() {
                 </div>
               ) : (
                 <div className="space-y-4">
-                  {filteredReviews.map((review) => (
-                    <div key={review.id} className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                  {filteredReviews.map(review => (
+                    <div
+                      key={review.id}
+                      className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors"
+                    >
                       <div className="flex items-start gap-4">
                         {/* Avatar du client */}
                         <div className="w-10 h-10 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center flex-shrink-0 shadow-sm">
                           {review.client?.clientProfile?.avatar ? (
-                            <img 
-                              src={review.client.clientProfile.avatar} 
+                            <img
+                              src={review.client.clientProfile.avatar}
                               alt={review.client.fullName || 'Client'}
                               className="w-10 h-10 rounded-full object-cover"
                             />
@@ -395,7 +396,7 @@ export default function ReviewsPage() {
                             </span>
                           )}
                         </div>
-                        
+
                         <div className="flex-1 min-w-0">
                           {/* Header de l'avis */}
                           <div className="flex items-center justify-between mb-2">
@@ -405,14 +406,17 @@ export default function ReviewsPage() {
                               </span>
                               <StarRating rating={review.rating} size="sm" />
                             </div>
-                            <span className="text-sm text-gray-500" title={new Date(review.createdAt).toLocaleString('fr-FR')}>
-                              {formatDistanceToNow(new Date(review.createdAt), { 
-                                locale: fr, 
-                                addSuffix: true 
+                            <span
+                              className="text-sm text-gray-500"
+                              title={new Date(review.createdAt).toLocaleString('fr-FR')}
+                            >
+                              {formatDistanceToNow(new Date(review.createdAt), {
+                                locale: fr,
+                                addSuffix: true,
                               })}
                             </span>
                           </div>
-                          
+
                           {/* Commentaire */}
                           {review.comment && (
                             <div className="bg-gray-50 rounded-xl p-4 mt-3 border border-gray-100">
@@ -432,9 +436,10 @@ export default function ReviewsPage() {
               {!loading && totalPages > 1 && (
                 <div className="mt-6 flex items-center justify-between">
                   <div className="text-sm text-gray-700">
-                    Affichage de {((currentPage - 1) * limit) + 1} à {Math.min(currentPage * limit, totalReviews)} sur {totalReviews} avis
+                    Affichage de {(currentPage - 1) * limit + 1} à{' '}
+                    {Math.min(currentPage * limit, totalReviews)} sur {totalReviews} avis
                   </div>
-                  
+
                   <div className="flex items-center gap-2">
                     <Button
                       variant="outline"
@@ -444,14 +449,14 @@ export default function ReviewsPage() {
                     >
                       Précédent
                     </Button>
-                    
+
                     <div className="flex items-center gap-1">
                       {[...Array(Math.min(5, totalPages))].map((_, i) => {
                         const page = i + 1;
                         return (
                           <Button
                             key={page}
-                            variant={currentPage === page ? "primary" : "outline"}
+                            variant={currentPage === page ? 'primary' : 'outline'}
                             size="sm"
                             onClick={() => setCurrentPage(page)}
                             className="w-8 h-8 p-0"
@@ -460,12 +465,12 @@ export default function ReviewsPage() {
                           </Button>
                         );
                       })}
-                      
+
                       {totalPages > 5 && (
                         <>
                           {totalPages > 6 && <span className="text-gray-500">...</span>}
                           <Button
-                            variant={currentPage === totalPages ? "primary" : "outline"}
+                            variant={currentPage === totalPages ? 'primary' : 'outline'}
                             size="sm"
                             onClick={() => setCurrentPage(totalPages)}
                             className="w-8 h-8 p-0"
@@ -475,7 +480,7 @@ export default function ReviewsPage() {
                         </>
                       )}
                     </div>
-                    
+
                     <Button
                       variant="outline"
                       size="sm"

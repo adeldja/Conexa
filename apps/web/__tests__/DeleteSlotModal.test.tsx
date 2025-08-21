@@ -39,12 +39,7 @@ describe('DeleteSlotModal Component', () => {
 
   it('does not render when slot is null', () => {
     render(
-      <DeleteSlotModal
-        slot={null}
-        isOpen={true}
-        onClose={mockOnClose}
-        onSuccess={mockOnSuccess}
-      />
+      <DeleteSlotModal slot={null} isOpen={true} onClose={mockOnClose} onSuccess={mockOnSuccess} />
     );
 
     expect(screen.queryByText(/Confirmer la suppression/i)).not.toBeInTheDocument();
@@ -102,7 +97,9 @@ describe('DeleteSlotModal Component', () => {
   });
 
   it('displays error message when deletion fails', async () => {
-    mockAvailabilityService.deleteSlot.mockRejectedValue(new Error('Erreur lors de la suppression'));
+    mockAvailabilityService.deleteSlot.mockRejectedValue(
+      new Error('Erreur lors de la suppression')
+    );
 
     render(
       <DeleteSlotModal
@@ -124,7 +121,7 @@ describe('DeleteSlotModal Component', () => {
 
   it('disables buttons during deletion process', async () => {
     // Simuler une opération qui ne se termine jamais
-    mockAvailabilityService.deleteSlot.mockImplementation(() => new Promise(() => { }));
+    mockAvailabilityService.deleteSlot.mockImplementation(() => new Promise(() => {}));
 
     render(
       <DeleteSlotModal

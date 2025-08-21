@@ -30,9 +30,9 @@ describe('SlotForm Component', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    
+
     // Mock pour les méthodes de formatage des dates
-    mockAvailabilityService.formatTimeForInput.mockImplementation((date) => {
+    mockAvailabilityService.formatTimeForInput.mockImplementation(date => {
       return new Date(date).toISOString().slice(0, 16);
     });
   });
@@ -40,11 +40,7 @@ describe('SlotForm Component', () => {
   it('renders the form for creating a new slot', () => {
     render(
       <AuthProvider>
-        <SlotForm
-          slot={null}
-          onSuccess={mockOnSuccess}
-          onCancel={mockOnCancel}
-        />
+        <SlotForm slot={null} onSuccess={mockOnSuccess} onCancel={mockOnCancel} />
       </AuthProvider>
     );
 
@@ -68,11 +64,7 @@ describe('SlotForm Component', () => {
 
     render(
       <AuthProvider>
-        <SlotForm
-          slot={mockSlot}
-          onSuccess={mockOnSuccess}
-          onCancel={mockOnCancel}
-        />
+        <SlotForm slot={mockSlot} onSuccess={mockOnSuccess} onCancel={mockOnCancel} />
       </AuthProvider>
     );
 
@@ -92,11 +84,7 @@ describe('SlotForm Component', () => {
 
     render(
       <AuthProvider>
-        <SlotForm
-          slot={null}
-          onSuccess={mockOnSuccess}
-          onCancel={mockOnCancel}
-        />
+        <SlotForm slot={null} onSuccess={mockOnSuccess} onCancel={mockOnCancel} />
       </AuthProvider>
     );
 
@@ -139,11 +127,7 @@ describe('SlotForm Component', () => {
 
     render(
       <AuthProvider>
-        <SlotForm
-          slot={mockSlot}
-          onSuccess={mockOnSuccess}
-          onCancel={mockOnCancel}
-        />
+        <SlotForm slot={mockSlot} onSuccess={mockOnSuccess} onCancel={mockOnCancel} />
       </AuthProvider>
     );
 
@@ -169,11 +153,7 @@ describe('SlotForm Component', () => {
   it('validates that end time is after start time', async () => {
     render(
       <AuthProvider>
-        <SlotForm
-          slot={null}
-          onSuccess={mockOnSuccess}
-          onCancel={mockOnCancel}
-        />
+        <SlotForm slot={null} onSuccess={mockOnSuccess} onCancel={mockOnCancel} />
       </AuthProvider>
     );
 
@@ -189,7 +169,9 @@ describe('SlotForm Component', () => {
 
     // Vérifier le message d'erreur
     await waitFor(() => {
-      expect(screen.getByText(/L'heure de fin doit être postérieure à l'heure de début/i)).toBeInTheDocument();
+      expect(
+        screen.getByText(/L'heure de fin doit être postérieure à l'heure de début/i)
+      ).toBeInTheDocument();
     });
 
     expect(mockAvailabilityService.createSlot).not.toHaveBeenCalled();
@@ -201,11 +183,7 @@ describe('SlotForm Component', () => {
 
     render(
       <AuthProvider>
-        <SlotForm
-          slot={null}
-          onSuccess={mockOnSuccess}
-          onCancel={mockOnCancel}
-        />
+        <SlotForm slot={null} onSuccess={mockOnSuccess} onCancel={mockOnCancel} />
       </AuthProvider>
     );
 
@@ -223,11 +201,7 @@ describe('SlotForm Component', () => {
   it('calls onCancel when cancel button is clicked', () => {
     render(
       <AuthProvider>
-        <SlotForm
-          slot={null}
-          onSuccess={mockOnSuccess}
-          onCancel={mockOnCancel}
-        />
+        <SlotForm slot={null} onSuccess={mockOnSuccess} onCancel={mockOnCancel} />
       </AuthProvider>
     );
 

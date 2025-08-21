@@ -36,7 +36,7 @@ export class SeederService {
       },
       {
         name: 'Cours de musique',
-        description: 'Apprentissage d\'instruments et théorie musicale',
+        description: "Apprentissage d'instruments et théorie musicale",
         icon: '🎵',
       },
     ];
@@ -56,9 +56,10 @@ export class SeederService {
     }
 
     return {
-      message: created.length > 0 
-        ? `${created.length} spécialités créées: ${created.join(', ')}`
-        : 'Toutes les spécialités existent déjà',
+      message:
+        created.length > 0
+          ? `${created.length} spécialités créées: ${created.join(', ')}`
+          : 'Toutes les spécialités existent déjà',
       count: created.length,
     };
   }
@@ -146,9 +147,10 @@ export class SeederService {
     }
 
     return {
-      message: created.length > 0 
-        ? `${created.length} utilisateurs créés: ${created.join(', ')}`
-        : 'Tous les utilisateurs existent déjà',
+      message:
+        created.length > 0
+          ? `${created.length} utilisateurs créés: ${created.join(', ')}`
+          : 'Tous les utilisateurs existent déjà',
       count: created.length,
     };
   }
@@ -168,52 +170,61 @@ export class SeederService {
     const providerProfilesData = [
       {
         businessName: 'Coaching Excellence',
-        description: 'Coach sportif professionnel avec 10 ans d\'expérience. Spécialisé en musculation, cardio et préparation physique.',
+        description:
+          "Coach sportif professionnel avec 10 ans d'expérience. Spécialisé en musculation, cardio et préparation physique.",
         phone: '+33123456789',
       },
       {
         businessName: 'Cabinet Juridique Martin',
-        description: 'Avocate spécialisée en droit des affaires, droit du travail et contentieux commercial.',
+        description:
+          'Avocate spécialisée en droit des affaires, droit du travail et contentieux commercial.',
         phone: '+33123456790',
       },
       {
         businessName: 'DevWeb Solutions',
-        description: 'Développeur full-stack spécialisé en React, Node.js et applications web modernes.',
+        description:
+          'Développeur full-stack spécialisé en React, Node.js et applications web modernes.',
         phone: '+33123456791',
       },
       {
         businessName: 'Atelier Culinaire',
-        description: 'Chef cuisinier proposant des cours de cuisine française et internationale.',
+        description:
+          'Chef cuisinier proposant des cours de cuisine française et internationale.',
         phone: '+33123456792',
       },
       {
         businessName: 'Bien-être & Relaxation',
-        description: 'Masseur thérapeutique certifié, spécialisé en massage suédois et deep tissue.',
+        description:
+          'Masseur thérapeutique certifié, spécialisé en massage suédois et deep tissue.',
         phone: '+33123456793',
       },
       {
         businessName: 'École de Musique Harmony',
-        description: 'Professeur de piano et guitare, tous niveaux. Méthode pédagogique adaptée.',
+        description:
+          'Professeur de piano et guitare, tous niveaux. Méthode pédagogique adaptée.',
         phone: '+33123456794',
       },
     ];
 
     const created = [];
-    
+
     // S'assurer que TOUS les providers ont un profil
     for (let i = 0; i < providers.length; i++) {
       const provider = providers[i];
       if (!provider.providerProfile) {
-        const profileData = providerProfilesData[i % providerProfilesData.length];
-        
+        const profileData =
+          providerProfilesData[i % providerProfilesData.length];
+
         // Personnaliser selon le prestataire
         const customizedProfile = {
-          businessName: i < providerProfilesData.length 
-            ? profileData.businessName 
-            : `${provider.fullName} Services`,
-          description: i < providerProfilesData.length 
-            ? profileData.description 
-            : `Services professionnels proposés par ${provider.fullName}`,
+          businessName:
+            i < providerProfilesData.length
+              ? profileData.businessName
+              : `${provider.fullName} Services`,
+          description:
+            i < providerProfilesData.length
+              ? profileData.description
+              : `Services professionnels proposés par ${provider.fullName}`,
           phone: `+3312345${(6795 + i).toString()}`, // Numéros uniques
         };
 
@@ -229,10 +240,14 @@ export class SeederService {
 
     // Créer les profils clients avec des données plus variées
     const clientPhones = [
-      '+33123456700', '+33123456701', '+33123456702', 
-      '+33123456703', '+33123456704', '+33123456705'
+      '+33123456700',
+      '+33123456701',
+      '+33123456702',
+      '+33123456703',
+      '+33123456704',
+      '+33123456705',
     ];
-    
+
     for (let i = 0; i < clients.length; i++) {
       const client = clients[i];
       if (!client.clientProfile) {
@@ -247,9 +262,10 @@ export class SeederService {
     }
 
     return {
-      message: created.length > 0 
-        ? `${created.length} profils créés: ${created.join(', ')}`
-        : 'Tous les profils existent déjà',
+      message:
+        created.length > 0
+          ? `${created.length} profils créés: ${created.join(', ')}`
+          : 'Tous les profils existent déjà',
       count: created.length,
     };
   }
@@ -261,52 +277,72 @@ export class SeederService {
     });
 
     if (providers.length === 0) {
-      return { message: 'Aucun prestataire trouvé. Créez d\'abord des utilisateurs prestataires.' };
+      return {
+        message:
+          "Aucun prestataire trouvé. Créez d'abord des utilisateurs prestataires.",
+      };
     }
 
     const created = [];
     const now = new Date();
-    
+
     // Templates d'horaires selon le type de service
     const scheduleTemplates = [
       // Template 1: Horaires de bureau (coach sportif, consultation)
       [
-        { hour: 8, minute: 0 }, { hour: 9, minute: 0 }, { hour: 10, minute: 0 },
-        { hour: 14, minute: 0 }, { hour: 15, minute: 0 }, { hour: 16, minute: 0 }, { hour: 17, minute: 0 }
+        { hour: 8, minute: 0 },
+        { hour: 9, minute: 0 },
+        { hour: 10, minute: 0 },
+        { hour: 14, minute: 0 },
+        { hour: 15, minute: 0 },
+        { hour: 16, minute: 0 },
+        { hour: 17, minute: 0 },
       ],
       // Template 2: Horaires flexibles (massage, cours de musique)
       [
-        { hour: 9, minute: 30 }, { hour: 11, minute: 0 }, 
-        { hour: 14, minute: 30 }, { hour: 16, minute: 0 }, { hour: 18, minute: 30 }
+        { hour: 9, minute: 30 },
+        { hour: 11, minute: 0 },
+        { hour: 14, minute: 30 },
+        { hour: 16, minute: 0 },
+        { hour: 18, minute: 30 },
       ],
       // Template 3: Horaires étendus (développement web, cours cuisine)
       [
-        { hour: 9, minute: 0 }, { hour: 11, minute: 0 }, { hour: 14, minute: 0 }, 
-        { hour: 16, minute: 0 }, { hour: 19, minute: 0 }, { hour: 20, minute: 30 }
+        { hour: 9, minute: 0 },
+        { hour: 11, minute: 0 },
+        { hour: 14, minute: 0 },
+        { hour: 16, minute: 0 },
+        { hour: 19, minute: 0 },
+        { hour: 20, minute: 30 },
       ],
     ];
 
-    for (let providerIndex = 0; providerIndex < providers.length; providerIndex++) {
+    for (
+      let providerIndex = 0;
+      providerIndex < providers.length;
+      providerIndex++
+    ) {
       const provider = providers[providerIndex];
-      const defaultPrice = provider.providerProfile?.defaultPrice || 50.00;
-      const schedule = scheduleTemplates[providerIndex % scheduleTemplates.length];
-      
+      const defaultPrice = provider.providerProfile?.defaultPrice || 50.0;
+      const schedule =
+        scheduleTemplates[providerIndex % scheduleTemplates.length];
+
       // Créer des créneaux pour les 14 prochains jours
       for (let day = 1; day <= 14; day++) {
         const date = new Date(now);
         date.setDate(date.getDate() + day);
-        
+
         // Éviter les dimanches pour certains prestataires
         if (date.getDay() === 0 && providerIndex % 2 === 0) continue;
 
         for (const time of schedule) {
           const startTime = new Date(date);
           startTime.setHours(time.hour, time.minute, 0, 0);
-          
+
           // Durée variable selon le service (30min à 2h)
           const durations = [30, 60, 90, 120];
           const duration = durations[providerIndex % durations.length];
-          
+
           const endTime = new Date(startTime);
           endTime.setMinutes(startTime.getMinutes() + duration);
 
@@ -333,16 +369,19 @@ export class SeederService {
                 description: this.getSlotDescription(duration, time.hour),
               },
             });
-            created.push(`Créneau ${startTime.toLocaleDateString()} ${startTime.toLocaleTimeString()} pour ${provider.fullName}`);
+            created.push(
+              `Créneau ${startTime.toLocaleDateString()} ${startTime.toLocaleTimeString()} pour ${provider.fullName}`,
+            );
           }
         }
       }
     }
 
     return {
-      message: created.length > 0 
-        ? `${created.length} créneaux créés`
-        : 'Tous les créneaux existent déjà',
+      message:
+        created.length > 0
+          ? `${created.length} créneaux créés`
+          : 'Tous les créneaux existent déjà',
       count: created.length,
     };
   }
@@ -350,7 +389,11 @@ export class SeederService {
   private getSlotDescription(duration: number, hour: number): string {
     const descriptions: Record<number, string[]> = {
       30: ['Consultation express', 'Session découverte', 'Rendez-vous court'],
-      60: ['Consultation standard', 'Session complète', 'Rendez-vous classique'],
+      60: [
+        'Consultation standard',
+        'Session complète',
+        'Rendez-vous classique',
+      ],
       90: ['Session approfondie', 'Consultation détaillée', 'Séance intensive'],
       120: ['Session complète', 'Formation intensive', 'Atelier complet'],
     };
@@ -361,9 +404,13 @@ export class SeederService {
       evening: 'soirée',
     };
 
-    const timeOfDay = hour < 12 ? 'morning' : hour < 18 ? 'afternoon' : 'evening';
-    const baseDesc = descriptions[duration]?.[Math.floor(Math.random() * descriptions[duration].length)] || 'Consultation';
-    
+    const timeOfDay =
+      hour < 12 ? 'morning' : hour < 18 ? 'afternoon' : 'evening';
+    const baseDesc =
+      descriptions[duration]?.[
+        Math.floor(Math.random() * descriptions[duration].length)
+      ] || 'Consultation';
+
     return `${baseDesc} - ${timeDescriptions[timeOfDay]}`;
   }
 
@@ -373,27 +420,28 @@ export class SeederService {
     });
 
     const availableSlots = await this.prisma.slot.findMany({
-      where: { 
+      where: {
         isAvailable: true,
-        startTime: { gte: new Date() } // Seulement les créneaux futurs
+        startTime: { gte: new Date() }, // Seulement les créneaux futurs
       },
       include: { provider: true },
       take: 20, // Limiter pour éviter trop de réservations
     });
 
     if (clients.length === 0 || availableSlots.length === 0) {
-      return { 
-        message: 'Impossible de créer des réservations : clients ou créneaux manquants',
-        count: 0 
+      return {
+        message:
+          'Impossible de créer des réservations : clients ou créneaux manquants',
+        count: 0,
       };
     }
 
     const created = [];
     const statuses = ['PENDING', 'CONFIRMED'];
-    
+
     // Créer quelques réservations de test
     const numberOfBookings = Math.min(10, availableSlots.length);
-    
+
     for (let i = 0; i < numberOfBookings; i++) {
       const client = clients[i % clients.length];
       const slot = availableSlots[i];
@@ -415,17 +463,20 @@ export class SeederService {
           data: { isAvailable: false },
         });
 
-        created.push(`Réservation ${booking.id} - ${client.fullName} chez ${slot.provider.fullName}`);
-      } catch (error) {
+        created.push(
+          `Réservation ${booking.id} - ${client.fullName} chez ${slot.provider.fullName}`,
+        );
+      } catch (_error) {
         // Ignorer les erreurs de contraintes (réservation déjà existante)
         continue;
       }
     }
 
     return {
-      message: created.length > 0 
-        ? `${created.length} réservations créées`
-        : 'Aucune réservation créée',
+      message:
+        created.length > 0
+          ? `${created.length} réservations créées`
+          : 'Aucune réservation créée',
       count: created.length,
     };
   }
@@ -433,17 +484,17 @@ export class SeederService {
   async seedReviews() {
     const completedBookings = await this.prisma.booking.findMany({
       where: { status: 'CONFIRMED' }, // Utiliser CONFIRMED car COMPLETED n'existe pas
-      include: { 
-        client: true, 
+      include: {
+        client: true,
         slot: { include: { provider: true } },
-        review: true 
+        review: true,
       },
     });
 
     if (completedBookings.length === 0) {
-      return { 
+      return {
         message: 'Aucune réservation confirmée trouvée pour créer des avis',
-        count: 0 
+        count: 0,
       };
     }
 
@@ -451,28 +502,28 @@ export class SeederService {
       {
         rating: 5,
         comments: [
-          'Excellent service ! Très professionnel et à l\'écoute.',
+          "Excellent service ! Très professionnel et à l'écoute.",
           'Je recommande vivement, résultats au-delà de mes attentes.',
           'Prestation de qualité, je reviendrai certainement.',
           'Parfait ! Exactement ce que je recherchais.',
-        ]
+        ],
       },
       {
         rating: 4,
         comments: [
           'Très bon service, quelques petits points à améliorer.',
           'Globalement satisfait, bonne prestation.',
-          'Bien dans l\'ensemble, je recommande.',
+          "Bien dans l'ensemble, je recommande.",
           'Service de qualité avec un bon rapport qualité/prix.',
-        ]
+        ],
       },
       {
         rating: 3,
         comments: [
           'Service correct, sans plus.',
           'Prestation moyenne, peut mieux faire.',
-          'Acceptable mais j\'attendais mieux.',
-        ]
+          "Acceptable mais j'attendais mieux.",
+        ],
       },
     ];
 
@@ -480,8 +531,12 @@ export class SeederService {
 
     for (const booking of completedBookings) {
       if (!booking.review) {
-        const template = reviewTemplates[Math.floor(Math.random() * reviewTemplates.length)];
-        const comment = template.comments[Math.floor(Math.random() * template.comments.length)];
+        const template =
+          reviewTemplates[Math.floor(Math.random() * reviewTemplates.length)];
+        const comment =
+          template.comments[
+            Math.floor(Math.random() * template.comments.length)
+          ];
 
         try {
           const review = await this.prisma.review.create({
@@ -494,8 +549,10 @@ export class SeederService {
             },
           });
 
-          created.push(`Avis ${review.rating}/5 par ${booking.client.fullName} pour ${booking.slot.provider.fullName}`);
-        } catch (error) {
+          created.push(
+            `Avis ${review.rating}/5 par ${booking.client.fullName} pour ${booking.slot.provider.fullName}`,
+          );
+        } catch (_error) {
           // Ignorer les erreurs de contraintes
           continue;
         }
@@ -503,51 +560,56 @@ export class SeederService {
     }
 
     return {
-      message: created.length > 0 
-        ? `${created.length} avis créés`
-        : 'Aucun avis créé (tous les bookings ont déjà des avis)',
+      message:
+        created.length > 0
+          ? `${created.length} avis créés`
+          : 'Aucun avis créé (tous les bookings ont déjà des avis)',
       count: created.length,
     };
   }
 
   async seedAll() {
     const results = [];
-    
+
     try {
       // 1. Créer les spécialités
       const specialtiesResult = await this.seedSpecialties();
       results.push(`Spécialités: ${specialtiesResult.message}`);
-      
+
       // 2. Créer les utilisateurs
       const usersResult = await this.seedUsers();
       results.push(`Utilisateurs: ${usersResult.message}`);
-      
+
       // 3. Créer les profils
       const profilesResult = await this.seedProfiles();
       results.push(`Profils: ${profilesResult.message}`);
-      
+
       // 4. Associer des spécialités aux prestataires
       const specialtyAssociationsResult = await this.seedProviderSpecialties();
-      results.push(`Associations spécialités: ${specialtyAssociationsResult.message}`);
-      
+      results.push(
+        `Associations spécialités: ${specialtyAssociationsResult.message}`,
+      );
+
       // 5. Créer les créneaux
       const slotsResult = await this.seedSlots();
       results.push(`Créneaux: ${slotsResult.message}`);
-      
+
       // 6. Créer des réservations
       const bookingsResult = await this.seedBookings();
       results.push(`Réservations: ${bookingsResult.message}`);
-      
+
       // 7. Créer des avis
       const reviewsResult = await this.seedReviews();
       results.push(`Avis: ${reviewsResult.message}`);
-      
+
       return {
         message: results,
       };
     } catch (error) {
       return {
-        message: [`Erreur lors du seeding: ${error instanceof Error ? error.message : 'Erreur inconnue'}`],
+        message: [
+          `Erreur lors du seeding: ${error instanceof Error ? error.message : 'Erreur inconnue'}`,
+        ],
       };
     }
   }
@@ -555,19 +617,19 @@ export class SeederService {
   async seedProviderSpecialties() {
     const providers = await this.prisma.user.findMany({
       where: { role: Role.PROVIDER },
-      include: { 
-        providerProfile: { 
-          include: { specialties: true } 
-        } 
+      include: {
+        providerProfile: {
+          include: { specialties: true },
+        },
       },
     });
 
     const specialties = await this.prisma.specialty.findMany();
 
     if (providers.length === 0 || specialties.length === 0) {
-      return { 
+      return {
         message: 'Aucun prestataire ou spécialité trouvé',
-        count: 0 
+        count: 0,
       };
     }
 
@@ -575,7 +637,7 @@ export class SeederService {
     const levels = ['Débutant', 'Intermédiaire', 'Expert'];
     const certifications = [
       'Certification professionnelle',
-      'Diplôme d\'État',
+      "Diplôme d'État",
       'Formation spécialisée',
       'Certification internationale',
       'Auto-formation + expérience',
@@ -587,23 +649,29 @@ export class SeederService {
       // Assigner 1-3 spécialités par prestataire
       const numberOfSpecialties = Math.floor(Math.random() * 3) + 1;
       const shuffledSpecialties = specialties.sort(() => 0.5 - Math.random());
-      
-      for (let i = 0; i < numberOfSpecialties && i < shuffledSpecialties.length; i++) {
+
+      for (
+        let i = 0;
+        i < numberOfSpecialties && i < shuffledSpecialties.length;
+        i++
+      ) {
         const specialty = shuffledSpecialties[i];
-        
+
         // Vérifier si l'association existe déjà
-        const existingAssociation = await this.prisma.providerSpecialty.findUnique({
-          where: {
-            providerId_specialtyId: {
-              providerId: provider.providerProfile.id,
-              specialtyId: specialty.id,
+        const existingAssociation =
+          await this.prisma.providerSpecialty.findUnique({
+            where: {
+              providerId_specialtyId: {
+                providerId: provider.providerProfile.id,
+                specialtyId: specialty.id,
+              },
             },
-          },
-        });
+          });
 
         if (!existingAssociation) {
           const level = levels[Math.floor(Math.random() * levels.length)];
-          const certification = certifications[Math.floor(Math.random() * certifications.length)];
+          const certification =
+            certifications[Math.floor(Math.random() * certifications.length)];
 
           await this.prisma.providerSpecialty.create({
             data: {
@@ -620,9 +688,10 @@ export class SeederService {
     }
 
     return {
-      message: created.length > 0 
-        ? `${created.length} associations spécialité-prestataire créées`
-        : 'Toutes les associations existent déjà',
+      message:
+        created.length > 0
+          ? `${created.length} associations spécialité-prestataire créées`
+          : 'Toutes les associations existent déjà',
       count: created.length,
     };
   }
@@ -653,7 +722,9 @@ export class SeederService {
     try {
       switch (entity) {
         case 'users':
-          await this.prisma.user.deleteMany({ where: { role: { not: 'ADMIN' } } });
+          await this.prisma.user.deleteMany({
+            where: { role: { not: 'ADMIN' } },
+          });
           break;
         case 'slots':
           await this.prisma.slot.deleteMany();
@@ -684,7 +755,9 @@ export class SeederService {
   async getStats() {
     const stats = {
       users: await this.prisma.user.count(),
-      providers: await this.prisma.user.count({ where: { role: Role.PROVIDER } }),
+      providers: await this.prisma.user.count({
+        where: { role: Role.PROVIDER },
+      }),
       clients: await this.prisma.user.count({ where: { role: Role.CLIENT } }),
       specialties: await this.prisma.specialty.count(),
       slots: await this.prisma.slot.count(),

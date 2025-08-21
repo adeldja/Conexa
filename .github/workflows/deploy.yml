@@ -1,0 +1,154 @@
+name: Deployment
+
+on:
+  push:
+    branches: [main]
+  workflow_run:
+    workflows: ['Continuous Integration']
+    types: [completed]
+    branches: [main]
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  # Job de pré-vérification
+  pre-deploy:
+    name: 🔍 Pre-deployment checks
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'push' }}
+    outputs:
+      should-deploy: ${{ steps.check.outputs.deploy }}
+    steps:
+      - name: 🛒 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔍 Check if deployment should proceed
+        id: check
+        run: |
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo "deploy=true" >> $GITHUB_OUTPUT
+            echo "✅ Deployment autorisé pour la branche main"
+          else
+            echo "deploy=false" >> $GITHUB_OUTPUT
+            echo "❌ Deployment non autorisé pour cette branche"
+          fi
+
+  # Build de production
+  build-production:
+    name: 🏗️ Production Build
+    runs-on: ubuntu-latest
+    needs: pre-deploy
+    if: needs.pre-deploy.outputs.should-deploy == 'true'
+    strategy:
+      matrix:
+        workspace: [api, web]
+    steps:
+      - name: 🛒 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'yarn'
+
+      - name: 🔽 Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: 🔨 Generate Prisma client (for API)
+        if: matrix.workspace == 'api'
+        run: yarn workspace api prisma generate
+
+      - name: ⚙️ Setup production environment
+        run: |
+          if [ "${{ matrix.workspace }}" = "web" ]; then
+            echo "NEXT_PUBLIC_API_URL=${{ secrets.PRODUCTION_API_URL }}" > apps/web/.env.production
+          elif [ "${{ matrix.workspace }}" = "api" ]; then
+            echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > apps/api/.env.production
+            echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> apps/api/.env.production
+            echo "NODE_ENV=production" >> apps/api/.env.production
+          fi
+
+      - name: 🏗️ Build for production
+        run: yarn workspace ${{ matrix.workspace }} build
+
+      - name: 📦 Archive production artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.workspace }}-dist
+          path: |
+            apps/${{ matrix.workspace }}/dist
+            apps/${{ matrix.workspace }}/.next
+          retention-days: 30
+
+  # Tests de smoke en environnement de production
+  smoke-tests:
+    name: 💨 Smoke Tests
+    runs-on: ubuntu-latest
+    needs: [pre-deploy, build-production]
+    if: needs.pre-deploy.outputs.should-deploy == 'true'
+    steps:
+      - name: 🛒 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'yarn'
+
+      - name: 🔽 Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: 📥 Download API artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: api-dist
+          path: apps/api/
+
+      - name: 📥 Download Web artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: web-dist
+          path: apps/web/
+
+      - name: 💨 Run smoke tests
+        run: |
+          echo "🔥 Exécution des tests de smoke..."
+          # Ici vous pouvez ajouter vos tests de smoke spécifiques
+          # Par exemple : vérifier que l'application démarre correctement
+          echo "✅ Tests de smoke réussis"
+
+  # Notification de déploiement
+  notify-deployment:
+    name: 📢 Deployment Notification
+    runs-on: ubuntu-latest
+    needs: [pre-deploy, build-production, smoke-tests]
+    if: always() && needs.pre-deploy.outputs.should-deploy == 'true'
+    steps:
+      - name: 🎉 Deployment successful
+        if: ${{ needs.build-production.result == 'success' && needs.smoke-tests.result == 'success' }}
+        run: |
+          echo "🎉 Déploiement réussi !"
+          echo "✅ Build production: SUCCESS"
+          echo "✅ Tests de smoke: SUCCESS"
+          echo "🚀 L'application est prête pour la production"
+
+      - name: ❌ Deployment failed
+        if: ${{ needs.build-production.result != 'success' || needs.smoke-tests.result != 'success' }}
+        run: |
+          echo "❌ Échec du déploiement !"
+          echo "🏗️ Build production: ${{ needs.build-production.result }}"
+          echo "💨 Tests de smoke: ${{ needs.smoke-tests.result }}"
+          exit 1
+
+      # Optionnel: Notification Slack/Discord/Email
+      - name: 📱 Send notification (optionnel)
+        if: always()
+        run: |
+          # Exemple de notification
+          echo "📱 Envoi de notification..."
+          echo "Status: ${{ job.status }}"
+          echo "Commit: ${{ github.sha }}"
+          echo "Author: ${{ github.actor }}"

@@ -1,11 +1,13 @@
 import { BackendSlot, BackendBooking, GeneratedSlot } from '../types/types';
 
 export class SlotConverter {
-  static toGeneratedSlots(backendSlots: BackendSlot[], bookings: BackendBooking[] = []): GeneratedSlot[] {
+  static toGeneratedSlots(
+    backendSlots: BackendSlot[],
+    bookings: BackendBooking[] = []
+  ): GeneratedSlot[] {
     return backendSlots.map(slot => {
-      const booking = bookings.find(b => 
-        b.slotId === slot.id && 
-        (b.status === 'CONFIRMED' || b.status === 'PENDING')
+      const booking = bookings.find(
+        b => b.slotId === slot.id && (b.status === 'CONFIRMED' || b.status === 'PENDING')
       );
 
       const startTime = new Date(slot.startTime);
@@ -23,7 +25,10 @@ export class SlotConverter {
     });
   }
 
-  private static getSlotStatus(slot: BackendSlot, booking?: BackendBooking): 'available' | 'booked' | 'closed' {
+  private static getSlotStatus(
+    slot: BackendSlot,
+    booking?: BackendBooking
+  ): 'available' | 'booked' | 'closed' {
     if (booking) return 'booked';
     if (!slot.isAvailable) return 'closed';
     return 'available';

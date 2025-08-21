@@ -43,7 +43,9 @@ export function useBookingLogic() {
       setError(null);
       const data = await availabilityService.getProviderSlots(providerId);
       const availableSlots = data.filter(slot => slot.isAvailable);
-      availableSlots.sort((a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime());
+      availableSlots.sort(
+        (a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime()
+      );
       setAvailableSlots(availableSlots);
     } catch (err: any) {
       setError('Erreur lors de la récupération des créneaux: ' + err.message);
@@ -70,14 +72,14 @@ export function useBookingLogic() {
       setLoading(true);
       setError(null);
       setSuccess(null);
-      
+
       await bookingService.createBooking({
         slotId,
-        clientId: user.id
+        clientId: user.id,
       });
-      
+
       setSuccess('Votre demande de réservation a été envoyée avec succès !');
-      
+
       // Rafraîchir la liste des créneaux
       await fetchAvailableSlots(selectedProviderId);
     } catch (err: any) {
@@ -96,6 +98,6 @@ export function useBookingLogic() {
     error,
     success,
     handleProviderChange,
-    handleBookSlot
+    handleBookSlot,
   };
 }

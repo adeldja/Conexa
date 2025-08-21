@@ -37,7 +37,10 @@ export const profilesService = {
     return response.data;
   },
 
-  async updateClientProfile(userId: string, data: UpdateClientProfileRequest): Promise<ClientProfile> {
+  async updateClientProfile(
+    userId: string,
+    data: UpdateClientProfileRequest
+  ): Promise<ClientProfile> {
     const response = await api.put(`/profiles/client/${userId}`, data);
     return response.data;
   },
@@ -53,7 +56,10 @@ export const profilesService = {
     return response.data;
   },
 
-  async updateProviderProfile(userId: string, data: UpdateProviderProfileRequest): Promise<ProviderProfile> {
+  async updateProviderProfile(
+    userId: string,
+    data: UpdateProviderProfileRequest
+  ): Promise<ProviderProfile> {
     const response = await api.put(`/profiles/provider/${userId}`, data);
     return response.data;
   },
@@ -61,7 +67,7 @@ export const profilesService = {
   // === SEARCH PROVIDERS ===
   async searchProviders(params: SearchProvidersParams = {}): Promise<SearchProvidersResponse> {
     const searchParams = new URLSearchParams();
-    
+
     if (params.query) searchParams.append('query', params.query);
     if (params.specialtyId) searchParams.append('specialtyId', params.specialtyId);
     if (params.page) searchParams.append('page', params.page.toString());

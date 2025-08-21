@@ -40,12 +40,12 @@ function ProfileForm({ user, onSave, loading }: ProfileFormProps) {
     const requiredFields = ['fullName'];
     const providerFields = isProvider ? ['hourlyRate', 'zone'] : [];
     const allRequired = [...requiredFields, ...providerFields];
-    
+
     const completed = allRequired.filter(field => {
       const value = formData[field as keyof UserProfileData];
       return value !== undefined && value !== '' && value !== null;
     });
-    
+
     return Math.round((completed.length / allRequired.length) * 100);
   };
 
@@ -61,7 +61,10 @@ function ProfileForm({ user, onSave, loading }: ProfileFormProps) {
       errors.bio = 'La description ne peut pas dépasser 300 caractères';
     }
 
-    if (formData.phone && !/^(?:\+33|0)[1-9](?:[0-9]{8})$/.test(formData.phone.replace(/\s/g, ''))) {
+    if (
+      formData.phone &&
+      !/^(?:\+33|0)[1-9](?:[0-9]{8})$/.test(formData.phone.replace(/\s/g, ''))
+    ) {
       errors.phone = 'Format de téléphone invalide (format français requis)';
     }
 
@@ -81,7 +84,7 @@ function ProfileForm({ user, onSave, loading }: ProfileFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       error('Erreurs de validation', 'Veuillez corriger les erreurs avant de continuer');
       return;
@@ -117,31 +120,26 @@ function ProfileForm({ user, onSave, loading }: ProfileFormProps) {
       {/* Indicateur de complétion */}
       <Card className="p-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-gray-900">
-            Complétion du profil
-          </h3>
+          <h3 className="text-lg font-semibold text-gray-900">Complétion du profil</h3>
           <span className="text-2xl font-bold text-blue-600">{completion}%</span>
         </div>
         <div className="w-full bg-gray-200 rounded-full h-2">
-          <div 
+          <div
             className="bg-blue-600 h-2 rounded-full transition-all duration-300"
             style={{ width: `${completion}%` }}
           />
         </div>
         <p className="text-sm text-gray-600 mt-2">
-          {completion === 100 
-            ? '🎉 Votre profil est complet !' 
-            : `Complétez votre profil pour attirer plus de clients`
-          }
+          {completion === 100
+            ? '🎉 Votre profil est complet !'
+            : `Complétez votre profil pour attirer plus de clients`}
         </p>
       </Card>
 
       {/* Section Informations générales */}
       <Card className="p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-6">
-          Informations générales
-        </h3>
-        
+        <h3 className="text-lg font-semibold text-gray-900 mb-6">Informations générales</h3>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-2">
@@ -151,7 +149,7 @@ function ProfileForm({ user, onSave, loading }: ProfileFormProps) {
               id="fullName"
               type="text"
               value={formData.fullName || ''}
-              onChange={(e) => handleChange('fullName', e.target.value)}
+              onChange={e => handleChange('fullName', e.target.value)}
               placeholder="Votre nom complet"
               className={validationErrors.fullName ? 'border-red-500' : ''}
               disabled={saving}
@@ -169,7 +167,7 @@ function ProfileForm({ user, onSave, loading }: ProfileFormProps) {
               id="phone"
               type="tel"
               value={formData.phone || ''}
-              onChange={(e) => handleChange('phone', e.target.value)}
+              onChange={e => handleChange('phone', e.target.value)}
               placeholder="06 12 34 56 78"
               className={validationErrors.phone ? 'border-red-500' : ''}
               disabled={saving}
@@ -188,7 +186,7 @@ function ProfileForm({ user, onSave, loading }: ProfileFormProps) {
             id="bio"
             rows={4}
             value={formData.bio || ''}
-            onChange={(e) => handleChange('bio', e.target.value)}
+            onChange={e => handleChange('bio', e.target.value)}
             placeholder="Décrivez votre activité en quelques phrases..."
             className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none ${
               validationErrors.bio ? 'border-red-500' : 'border-gray-300'
@@ -197,9 +195,7 @@ function ProfileForm({ user, onSave, loading }: ProfileFormProps) {
             disabled={saving}
           />
           <div className="flex justify-between items-center mt-1">
-            {validationErrors.bio && (
-              <p className="text-red-500 text-sm">{validationErrors.bio}</p>
-            )}
+            {validationErrors.bio && <p className="text-red-500 text-sm">{validationErrors.bio}</p>}
             <p className="text-sm text-gray-500 ml-auto">
               {(formData.bio || '').length}/300 caractères
             </p>
@@ -207,11 +203,7 @@ function ProfileForm({ user, onSave, loading }: ProfileFormProps) {
         </div>
 
         <div className="mt-6 flex justify-end">
-          <Button
-            type="submit"
-            disabled={saving}
-            className="px-6"
-          >
+          <Button type="submit" disabled={saving} className="px-6">
             {saving ? 'Sauvegarde...' : 'Enregistrer les informations générales'}
           </Button>
         </div>
@@ -223,7 +215,7 @@ function ProfileForm({ user, onSave, loading }: ProfileFormProps) {
           <h3 className="text-lg font-semibold text-gray-900 mb-6">
             Informations professionnelles
           </h3>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label htmlFor="hourlyRate" className="block text-sm font-medium text-gray-700 mb-2">
@@ -235,7 +227,7 @@ function ProfileForm({ user, onSave, loading }: ProfileFormProps) {
                 min="0"
                 step="1"
                 value={formData.hourlyRate || ''}
-                onChange={(e) => handleChange('hourlyRate', parseFloat(e.target.value) || 0)}
+                onChange={e => handleChange('hourlyRate', parseFloat(e.target.value) || 0)}
                 placeholder="50"
                 className={validationErrors.hourlyRate ? 'border-red-500' : ''}
                 disabled={saving}
@@ -253,7 +245,7 @@ function ProfileForm({ user, onSave, loading }: ProfileFormProps) {
                 id="zone"
                 type="text"
                 value={formData.zone || ''}
-                onChange={(e) => handleChange('zone', e.target.value)}
+                onChange={e => handleChange('zone', e.target.value)}
                 placeholder="Paris et région parisienne"
                 disabled={saving}
               />
@@ -267,7 +259,7 @@ function ProfileForm({ user, onSave, loading }: ProfileFormProps) {
                 id="companyName"
                 type="text"
                 value={formData.companyName || ''}
-                onChange={(e) => handleChange('companyName', e.target.value)}
+                onChange={e => handleChange('companyName', e.target.value)}
                 placeholder="Ma super entreprise"
                 disabled={saving}
               />
@@ -281,7 +273,7 @@ function ProfileForm({ user, onSave, loading }: ProfileFormProps) {
                 id="siret"
                 type="text"
                 value={formData.siret || ''}
-                onChange={(e) => handleChange('siret', e.target.value)}
+                onChange={e => handleChange('siret', e.target.value)}
                 placeholder="12345678901234"
                 disabled={saving}
               />
@@ -292,28 +284,34 @@ function ProfileForm({ user, onSave, loading }: ProfileFormProps) {
             <h4 className="text-md font-medium text-gray-900 mb-4">Adresse</h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="md:col-span-2">
-                <label htmlFor="addressLine1" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="addressLine1"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   Adresse ligne 1
                 </label>
                 <Input
                   id="addressLine1"
                   type="text"
                   value={formData.addressLine1 || ''}
-                  onChange={(e) => handleChange('addressLine1', e.target.value)}
+                  onChange={e => handleChange('addressLine1', e.target.value)}
                   placeholder="123 Rue de la Paix"
                   disabled={saving}
                 />
               </div>
 
               <div className="md:col-span-2">
-                <label htmlFor="addressLine2" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="addressLine2"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   Adresse ligne 2
                 </label>
                 <Input
                   id="addressLine2"
                   type="text"
                   value={formData.addressLine2 || ''}
-                  onChange={(e) => handleChange('addressLine2', e.target.value)}
+                  onChange={e => handleChange('addressLine2', e.target.value)}
                   placeholder="Appartement, suite, etc."
                   disabled={saving}
                 />
@@ -327,21 +325,24 @@ function ProfileForm({ user, onSave, loading }: ProfileFormProps) {
                   id="city"
                   type="text"
                   value={formData.city || ''}
-                  onChange={(e) => handleChange('city', e.target.value)}
+                  onChange={e => handleChange('city', e.target.value)}
                   placeholder="Paris"
                   disabled={saving}
                 />
               </div>
 
               <div>
-                <label htmlFor="postalCode" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="postalCode"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   Code postal
                 </label>
                 <Input
                   id="postalCode"
                   type="text"
                   value={formData.postalCode || ''}
-                  onChange={(e) => handleChange('postalCode', e.target.value)}
+                  onChange={e => handleChange('postalCode', e.target.value)}
                   placeholder="75001"
                   className={validationErrors.postalCode ? 'border-red-500' : ''}
                   disabled={saving}
@@ -354,11 +355,7 @@ function ProfileForm({ user, onSave, loading }: ProfileFormProps) {
           </div>
 
           <div className="mt-6 flex justify-end">
-            <Button
-              type="submit"
-              disabled={saving}
-              className="px-6"
-            >
+            <Button type="submit" disabled={saving} className="px-6">
               {saving ? 'Sauvegarde...' : 'Enregistrer les informations professionnelles'}
             </Button>
           </div>
@@ -385,10 +382,10 @@ export default function ProfilePage() {
   const handleSaveProfile = async (data: UserProfileData) => {
     // TODO: Appeler l'API pour sauvegarder le profil
     console.log('Sauvegarde profil:', data);
-    
+
     // Simuler l'appel API
     await new Promise(resolve => setTimeout(resolve, 1500));
-    
+
     // En production, ici on appellerait l'API:
     // await profileService.updateProfile(user.id, data);
   };
@@ -401,7 +398,7 @@ export default function ProfilePage() {
     <ProtectedRoute>
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
         <ToastContainer toasts={toasts} onRemove={removeToast} />
-        
+
         <div className="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="mb-8">
@@ -429,16 +426,10 @@ export default function ProfilePage() {
             <div className="space-y-6">
               <Skeleton className="h-32 w-full rounded-lg" />
               <Skeleton className="h-96 w-full rounded-lg" />
-              {user.role === 'PROVIDER' && (
-                <Skeleton className="h-96 w-full rounded-lg" />
-              )}
+              {user.role === 'PROVIDER' && <Skeleton className="h-96 w-full rounded-lg" />}
             </div>
           ) : (
-            <ProfileForm 
-              user={user} 
-              onSave={handleSaveProfile}
-              loading={loading}
-            />
+            <ProfileForm user={user} onSave={handleSaveProfile} loading={loading} />
           )}
         </div>
       </div>

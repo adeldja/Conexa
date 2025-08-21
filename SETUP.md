@@ -3,6 +3,7 @@
 ## Prérequis
 
 ### 1. Node.js et Yarn
+
 ```bash
 # Installer Node.js (version 18+)
 # Télécharger depuis https://nodejs.org/
@@ -12,6 +13,7 @@ npm install -g yarn
 ```
 
 ### 2. PostgreSQL
+
 ```bash
 # Sur macOS avec Homebrew
 brew install postgresql
@@ -24,12 +26,14 @@ brew services start postgresql
 ## Installation
 
 ### 1. Cloner et installer les dépendances
+
 ```bash
 cd /Users/adel/Desktop/bureau/Ynov/Conexa
 yarn install
 ```
 
 ### 2. Configuration de la base de données
+
 ```bash
 # Créer l'utilisateur et la base de données
 createuser -s conexa_user
@@ -38,6 +42,7 @@ psql -d postgres -c "ALTER USER conexa_user WITH PASSWORD 'conexa_pass';"
 ```
 
 ### 3. Initialiser Prisma
+
 ```bash
 yarn workspace api prisma generate
 yarn workspace api prisma db push
@@ -46,17 +51,20 @@ yarn workspace api prisma db push
 ## Démarrage
 
 ### Option 1: Script automatique (recommandé)
+
 ```bash
 ./start.sh
 ```
 
 ### Option 2: Démarrage manuel
+
 ```bash
 # Dans le terminal principal
 yarn dev
 ```
 
 ### Option 3: Démarrage séparé
+
 ```bash
 # Terminal 1: API
 yarn dev:api
@@ -103,13 +111,14 @@ yarn build
 ## Structure des ports
 
 - **3000**: Next.js (Frontend)
-- **3001**: NestJS (Backend API)  
+- **3001**: NestJS (Backend API)
 - **5432**: PostgreSQL
 - **5555**: Prisma Studio
 
 ## Variables d'environnement
 
 Les fichiers suivants sont configurés :
+
 - `.env` (racine)
 - `apps/api/.env` (backend)
 - `apps/web/.env.local` (frontend)
@@ -117,11 +126,13 @@ Les fichiers suivants sont configurés :
 ## Dépannage
 
 ### PostgreSQL ne démarre pas
+
 ```bash
 brew services restart postgresql
 ```
 
 ### Erreur de connexion à la DB
+
 ```bash
 # Vérifier que PostgreSQL fonctionne
 brew services list | grep postgres
@@ -131,6 +142,7 @@ yarn prisma:reset
 ```
 
 ### Problème de permissions
+
 ```bash
 # Donner les permissions complètes à l'utilisateur
 psql -d postgres -c "ALTER USER conexa_user WITH SUPERUSER;"

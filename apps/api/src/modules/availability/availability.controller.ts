@@ -1,5 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { AvailabilityService } from './availability.service';
 import { CreateSlotDto } from './dto/create-slot.dto';
@@ -26,7 +40,10 @@ export class AvailabilityController {
 
   @Get('provider/:providerId')
   @ApiOperation({ summary: 'Get all slots for a provider' })
-  @ApiResponse({ status: 200, description: 'List of slots returned successfully' })
+  @ApiResponse({
+    status: 200,
+    description: 'List of slots returned successfully',
+  })
   findByProvider(@Param('providerId') providerId: string) {
     return this.availabilityService.findByProvider(providerId);
   }

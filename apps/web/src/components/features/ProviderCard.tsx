@@ -10,7 +10,8 @@ interface ProviderCardProps {
 }
 
 export function ProviderCard({ provider, onViewProfile, className }: ProviderCardProps) {
-  const { user, businessName, description, averageRating, defaultPrice, specialties, isVerified } = provider;
+  const { user, businessName, description, averageRating, defaultPrice, specialties, isVerified } =
+    provider;
 
   return (
     <Card className={`p-6 hover:shadow-lg transition-shadow cursor-pointer ${className}`}>
@@ -44,7 +45,7 @@ export function ProviderCard({ provider, onViewProfile, className }: ProviderCar
                   </span>
                 )}
               </h3>
-              
+
               {/* Note et avis */}
               {averageRating && (
                 <div className="flex items-center mb-2">
@@ -59,27 +60,19 @@ export function ProviderCard({ provider, onViewProfile, className }: ProviderCar
             {/* Prix */}
             {defaultPrice && (
               <div className="text-right">
-                <div className="text-lg font-semibold text-gray-900">
-                  {defaultPrice}€
-                </div>
-                <div className="text-sm text-gray-500">
-                  / session
-                </div>
+                <div className="text-lg font-semibold text-gray-900">{defaultPrice}€</div>
+                <div className="text-sm text-gray-500">/ session</div>
               </div>
             )}
           </div>
 
           {/* Description */}
-          {description && (
-            <p className="text-gray-600 text-sm mb-3 line-clamp-2">
-              {description}
-            </p>
-          )}
+          {description && <p className="text-gray-600 text-sm mb-3 line-clamp-2">{description}</p>}
 
           {/* Spécialités */}
           {specialties && specialties.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-3">
-              {specialties.slice(0, 3).map((providerSpecialty) => (
+              {specialties.slice(0, 3).map(providerSpecialty => (
                 <Badge key={providerSpecialty.id} variant="secondary" className="text-xs">
                   {providerSpecialty.specialty.icon} {providerSpecialty.specialty.name}
                   {providerSpecialty.level && (
@@ -99,9 +92,7 @@ export function ProviderCard({ provider, onViewProfile, className }: ProviderCar
           <div className="flex items-center justify-between pt-3 border-t border-gray-100">
             <div className="flex items-center gap-4 text-sm text-gray-500">
               {provider.address && (
-                <span className="flex items-center gap-1">
-                  📍 {provider.address.split(',')[0]}
-                </span>
+                <span className="flex items-center gap-1">📍 {provider.address.split(',')[0]}</span>
               )}
               {provider.website && (
                 <a
@@ -109,7 +100,7 @@ export function ProviderCard({ provider, onViewProfile, className }: ProviderCar
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-1 hover:text-blue-600"
-                  onClick={(e) => e.stopPropagation()}
+                  onClick={e => e.stopPropagation()}
                 >
                   🌐 Site web
                 </a>

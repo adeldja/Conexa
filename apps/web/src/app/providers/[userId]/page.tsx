@@ -9,7 +9,7 @@ import type { ProviderProfile, Review } from '@/types/profiles';
 export default function ProviderProfilePage() {
   const params = useParams();
   const userId = params.userId as string;
-  
+
   const [provider, setProvider] = useState<ProviderProfile | null>(null);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [reviewStats, setReviewStats] = useState<{
@@ -24,7 +24,7 @@ export default function ProviderProfilePage() {
     const loadProviderData = async () => {
       try {
         setLoading(true);
-        
+
         // Charger le profil du prestataire
         const providerData = await providerProfileService.get(userId);
         setProvider(providerData);
@@ -67,15 +67,11 @@ export default function ProviderProfilePage() {
     return (
       <div className="container mx-auto px-4 py-8">
         <Card className="p-8 text-center">
-          <h1 className="text-xl font-semibold text-gray-900 mb-2">
-            Profil non trouvé
-          </h1>
+          <h1 className="text-xl font-semibold text-gray-900 mb-2">Profil non trouvé</h1>
           <p className="text-gray-600 mb-4">
-            {error || 'Ce prestataire n\'existe pas ou n\'est plus disponible.'}
+            {error || "Ce prestataire n'existe pas ou n'est plus disponible."}
           </p>
-          <Button onClick={() => window.history.back()}>
-            Retour
-          </Button>
+          <Button onClick={() => window.history.back()}>Retour</Button>
         </Card>
       </div>
     );
@@ -101,7 +97,7 @@ export default function ProviderProfilePage() {
                 </span>
               )}
             </div>
-            
+
             {provider.isVerified && (
               <Badge variant="success" className="mb-2">
                 ✓ Prestataire vérifié
@@ -116,14 +112,12 @@ export default function ProviderProfilePage() {
                 <h1 className="text-3xl font-bold text-gray-900 mb-2">
                   {provider.businessName || provider.user?.fullName}
                 </h1>
-                
+
                 {/* Note et avis */}
                 {reviewStats && reviewStats.totalReviews > 0 && (
                   <div className="flex items-center gap-4 mb-4">
                     <StarRating rating={reviewStats.averageRating} size="lg" />
-                    <span className="text-gray-600">
-                      {reviewStats.totalReviews} avis
-                    </span>
+                    <span className="text-gray-600">{reviewStats.totalReviews} avis</span>
                   </div>
                 )}
               </div>
@@ -131,9 +125,7 @@ export default function ProviderProfilePage() {
               {/* Prix */}
               {provider.defaultPrice && (
                 <div className="text-right">
-                  <div className="text-3xl font-bold text-gray-900">
-                    {provider.defaultPrice}€
-                  </div>
+                  <div className="text-3xl font-bold text-gray-900">{provider.defaultPrice}€</div>
                   <div className="text-gray-600">par session</div>
                 </div>
               )}
@@ -141,25 +133,19 @@ export default function ProviderProfilePage() {
 
             {/* Description */}
             {provider.description && (
-              <p className="text-gray-700 mb-6 leading-relaxed">
-                {provider.description}
-              </p>
+              <p className="text-gray-700 mb-6 leading-relaxed">{provider.description}</p>
             )}
 
             {/* Spécialités */}
             {provider.specialties && provider.specialties.length > 0 && (
               <div className="mb-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                  Spécialités
-                </h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">Spécialités</h3>
                 <div className="flex flex-wrap gap-3">
-                  {provider.specialties.map((providerSpecialty) => (
+                  {provider.specialties.map(providerSpecialty => (
                     <Badge key={providerSpecialty.id} variant="primary" size="lg">
                       {providerSpecialty.specialty.icon} {providerSpecialty.specialty.name}
                       {providerSpecialty.level && (
-                        <span className="ml-2 font-semibold">
-                          ({providerSpecialty.level})
-                        </span>
+                        <span className="ml-2 font-semibold">({providerSpecialty.level})</span>
                       )}
                     </Badge>
                   ))}
@@ -231,10 +217,12 @@ export default function ProviderProfilePage() {
                 </div>
 
                 <div className="space-y-2">
-                  {[5, 4, 3, 2, 1].map((rating) => {
-                    const count = reviewStats.ratingBreakdown.find(r => r.rating === rating)?.count || 0;
-                    const percentage = reviewStats.totalReviews > 0 ? (count / reviewStats.totalReviews) * 100 : 0;
-                    
+                  {[5, 4, 3, 2, 1].map(rating => {
+                    const count =
+                      reviewStats.ratingBreakdown.find(r => r.rating === rating)?.count || 0;
+                    const percentage =
+                      reviewStats.totalReviews > 0 ? (count / reviewStats.totalReviews) * 100 : 0;
+
                     return (
                       <div key={rating} className="flex items-center gap-2">
                         <span className="w-3 text-sm">{rating}</span>
@@ -256,7 +244,7 @@ export default function ProviderProfilePage() {
 
           {/* Liste des avis */}
           <div className="space-y-6">
-            {reviews.map((review) => (
+            {reviews.map(review => (
               <div key={review.id} className="border-b border-gray-100 pb-6 last:border-b-0">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
@@ -264,7 +252,7 @@ export default function ProviderProfilePage() {
                       {(review.client?.fullName || 'A')[0].toUpperCase()}
                     </span>
                   </div>
-                  
+
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <span className="font-medium text-gray-900">
@@ -275,11 +263,9 @@ export default function ProviderProfilePage() {
                         {new Date(review.createdAt).toLocaleDateString('fr-FR')}
                       </span>
                     </div>
-                    
+
                     {review.comment && (
-                      <p className="text-gray-700 leading-relaxed">
-                        {review.comment}
-                      </p>
+                      <p className="text-gray-700 leading-relaxed">{review.comment}</p>
                     )}
                   </div>
                 </div>

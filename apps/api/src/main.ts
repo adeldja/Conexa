@@ -23,7 +23,6 @@ async function bootstrap() {
     optionsSuccessStatus: 204,
   });
 
-
   const config = new DocumentBuilder()
     .setTitle('Conexa API')
     .setDescription('API de la plateforme de prise de rendez-vous Conexa')
@@ -37,7 +36,8 @@ async function bootstrap() {
   const port = Number(process.env.PORT) || 3001;
   await app.listen(port, '0.0.0.0');
 
-  const publicUrl = process.env.RENDER_EXTERNAL_URL ?? `http://localhost:${port}`;
+  const publicUrl =
+    process.env.RENDER_EXTERNAL_URL ?? `http://localhost:${port}`;
   console.log(`🚀 API started on ${publicUrl}`);
   console.log(`📚 Swagger docs: ${publicUrl}/docs`);
 }

@@ -52,12 +52,14 @@ export const providerProfileService = {
   },
 
   // Rechercher des prestataires
-  async search(params: {
-    query?: string;
-    specialtyId?: string;
-    page?: number;
-    limit?: number;
-  } = {}): Promise<{
+  async search(
+    params: {
+      query?: string;
+      specialtyId?: string;
+      page?: number;
+      limit?: number;
+    } = {}
+  ): Promise<{
     providers: ProviderProfile[];
     pagination: {
       page: number;
@@ -67,13 +69,15 @@ export const providerProfileService = {
     };
   }> {
     const searchParams = new URLSearchParams();
-    
+
     if (params.query) searchParams.append('query', params.query);
     if (params.specialtyId) searchParams.append('specialtyId', params.specialtyId);
     if (params.page) searchParams.append('page', params.page.toString());
     if (params.limit) searchParams.append('limit', params.limit.toString());
 
-    const response = await api.get(`${API_CONFIG.ENDPOINTS.PROFILES}/providers/search?${searchParams}`);
+    const response = await api.get(
+      `${API_CONFIG.ENDPOINTS.PROFILES}/providers/search?${searchParams}`
+    );
     return response.data;
   },
 };

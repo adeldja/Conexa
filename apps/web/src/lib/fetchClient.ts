@@ -16,12 +16,9 @@ class FetchClient {
     };
   }
 
-  private async request<T>(
-    endpoint: string,
-    options: RequestOptions = {}
-  ): Promise<T> {
+  private async request<T>(endpoint: string, options: RequestOptions = {}): Promise<T> {
     const { params, ...fetchOptions } = options;
-    
+
     // Construire l'URL avec les paramètres
     let url = `${this.baseURL}${endpoint}`;
     if (params) {
@@ -53,7 +50,7 @@ class FetchClient {
           // TODO: Rediriger vers la page de connexion
           // window.location.href = '/login';
         }
-        
+
         const errorText = await response.text();
         throw new Error(`HTTP ${response.status}: ${errorText}`);
       }

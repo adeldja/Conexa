@@ -1,4 +1,10 @@
-import { IsOptional, IsString, IsDateString, IsPhoneNumber, IsObject } from 'class-validator';
+import {
+  IsOptional,
+  IsString,
+  IsDateString,
+  IsPhoneNumber,
+  IsObject,
+} from 'class-validator';
 
 export class CreateClientProfileDto {
   @IsOptional()

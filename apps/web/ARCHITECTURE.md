@@ -92,12 +92,14 @@ src/
 ## 🎯 Points forts de l'architecture actuelle
 
 ### 1. **Composants UI robustes**
+
 - **Design System complet** : Badge, Button, Card, Input, Select, etc.
 - **Composants avancés** : StarRating, Table, Toast, Skeleton
 - **États de chargement** intégrés avec Skeleton
 - **Système de notification** avec Toast
 
 ### 2. **Architecture en couches bien définie**
+
 ```tsx
 // Exemple d'utilisation des couches
 import { Button, Card, StarRating } from '@/components/ui';
@@ -107,23 +109,27 @@ import { specialtyService } from '@/services';
 ```
 
 ### 3. **Services API organisés**
+
 - **spécialisation par domaine** : auth, booking, profiles, specialties
 - **Service avancé** pour les créneaux (advancedSlotsService)
 - **Gestion centralisée** des appels API
 - **Types TypeScript** pour la sécurité
 
 ### 4. **Hooks métier spécialisés**
+
 - `useBookingLogic` : Logique complexe de réservation
 - `useSpecialties` : Gestion des spécialités (récemment corrigé)
 - Réutilisabilité et testabilité
 
 ### 5. **Utilitaires complets**
+
 - **Gestion des dates** : formatage, manipulation, conversion
 - **Génération de créneaux** : slotGenerator, slotConverter
 - **Authentification** : authManager centralisé
 - **Configuration API** : apiClient, apiConfig
 
 ### 6. **Types TypeScript exhaustifs**
+
 - **Types métier** : profiles.ts avec ProviderProfile, Specialty, etc.
 - **Types d'auth** : User, AuthState, etc.
 - **Types généraux** : types.ts pour les utilitaires
@@ -131,20 +137,31 @@ import { specialtyService } from '@/services';
 ## 🚀 Fonctionnalités récemment corrigées
 
 ### ✅ **Gestion des spécialités** (Août 2025)
-- **Hook useSpecialties** : Boucle infinie corrigée (suppression de `error` dans les dépendances useEffect)
-- **Service specialtyService** : Ajout et suppression fonctionnels avec gestion d'erreurs appropriée
-- **Backend synchronisé** : ProviderProfile automatique lors de la création d'utilisateur PROVIDER
+
+- **Hook useSpecialties** : Boucle infinie corrigée (suppression de `error` dans
+  les dépendances useEffect)
+- **Service specialtyService** : Ajout et suppression fonctionnels avec gestion
+  d'erreurs appropriée
+- **Backend synchronisé** : ProviderProfile automatique lors de la création
+  d'utilisateur PROVIDER
 - **Validation des données** : Types TypeScript stricts pour les requêtes API
 
 ### 🧹 **Code nettoyé et sécurisé** (Août 2025)
+
 - **Authentification stricte** : Suppression des fallbacks temporaires dangereux
-- **Logs de debug supprimés** : Code de production propre sans console.log de debug
-- **DTOs nettoyés** : Suppression des champs temporaires (`userId`, `clientId`) dans les DTOs
-- **Intercepteur axios configuré** : Token d'authentification automatique sur toutes les requêtes
-- **Gestion d'erreurs améliorée** : Les composants gèrent leurs propres erreurs 401 sans redirection forcée
-- **Contrôleurs backend sécurisés** : `UnauthorizedException` obligatoire pour les routes protégées
+- **Logs de debug supprimés** : Code de production propre sans console.log de
+  debug
+- **DTOs nettoyés** : Suppression des champs temporaires (`userId`, `clientId`)
+  dans les DTOs
+- **Intercepteur axios configuré** : Token d'authentification automatique sur
+  toutes les requêtes
+- **Gestion d'erreurs améliorée** : Les composants gèrent leurs propres erreurs
+  401 sans redirection forcée
+- **Contrôleurs backend sécurisés** : `UnauthorizedException` obligatoire pour
+  les routes protégées
 
 ### ⚠️ **Points d'attention**
+
 - **Gestion des créneaux** : Sensible aux changements d'authentification
 - **Services doubles** : `profileService` vs `profilesService` à unifier
 - **Composants legacy** : Dossier `booking/` racine à nettoyer
@@ -152,35 +169,42 @@ import { specialtyService } from '@/services';
 ## 🔧 Améliorations techniques
 
 ### 1. **Performance**
+
 - Composants UI optimisés avec Skeleton
 - Lazy loading potentiel sur les features
 - Index files pour des imports propres
 
 ### 2. **Maintenabilité**
+
 - Structure modulaire par domaine
 - Séparation claire UI/métier/services
 - Types TypeScript complets
 
 ### 3. **Sécurité et Authentification**
+
 - **Authentification JWT** : Système complet avec tokens Bearer
 - **Intercepteur axios** : Ajout automatique du token sur toutes les requêtes
 - **Gestion des erreurs 401** : Flexible, sans redirection forcée
 - **Validation des permissions** : Contrôleurs backend sécurisés
-- **Stockage sécurisé** : localStorage pour tokens avec vérification côté serveur
+- **Stockage sécurisé** : localStorage pour tokens avec vérification côté
+  serveur
 
 ## � Prochaines étapes recommandées
 
 ### 🎯 **Court terme**
+
 1. **Nettoyer les composants legacy** (dossier `booking/` racine)
 2. **Unifier les services profiles** (profileService vs profilesService)
 3. **Tester la gestion des créneaux** après les changements d'authentification
 
 ### 🚀 **Moyen terme**
+
 1. **Optimiser le design system** avec des tokens de design
 2. **Ajouter des composants manquants** : Modal, Dropdown, Tooltip
 3. **Implémenter des tests unitaires** pour les hooks critiques
 
 ### 🎨 **Long terme**
+
 1. **Thème cohérent** avec variables CSS
 2. **Documentation Storybook** pour le design system
 3. **Tests d'intégration** pour les features critiques
@@ -189,20 +213,24 @@ import { specialtyService } from '@/services';
 ## 🔒 **Sécurité et Bonnes Pratiques**
 
 ### ✅ **Authentification**
+
 - Token JWT stocké en localStorage
 - Intercepteur axios pour ajout automatique du Bearer token
 - Validation stricte côté backend avec UnauthorizedException
 - Gestion flexible des erreurs 401 (pas de redirection forcée)
 
 ### ✅ **Code Quality**
+
 - Types TypeScript stricts
 - Suppression des fallbacks temporaires dangereux
 - Logs de debug supprimés pour la production
 - DTOs nettoyés sans champs de test
 
 ### ⚠️ **Points de vigilance**
+
 - **Services en doublon** : Unifier profileService/profilesService
 - **Composants legacy** : Nettoyer le dossier booking/
 - **Gestion d'erreurs** : Vérifier la compatibilité avec les créneaux
 
-Cette architecture est maintenant **sécurisée et prête pour la production** avec une authentification robuste et un code nettoyé !
+Cette architecture est maintenant **sécurisée et prête pour la production** avec
+une authentification robuste et un code nettoyé !

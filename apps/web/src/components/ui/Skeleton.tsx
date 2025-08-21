@@ -4,14 +4,16 @@ interface SkeletonProps {
 }
 
 export function Skeleton({ className = '', children }: SkeletonProps) {
-  return (
-    <div className={`animate-pulse bg-gray-200 rounded ${className}`}>
-      {children}
-    </div>
-  );
+  return <div className={`animate-pulse bg-gray-200 rounded ${className}`}>{children}</div>;
 }
 
-export function SkeletonText({ lines = 1, className = '' }: { lines?: number; className?: string }) {
+export function SkeletonText({
+  lines = 1,
+  className = '',
+}: {
+  lines?: number;
+  className?: string;
+}) {
   return (
     <div className={`space-y-2 ${className}`}>
       {Array.from({ length: lines }).map((_, i) => (
