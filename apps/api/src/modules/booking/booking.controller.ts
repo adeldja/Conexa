@@ -15,13 +15,10 @@ export class BookingController {
   @ApiOperation({ summary: 'Create a new booking' })
   @ApiResponse({ status: 201, description: 'Booking created successfully' })
   async create(@Body() createBookingDto: CreateBookingDto) {
-    console.log('Received request to create booking:', createBookingDto);
     try {
       const result = await this.bookingService.create(createBookingDto);
-      console.log('Booking created successfully:', result);
       return result;
     } catch (error) {
-      console.error('Error in create booking controller:', error);
       throw error;
     }
   }

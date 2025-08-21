@@ -37,7 +37,6 @@ export class BookingService {
 
       return booking;
     } catch (error) {
-      console.error('Error creating booking:', error);
       throw error;
     }
   }

@@ -10,7 +10,7 @@ const mockAvailabilityService = availabilityService as jest.Mocked<typeof availa
 describe('DeleteSlotModal Component', () => {
   const mockOnClose = jest.fn();
   const mockOnSuccess = jest.fn();
-  
+
   const mockSlot = {
     id: 'slot1',
     providerId: 'provider1',
@@ -124,7 +124,7 @@ describe('DeleteSlotModal Component', () => {
 
   it('disables buttons during deletion process', async () => {
     // Simuler une opération qui ne se termine jamais
-    mockAvailabilityService.deleteSlot.mockImplementation(() => new Promise(() => {}));
+    mockAvailabilityService.deleteSlot.mockImplementation(() => new Promise(() => { }));
 
     render(
       <DeleteSlotModal

@@ -16,13 +16,10 @@ export class AvailabilityController {
   @ApiOperation({ summary: 'Create a new availability slot' })
   @ApiResponse({ status: 201, description: 'Slot created successfully' })
   async create(@Body() createSlotDto: CreateSlotDto) {
-    console.log('Received request to create slot:', createSlotDto);
     try {
       const result = await this.availabilityService.create(createSlotDto);
-      console.log('Slot created successfully:', result);
       return result;
     } catch (error) {
-      console.error('Error in create slot controller:', error);
       throw error;
     }
   }

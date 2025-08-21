@@ -90,7 +90,6 @@ export default function SlotForm({ slot, onSuccess, onCancel }: SlotFormProps) {
           endTime: new Date(formData.endTime).toISOString(),
           isAvailable: formData.isAvailable
         };
-        console.log('Sending create slot request with data:', createData);
         await availabilityService.createSlot(createData);
       }
 
