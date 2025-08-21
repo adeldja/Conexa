@@ -1,22 +1,16 @@
-/*
-  Warnings:
-
-  - Added the required column `updatedAt` to the `Booking` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `updatedAt` to the `Slot` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `updatedAt` to the `User` table without a default value. This is not possible if the table is not empty.
-
-*/
+-- Migration: add_user_profiles
+-- Adding user profiles, specialties, and reviews to the database schema
 -- AlterTable
 ALTER TABLE "Booking" ADD COLUMN     "notes" TEXT,
-ADD COLUMN     "updatedAt" TIMESTAMP(3) NOT NULL;
+ADD COLUMN     "updatedAt" TIMESTAMP(3);
 
 -- AlterTable
 ALTER TABLE "Slot" ADD COLUMN     "description" TEXT,
 ADD COLUMN     "price" DECIMAL(10,2),
-ADD COLUMN     "updatedAt" TIMESTAMP(3) NOT NULL;
+ADD COLUMN     "updatedAt" TIMESTAMP(3);
 
 -- AlterTable
-ALTER TABLE "User" ADD COLUMN     "updatedAt" TIMESTAMP(3) NOT NULL;
+ALTER TABLE "User" ADD COLUMN     "updatedAt" TIMESTAMP(3);
 
 -- CreateTable
 CREATE TABLE "ClientProfile" (
@@ -28,7 +22,7 @@ CREATE TABLE "ClientProfile" (
     "preferences" JSONB,
     "totalBookings" INTEGER NOT NULL DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "updatedAt" TIMESTAMP(3),
 
     CONSTRAINT "ClientProfile_pkey" PRIMARY KEY ("id")
 );
@@ -51,7 +45,7 @@ CREATE TABLE "ProviderProfile" (
     "defaultSchedule" JSONB,
     "isVerified" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "updatedAt" TIMESTAMP(3),
 
     CONSTRAINT "ProviderProfile_pkey" PRIMARY KEY ("id")
 );
@@ -88,7 +82,7 @@ CREATE TABLE "Review" (
     "providerId" TEXT NOT NULL,
     "bookingId" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "updatedAt" TIMESTAMP(3),
 
     CONSTRAINT "Review_pkey" PRIMARY KEY ("id")
 );
