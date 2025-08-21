@@ -1,10 +1,6 @@
 import { IsString, IsOptional } from 'class-validator';
 
 export class AddProviderSpecialtyDto {
-  @IsOptional()
-  @IsString()
-  userId?: string; // Temporaire pour les tests
-
   @IsString()
   specialtyId: string;
 

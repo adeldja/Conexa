@@ -136,6 +136,14 @@ import { specialtyService } from '@/services';
 - **Autorisation temporaire** : userId dans les requêtes
 - **Backend synchronisé** : ProviderProfile automatique
 
+### 🧹 **Code nettoyé** (Août 2025)
+- **Suppression des fallbacks temporaires** : Authentification stricte requise
+- **Removal des logs de debug** : Console.log de debug supprimés  
+- **DTOs nettoyés** : Champs temporaires de test supprimés
+- **Services frontend** : Suppression des userId temporaires dans les requêtes
+- **Contrôleurs backend** : Authentification obligatoire avec UnauthorizedException
+- **Intercepteur axios corrigé** : Token d'authentification automatiquement ajouté aux requêtes
+
 ## 🔧 Améliorations techniques
 
 ### 1. **Performance**
@@ -158,7 +166,7 @@ import { specialtyService } from '@/services';
 ### 🎯 **Court terme**
 1. **Nettoyer les composants legacy** (dossier `booking/` racine)
 2. **Unifier les services profiles** (profileService vs profilesService)
-3. **Compléter les tests** pour les hooks corrigés
+3. **Optimiser les performances** et ajouter des tests unitaires
 
 ### 🚀 **Moyen terme**
 1. **Optimiser le design system** avec des tokens de design

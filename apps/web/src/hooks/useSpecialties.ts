@@ -39,14 +39,6 @@ export function useSpecialties() {
         );
         
         setMySpecialties(uniqueMySpecialties);
-        
-        // Log pour debug
-        console.log('Specialties loaded:', {
-          all: specialtiesResponse.length,
-          my: uniqueMySpecialties.length,
-          myIds: uniqueMySpecialties.map(s => s.id),
-          duplicateRemoved: mySpecialtiesResponse.length - uniqueMySpecialties.length
-        });
       } catch (err) {
         console.error('Erreur lors du chargement:', err);
         error('Erreur de chargement', 'Impossible de charger les spécialités');

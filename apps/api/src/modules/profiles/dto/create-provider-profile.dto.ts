@@ -3,10 +3,6 @@ import { IsOptional, IsString, IsUrl, IsPhoneNumber, IsDecimal, IsBoolean, IsObj
 export class CreateProviderProfileDto {
   @IsOptional()
   @IsString()
-  userId?: string; // Temporaire pour les tests
-
-  @IsOptional()
-  @IsString()
   businessName?: string;
 
   @IsOptional()

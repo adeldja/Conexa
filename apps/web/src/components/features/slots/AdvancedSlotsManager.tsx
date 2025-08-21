@@ -24,22 +24,16 @@ export default function AdvancedSlotsManager() {
 
   const loadExistingSlots = async () => {
     if (!user?.id) {
-      console.log('🔧 Debug - Pas d\'utilisateur connecté');
       return;
     }
-
-    console.log('🔧 Debug - Chargement des créneaux pour user:', user.id);
 
     try {
       setIsLoadingSlots(true);
       setError(null);
       
-      console.log('🔧 Debug - Appel advancedSlotsService.getSlotsWithBookings');
       const slots = await advancedSlotsService.getSlotsWithBookings(user.id);
-      console.log('🔧 Debug - Slots reçus:', slots);
       setGeneratedSlots(slots);
     } catch (error) {
-      console.error('🔧 Debug - Erreur lors du chargement des créneaux:', error);
       setError(error instanceof Error ? error.message : 'Erreur lors du chargement des créneaux');
     } finally {
       setIsLoadingSlots(false);

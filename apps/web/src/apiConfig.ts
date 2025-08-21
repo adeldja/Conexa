@@ -25,11 +25,13 @@ export const api = axios.create({
 // Intercepteur pour ajouter le token d'authentification
 api.interceptors.request.use(
   (config) => {
-    // TODO: Récupérer le token depuis le contexte d'authentification
-    // const token = getAuthToken();
-    // if (token) {
-    //   config.headers.Authorization = `Bearer ${token}`;
-    // }
+    // Récupérer le token depuis localStorage
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('conexa_token');
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+    }
     return config;
   },
   (error) => {
@@ -41,10 +43,8 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
-      // TODO: Rediriger vers la page de connexion
-      // window.location.href = '/login';
-    }
+    // Laisser les composants gérer les erreurs 401 eux-mêmes
+    // Ne pas rediriger automatiquement
     return Promise.reject(error);
   }
 );
