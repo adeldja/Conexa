@@ -37,6 +37,11 @@ export class SeederController {
     return this.seederService.seedReviews();
   }
 
+  @Post('provider-specialties')
+  async seedProviderSpecialties() {
+    return this.seederService.seedProviderSpecialties();
+  }
+
   @Post('all')
   async seedAll() {
     return this.seederService.seedAll();
