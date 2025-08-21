@@ -10,7 +10,6 @@
     "test",
     "dist",
     "**/*spec.ts",
-    "src/main-backup.ts",
-    "prisma/seed.ts"
+    "src/main-backup.ts"
   ]
 }
