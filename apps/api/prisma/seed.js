@@ -1,11 +1,12 @@
-import { PrismaClient, Role, Status } from '@prisma/client';
-
+const { PrismaClient, Role, Status } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 async function main() {
   console.log('🌱 Seeding database...');
 
-  // 3 spécialités (idempotent)
+  // ====================
+  // 1. Spécialités
+  // ====================
   const yoga = await prisma.specialty.upsert({
     where: { name: 'Yoga' },
     update: {},
@@ -24,7 +25,9 @@ async function main() {
     create: { name: 'Coaching', description: 'Coaching sportif personnalisé', icon: '🏋️' },
   });
 
-  // 3 clients
+  // ====================
+  // 2. Clients (3)
+  // ====================
   const clients = await Promise.all(
     [1, 2, 3].map((i) =>
       prisma.user.upsert({
@@ -39,11 +42,13 @@ async function main() {
             create: { phone: `060000000${i}` },
           },
         },
-      }),
-    ),
+      })
+    )
   );
 
-  // 3 providers
+  // ====================
+  // 3. Providers (3)
+  // ====================
   const providers = await Promise.all(
     [1, 2, 3].map((i) =>
       prisma.user.upsert({
@@ -61,20 +66,27 @@ async function main() {
               phone: `070000000${i}`,
               address: `Rue ${i}, Paris`,
               specialties: {
-                create: [{ specialtyId: i === 1 ? yoga.id : i === 2 ? massage.id : coaching.id, level: 'Expert' }],
+                create: [
+                  {
+                    specialtyId: i === 1 ? yoga.id : i === 2 ? massage.id : coaching.id,
+                    level: 'Expert',
+                  },
+                ],
               },
             },
           },
         },
-      }),
-    ),
+      })
+    )
   );
 
-  // 1 slot par provider
+  // ====================
+  // 4. Slots (1 par provider)
+  // ====================
   const slots = await Promise.all(
     providers.map((p, i) =>
       prisma.slot.upsert({
-        where: { id: `slot-${i}` }, // ID fixe pour éviter doublons
+        where: { id: `slot-${i}` },
         update: {},
         create: {
           id: `slot-${i}`,
@@ -84,11 +96,13 @@ async function main() {
           price: 50.0,
           description: `Service ${i + 1} by ${p.fullName}`,
         },
-      }),
-    ),
+      })
+    )
   );
 
-  // 1 booking + review par client
+  // ====================
+  // 5. Bookings + Reviews (1 par client)
+  // ====================
   await Promise.all(
     clients.map((c, i) =>
       prisma.booking.upsert({
@@ -109,8 +123,8 @@ async function main() {
             },
           },
         },
-      }),
-    ),
+      })
+    )
   );
 
   console.log('✅ Seed terminé');
