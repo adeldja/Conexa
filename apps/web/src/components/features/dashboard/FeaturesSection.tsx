@@ -39,6 +39,12 @@ const MessageIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
+const DatabaseIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+  </svg>
+);
+
 export default function FeaturesSection({ user }: FeaturesSectionProps) {
   return (
     <div className="lg:col-span-2">
@@ -134,6 +140,21 @@ export default function FeaturesSection({ user }: FeaturesSectionProps) {
             iconBgColor="bg-green-100"
             buttonBgColor="bg-green-600"
             buttonHoverColor="hover:bg-green-700"
+          />
+        )}
+
+        {/* Fonctionnalités pour ADMIN */}
+        {user?.role === 'ADMIN' && (
+          <FeatureCard
+            icon={<DatabaseIcon className="w-6 h-6 text-red-600" />}
+            title="Création BDD"
+            description="Outils d'administration pour initialiser et gérer les données de la base."
+            status="active"
+            href="/dashboard/admin/seeder"
+            buttonText="Administrer"
+            iconBgColor="bg-red-100"
+            buttonBgColor="bg-red-600"
+            buttonHoverColor="hover:bg-red-700"
           />
         )}
       </div>
