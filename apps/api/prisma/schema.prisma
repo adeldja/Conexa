@@ -15,8 +15,104 @@ model User {
   role      Role      @default(CLIENT)
   timezone  String    @default("UTC")
   createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   bookings  Booking[] @relation("ClientBookings")
   slots     Slot[]    @relation("ProviderSlots")
+  
+  // Relations vers les profils spécialisés
+  clientProfile   ClientProfile?   @relation("UserClientProfile")
+  providerProfile ProviderProfile? @relation("UserProviderProfile")
+  
+  // Avis donnés (en tant que client)
+  reviewsGiven    Review[] @relation("ClientReviews")
+  // Avis reçus (en tant que prestataire)
+  reviewsReceived Review[] @relation("ProviderReviews")
+}
+
+model ClientProfile {
+  id              String   @id @default(uuid())
+  userId          String   @unique
+  phone           String?
+  dateOfBirth     DateTime?
+  avatar          String?
+  preferences     Json?    // Stockage flexible pour préférences (notifications, etc.)
+  totalBookings   Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  user User @relation("UserClientProfile", fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model ProviderProfile {
+  id              String      @id @default(uuid())
+  userId          String      @unique
+  businessName    String?
+  description     String?
+  phone           String?
+  website         String?
+  address         String?
+  avatar          String?
+  
+  // Tarification
+  defaultPrice    Decimal?    @db.Decimal(10,2)
+  currency        String      @default("EUR")
+  
+  // Statistiques
+  totalSlots      Int         @default(0)
+  totalBookings   Int         @default(0)
+  averageRating   Decimal?    @db.Decimal(3,2)
+  
+  // Planning par défaut (JSON flexible)
+  defaultSchedule Json?
+  
+  // Métadonnées
+  isVerified      Boolean     @default(false)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  
+  user         User                      @relation("UserProviderProfile", fields: [userId], references: [id], onDelete: Cascade)
+  specialties  ProviderSpecialty[]       @relation("ProviderSpecialties")
+}
+
+model Specialty {
+  id          String              @id @default(uuid())
+  name        String              @unique
+  description String?
+  icon        String?             // Pour l'UI (nom d'icône ou emoji)
+  createdAt   DateTime            @default(now())
+  
+  providers   ProviderSpecialty[] @relation("SpecialtyProviders")
+}
+
+model ProviderSpecialty {
+  id           String   @id @default(uuid())
+  providerId   String
+  specialtyId  String
+  level        String?  // "Débutant", "Intermédiaire", "Expert"
+  certification String? // Certification ou diplôme
+  createdAt    DateTime @default(now())
+  
+  provider  ProviderProfile @relation("ProviderSpecialties", fields: [providerId], references: [id], onDelete: Cascade)
+  specialty Specialty       @relation("SpecialtyProviders", fields: [specialtyId], references: [id], onDelete: Cascade)
+  
+  @@unique([providerId, specialtyId])
+}
+
+model Review {
+  id          String   @id @default(uuid())
+  rating      Int      // 1-5 étoiles
+  comment     String?
+  clientId    String
+  providerId  String
+  bookingId   String?  @unique // Optionnel : lien vers une réservation spécifique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  client   User     @relation("ClientReviews", fields: [clientId], references: [id], onDelete: Cascade)
+  provider User     @relation("ProviderReviews", fields: [providerId], references: [id], onDelete: Cascade)
+  booking  Booking? @relation("BookingReview", fields: [bookingId], references: [id])
+  
+  @@unique([clientId, providerId, bookingId])
 }
 
 model Slot {
@@ -25,9 +121,13 @@ model Slot {
   startTime   DateTime
   endTime     DateTime
   isAvailable Boolean   @default(true)
+  price       Decimal?  @db.Decimal(10,2) // Prix spécifique à ce créneau (optionnel)
+  description String?   // Description du service pour ce créneau
   createdAt   DateTime  @default(now())
-  bookings    Booking[] @relation("SlotBookings")
-  provider    User      @relation("ProviderSlots", fields: [providerId], references: [id])
+  updatedAt   DateTime  @updatedAt
+  
+  bookings Booking[] @relation("SlotBookings")
+  provider User      @relation("ProviderSlots", fields: [providerId], references: [id])
 }
 
 model Booking {
@@ -35,9 +135,13 @@ model Booking {
   slotId    String
   clientId  String
   status    Status   @default(PENDING)
+  notes     String?  // Notes du client pour la réservation
   createdAt DateTime @default(now())
-  client    User     @relation("ClientBookings", fields: [clientId], references: [id])
-  slot      Slot     @relation("SlotBookings", fields: [slotId], references: [id])
+  updatedAt DateTime @updatedAt
+  
+  client User   @relation("ClientBookings", fields: [clientId], references: [id])
+  slot   Slot   @relation("SlotBookings", fields: [slotId], references: [id])
+  review Review? @relation("BookingReview")
 }
 
 enum Role {

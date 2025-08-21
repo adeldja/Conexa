@@ -39,10 +39,8 @@ export default function SlotsCalendar({ slots, onSlotStatusChange }: SlotsCalend
   };
 
   const handleSlotClick = (slot: GeneratedSlot, index: number) => {
-    console.log('🔧 Debug - Slot cliqué:', slot.status, slot.booking);
     
     if (slot.status === 'booked') {
-      console.log('🔧 Debug - Ouverture modal pour slot réservé:', slot);
       setSelectedSlot(slot);
     } else if (slot.status === 'available') {
       onSlotStatusChange(index, 'closed');
