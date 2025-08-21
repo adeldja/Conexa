@@ -131,18 +131,23 @@ import { specialtyService } from '@/services';
 ## 🚀 Fonctionnalités récemment corrigées
 
 ### ✅ **Gestion des spécialités** (Août 2025)
-- **Hook useSpecialties** : Boucle infinie corrigée
-- **Service specialtyService** : Ajout et suppression fonctionnels
-- **Autorisation temporaire** : userId dans les requêtes
-- **Backend synchronisé** : ProviderProfile automatique
+- **Hook useSpecialties** : Boucle infinie corrigée (suppression de `error` dans les dépendances useEffect)
+- **Service specialtyService** : Ajout et suppression fonctionnels avec gestion d'erreurs appropriée
+- **Backend synchronisé** : ProviderProfile automatique lors de la création d'utilisateur PROVIDER
+- **Validation des données** : Types TypeScript stricts pour les requêtes API
 
-### 🧹 **Code nettoyé** (Août 2025)
-- **Suppression des fallbacks temporaires** : Authentification stricte requise
-- **Removal des logs de debug** : Console.log de debug supprimés  
-- **DTOs nettoyés** : Champs temporaires de test supprimés
-- **Services frontend** : Suppression des userId temporaires dans les requêtes
-- **Contrôleurs backend** : Authentification obligatoire avec UnauthorizedException
-- **Intercepteur axios corrigé** : Token d'authentification automatiquement ajouté aux requêtes
+### 🧹 **Code nettoyé et sécurisé** (Août 2025)
+- **Authentification stricte** : Suppression des fallbacks temporaires dangereux
+- **Logs de debug supprimés** : Code de production propre sans console.log de debug
+- **DTOs nettoyés** : Suppression des champs temporaires (`userId`, `clientId`) dans les DTOs
+- **Intercepteur axios configuré** : Token d'authentification automatique sur toutes les requêtes
+- **Gestion d'erreurs améliorée** : Les composants gèrent leurs propres erreurs 401 sans redirection forcée
+- **Contrôleurs backend sécurisés** : `UnauthorizedException` obligatoire pour les routes protégées
+
+### ⚠️ **Points d'attention**
+- **Gestion des créneaux** : Sensible aux changements d'authentification
+- **Services doubles** : `profileService` vs `profilesService` à unifier
+- **Composants legacy** : Dossier `booking/` racine à nettoyer
 
 ## 🔧 Améliorations techniques
 
@@ -156,26 +161,48 @@ import { specialtyService } from '@/services';
 - Séparation claire UI/métier/services
 - Types TypeScript complets
 
-### 3. **Monitoring**
-- Intégration Sentry (instrumentation.ts)
-- Gestion d'erreurs centralisée
-- API configurée pour le debugging
+### 3. **Sécurité et Authentification**
+- **Authentification JWT** : Système complet avec tokens Bearer
+- **Intercepteur axios** : Ajout automatique du token sur toutes les requêtes
+- **Gestion des erreurs 401** : Flexible, sans redirection forcée
+- **Validation des permissions** : Contrôleurs backend sécurisés
+- **Stockage sécurisé** : localStorage pour tokens avec vérification côté serveur
 
 ## � Prochaines étapes recommandées
 
 ### 🎯 **Court terme**
 1. **Nettoyer les composants legacy** (dossier `booking/` racine)
 2. **Unifier les services profiles** (profileService vs profilesService)
-3. **Optimiser les performances** et ajouter des tests unitaires
+3. **Tester la gestion des créneaux** après les changements d'authentification
 
 ### 🚀 **Moyen terme**
 1. **Optimiser le design system** avec des tokens de design
 2. **Ajouter des composants manquants** : Modal, Dropdown, Tooltip
-3. **Implémenter l'authentification complète** (remplacer les fallbacks temporaires)
+3. **Implémenter des tests unitaires** pour les hooks critiques
 
 ### 🎨 **Long terme**
 1. **Thème cohérent** avec variables CSS
 2. **Documentation Storybook** pour le design system
 3. **Tests d'intégration** pour les features critiques
+4. **Monitoring avancé** avec Sentry pour la production
 
-Cette architecture est maintenant **mature et fonctionnelle** pour un développement évolutif !
+## 🔒 **Sécurité et Bonnes Pratiques**
+
+### ✅ **Authentification**
+- Token JWT stocké en localStorage
+- Intercepteur axios pour ajout automatique du Bearer token
+- Validation stricte côté backend avec UnauthorizedException
+- Gestion flexible des erreurs 401 (pas de redirection forcée)
+
+### ✅ **Code Quality**
+- Types TypeScript stricts
+- Suppression des fallbacks temporaires dangereux
+- Logs de debug supprimés pour la production
+- DTOs nettoyés sans champs de test
+
+### ⚠️ **Points de vigilance**
+- **Services en doublon** : Unifier profileService/profilesService
+- **Composants legacy** : Nettoyer le dossier booking/
+- **Gestion d'erreurs** : Vérifier la compatibilité avec les créneaux
+
+Cette architecture est maintenant **sécurisée et prête pour la production** avec une authentification robuste et un code nettoyé !
