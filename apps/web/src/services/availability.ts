@@ -1,8 +1,6 @@
 import { User } from '@/types/auth';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
-// Log pour déboguer l'URL de l'API
-console.log('API_BASE_URL:', API_BASE_URL);
 
 export interface Slot {
   id: string;
@@ -32,11 +30,11 @@ class AvailabilityService {
     const headers = new Headers({
       'Content-Type': 'application/json',
     });
-    
+
     if (token) {
       headers.append('Authorization', `Bearer ${token}`);
     }
-    
+
     return headers;
   }
 
@@ -67,30 +65,24 @@ class AvailabilityService {
   }
 
   async createSlot(slotData: CreateSlotDto): Promise<Slot> {
-    console.log('Creating slot with data:', slotData);
-    console.log('API URL:', `${API_BASE_URL}/availability`);
-    
     try {
       const headers = this.getAuthHeader();
-      console.log('Request headers:', Array.from(headers.entries()));
-      
+
       const response = await fetch(`${API_BASE_URL}/availability`, {
         method: 'POST',
         headers: headers,
         body: JSON.stringify(slotData),
       });
 
-      console.log('Response status:', response.status);
-      
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({ message: 'Unknown error' }));
-        console.error('Error response:', errorData);
-        throw new Error(errorData.message || `Erreur lors de la création du créneau: ${response.status}`);
+        throw new Error(
+          errorData.message || `Erreur lors de la création du créneau: ${response.status}`
+        );
       }
 
       return response.json();
     } catch (error) {
-      console.error('Exception during createSlot:', error);
       throw error;
     }
   }
@@ -130,10 +122,14 @@ class AvailabilityService {
 
   formatDateForDisplay(date: string): string {
     const d = new Date(date);
-    return d.toLocaleDateString('fr-FR') + ' ' + d.toLocaleTimeString('fr-FR', {
-      hour: '2-digit',
-      minute: '2-digit',
-    });
+    return (
+      d.toLocaleDateString('fr-FR') +
+      ' ' +
+      d.toLocaleTimeString('fr-FR', {
+        hour: '2-digit',
+        minute: '2-digit',
+      })
+    );
   }
 
   formatTimeForInput(date: string): string {

@@ -31,7 +31,7 @@ export interface UserProfileData {
   bio?: string;
   phone?: string;
   avatar?: string;
-  
+
   // Informations provider (conditionnelles)
   hourlyRate?: number;
   zone?: string;

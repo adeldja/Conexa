@@ -29,7 +29,7 @@ describe('AvailabilityService', () => {
     }).compile();
 
     service = module.get<AvailabilityService>(AvailabilityService);
-    
+
     // Réinitialiser tous les mocks après chaque test
     jest.clearAllMocks();
   });
@@ -45,7 +45,7 @@ describe('AvailabilityService', () => {
         providerId: 'provider-id',
         startTime: '2025-07-01T09:00:00.000Z',
         endTime: '2025-07-01T10:00:00.000Z',
-        isAvailable: true
+        isAvailable: true,
       };
 
       const expectedSlot = {
@@ -67,16 +67,16 @@ describe('AvailabilityService', () => {
       expect(mockPrismaService.slot.create).toHaveBeenCalledWith({
         data: expect.objectContaining({
           providerId: createSlotDto.providerId,
-          isAvailable: createSlotDto.isAvailable
+          isAvailable: createSlotDto.isAvailable,
         }),
       });
-      
+
       // Vérifier que les dates sont bien converties en objets Date
       const createCall = mockPrismaService.slot.create.mock.calls[0][0];
       expect(createCall.data.startTime).toBeInstanceOf(Date);
       expect(createCall.data.endTime).toBeInstanceOf(Date);
     });
-    
+
     it('should handle isAvailable being undefined', async () => {
       // Arrange
       const createSlotDto: CreateSlotDto = {
@@ -102,12 +102,12 @@ describe('AvailabilityService', () => {
 
       // Assert
       expect(result).toEqual(expectedSlot);
-      
+
       // Vérifier que isAvailable est défini à true par défaut
       const createCall = mockPrismaService.slot.create.mock.calls[0][0];
       expect(createCall.data.isAvailable).toBe(true);
     });
-    
+
     it('should handle error during slot creation', async () => {
       // Arrange
       const createSlotDto: CreateSlotDto = {

@@ -22,19 +22,11 @@ export default function SlotDetailsModal({ slot, isOpen, onClose }: SlotDetailsM
   };
 
   return (
-    <BaseModal 
-      isOpen={isOpen} 
-      onClose={onClose} 
-      title="Détails de la réservation"
-    >
+    <BaseModal isOpen={isOpen} onClose={onClose} title="Détails de la réservation">
       <div className="space-y-4">
-        <SlotInfo 
-          date={slot.date}
-          startTime={slot.startTime}
-          endTime={slot.endTime}
-        />
-        
-        <ClientInfo 
+        <SlotInfo date={slot.date} startTime={slot.startTime} endTime={slot.endTime} />
+
+        <ClientInfo
           clientName={slot.booking.clientName}
           clientEmail={slot.booking.clientEmail}
           clientPhone={slot.booking.clientPhone}
@@ -42,10 +34,7 @@ export default function SlotDetailsModal({ slot, isOpen, onClose }: SlotDetailsM
         />
       </div>
 
-      <ModalActions 
-        onClose={onClose}
-        onContact={handleContact}
-      />
+      <ModalActions onClose={onClose} onContact={handleContact} />
     </BaseModal>
   );
 }

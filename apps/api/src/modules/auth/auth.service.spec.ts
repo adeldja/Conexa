@@ -203,7 +203,7 @@ describe('AuthService', () => {
       mockUsersService.findOne.mockResolvedValue(null);
 
       await expect(service.validateUserById(userId)).rejects.toThrow(
-        UnauthorizedException
+        UnauthorizedException,
       );
       expect(mockUsersService.findOne).toHaveBeenCalledWith(userId);
     });

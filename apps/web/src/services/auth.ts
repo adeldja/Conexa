@@ -1,6 +1,6 @@
 import { User, LoginRequest, RegisterRequest, AuthResponse } from '@/types/auth';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ;
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 const TOKEN_KEY = 'conexa_token';
 const USER_KEY = 'conexa_user';
 
@@ -68,7 +68,7 @@ class AuthService {
 
     if (!response.ok) {
       const error = await response.json();
-      throw new Error(error.message || 'Erreur d\'inscription');
+      throw new Error(error.message || "Erreur d'inscription");
     }
 
     const data: AuthResponse = await response.json();
@@ -85,7 +85,7 @@ class AuthService {
 
     const response = await fetch(`${API_BASE_URL}/auth/profile`, {
       headers: {
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
 

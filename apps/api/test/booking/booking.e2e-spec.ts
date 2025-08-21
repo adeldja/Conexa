@@ -84,7 +84,10 @@ describe('Booking Integration Tests', () => {
       mockBookingService.create.mockRejectedValue({
         response: {
           statusCode: 400,
-          message: ['slotId should not be empty', 'clientId should not be empty'],
+          message: [
+            'slotId should not be empty',
+            'clientId should not be empty',
+          ],
         },
       });
 
@@ -117,7 +120,9 @@ describe('Booking Integration Tests', () => {
         .expect(200)
         .expect((res) => {
           expect(res.body).toEqual(mockResponse);
-          expect(mockBookingService.findByClient).toHaveBeenCalledWith(clientId);
+          expect(mockBookingService.findByClient).toHaveBeenCalledWith(
+            clientId,
+          );
         });
     });
   });

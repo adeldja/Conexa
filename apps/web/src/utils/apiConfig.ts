@@ -4,6 +4,6 @@ export const API_CONFIG = {
   endpoints: {
     slots: '/availability',
     bookings: '/bookings',
-    users: '/users'
-  }
+    users: '/users',
+  },
 };

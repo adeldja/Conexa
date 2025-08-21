@@ -36,7 +36,10 @@ export class ProfilesController {
     if (!userId) {
       throw new UnauthorizedException('Authentification requise');
     }
-    return this.profilesService.createClientProfile(userId, createClientProfileDto);
+    return this.profilesService.createClientProfile(
+      userId,
+      createClientProfileDto,
+    );
   }
 
   @Get('client/:userId')
@@ -54,7 +57,11 @@ export class ProfilesController {
     if (!currentUserId) {
       throw new UnauthorizedException('Authentification requise');
     }
-    return this.profilesService.updateClientProfile(userId, currentUserId, updateClientProfileDto);
+    return this.profilesService.updateClientProfile(
+      userId,
+      currentUserId,
+      updateClientProfileDto,
+    );
   }
 
   // === PROVIDER PROFILES ===
@@ -68,7 +75,10 @@ export class ProfilesController {
     if (!userId) {
       throw new UnauthorizedException('Authentification requise');
     }
-    return this.profilesService.createProviderProfile(userId, createProviderProfileDto);
+    return this.profilesService.createProviderProfile(
+      userId,
+      createProviderProfileDto,
+    );
   }
 
   @Get('provider/:userId')
@@ -86,7 +96,11 @@ export class ProfilesController {
     if (!currentUserId) {
       throw new UnauthorizedException('Authentification requise');
     }
-    return this.profilesService.updateProviderProfile(userId, currentUserId, updateProviderProfileDto);
+    return this.profilesService.updateProviderProfile(
+      userId,
+      currentUserId,
+      updateProviderProfileDto,
+    );
   }
 
   // === RECHERCHE PRESTATAIRES ===
@@ -98,6 +112,11 @@ export class ProfilesController {
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,
   ) {
-    return this.profilesService.searchProviders(query, specialtyId, page, limit);
+    return this.profilesService.searchProviders(
+      query,
+      specialtyId,
+      page,
+      limit,
+    );
   }
 }

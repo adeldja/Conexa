@@ -15,14 +15,17 @@ export default function SlotsCalendar({ slots, onSlotStatusChange }: SlotsCalend
   const [viewMode, setViewMode] = useState<'list' | 'calendar'>('list');
 
   const groupSlotsByDate = (slots: GeneratedSlot[]) => {
-    return slots.reduce((groups, slot) => {
-      const date = slot.date;
-      if (!groups[date]) {
-        groups[date] = [];
-      }
-      groups[date].push(slot);
-      return groups;
-    }, {} as Record<string, GeneratedSlot[]>);
+    return slots.reduce(
+      (groups, slot) => {
+        const date = slot.date;
+        if (!groups[date]) {
+          groups[date] = [];
+        }
+        groups[date].push(slot);
+        return groups;
+      },
+      {} as Record<string, GeneratedSlot[]>
+    );
   };
 
   const getSlotColorClasses = (status: string) => {
@@ -39,7 +42,6 @@ export default function SlotsCalendar({ slots, onSlotStatusChange }: SlotsCalend
   };
 
   const handleSlotClick = (slot: GeneratedSlot, index: number) => {
-    
     if (slot.status === 'booked') {
       setSelectedSlot(slot);
     } else if (slot.status === 'available') {
@@ -99,9 +101,8 @@ export default function SlotsCalendar({ slots, onSlotStatusChange }: SlotsCalend
             <span className="text-slate-600">Fermé</span>
           </div>
           <div className="text-slate-500">
-            • Cliquez sur un créneau disponible pour le fermer
-            • Cliquez sur un créneau fermé pour le rouvrir
-            • Cliquez sur un créneau réservé pour voir les détails
+            • Cliquez sur un créneau disponible pour le fermer • Cliquez sur un créneau fermé pour
+            le rouvrir • Cliquez sur un créneau réservé pour voir les détails
           </div>
         </div>
       </div>
@@ -110,11 +111,23 @@ export default function SlotsCalendar({ slots, onSlotStatusChange }: SlotsCalend
       <div className="p-6">
         {sortedDates.length === 0 ? (
           <div className="text-center py-12">
-            <svg className="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            <svg
+              className="w-12 h-12 text-gray-400 mx-auto mb-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
             </svg>
             <h4 className="text-lg font-medium text-gray-900 mb-2">Aucun créneau généré</h4>
-            <p className="text-gray-500">Configurez vos horaires hebdomadaires et générez vos créneaux.</p>
+            <p className="text-gray-500">
+              Configurez vos horaires hebdomadaires et générez vos créneaux.
+            </p>
           </div>
         ) : (
           <div className="space-y-6">
@@ -127,12 +140,13 @@ export default function SlotsCalendar({ slots, onSlotStatusChange }: SlotsCalend
                 <div className="p-4">
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-2">
                     {groupedSlots[date].map((slot, index) => {
-                      const globalIndex = slots.findIndex(s => 
-                        s.date === slot.date && 
-                        s.startTime === slot.startTime && 
-                        s.endTime === slot.endTime
+                      const globalIndex = slots.findIndex(
+                        s =>
+                          s.date === slot.date &&
+                          s.startTime === slot.startTime &&
+                          s.endTime === slot.endTime
                       );
-                      
+
                       return (
                         <button
                           key={`${slot.date}-${slot.startTime}-${slot.endTime}`}
@@ -146,19 +160,15 @@ export default function SlotsCalendar({ slots, onSlotStatusChange }: SlotsCalend
                             slot.status === 'booked' && slot.booking
                               ? `Réservé par ${slot.booking.clientName}`
                               : slot.status === 'available'
-                              ? 'Cliquer pour fermer'
-                              : slot.status === 'closed'
-                              ? 'Cliquer pour rouvrir'
-                              : ''
+                                ? 'Cliquer pour fermer'
+                                : slot.status === 'closed'
+                                  ? 'Cliquer pour rouvrir'
+                                  : ''
                           }
                         >
                           <div className="text-center">
-                            <div className="font-medium">
-                              {formatTime(slot.startTime)}
-                            </div>
-                            <div className="opacity-75">
-                              {formatTime(slot.endTime)}
-                            </div>
+                            <div className="font-medium">{formatTime(slot.startTime)}</div>
+                            <div className="opacity-75">{formatTime(slot.endTime)}</div>
                             {slot.status === 'booked' && (
                               <div className="mt-1 text-xs opacity-90">
                                 {slot.booking?.clientName || 'Réservé'}

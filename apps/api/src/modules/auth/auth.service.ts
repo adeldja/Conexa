@@ -30,7 +30,7 @@ export class AuthService {
   async validateUser(email: string, password: string): Promise<any> {
     const user = await this.usersService.findByEmail(email);
     if (user && (await bcrypt.compare(password, user.password))) {
-      const { password: _, ...result } = user;
+      const { password: _password, ...result } = user;
       return result;
     }
     return null;
@@ -62,7 +62,7 @@ export class AuthService {
   async validateUserById(userId: string): Promise<any> {
     const user = await this.usersService.findOne(userId);
     if (user) {
-      const { password: _, ...result } = user as any;
+      const { password: _password, ...result } = user as any;
       return result;
     }
     throw new UnauthorizedException();

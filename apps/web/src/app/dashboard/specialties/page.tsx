@@ -3,13 +3,16 @@
 import { useAuth } from '@/contexts/AuthContext';
 import ProtectedRoute from '@/components/shared/ProtectedRoute';
 import { ToastContainer, useToast, Skeleton } from '@/components/ui';
-import { MySpecialtiesSection, AvailableSpecialtiesSection } from '@/components/features/specialties';
+import {
+  MySpecialtiesSection,
+  AvailableSpecialtiesSection,
+} from '@/components/features/specialties';
 import { useSpecialties } from '@/hooks/useSpecialties';
 
 export default function SpecialtiesPage() {
   const { user } = useAuth();
   const { toasts, removeToast } = useToast();
-  
+
   const {
     mySpecialties,
     availableSpecialties,
@@ -38,8 +41,8 @@ export default function SpecialtiesPage() {
               <p className="text-gray-600 mb-6">
                 Cette section est uniquement accessible aux utilisateurs avec le rôle "PROVIDER".
               </p>
-              <a 
-                href="/dashboard" 
+              <a
+                href="/dashboard"
                 className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
               >
                 Retour au dashboard
@@ -55,14 +58,12 @@ export default function SpecialtiesPage() {
     <ProtectedRoute>
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
         <ToastContainer toasts={toasts} onRemove={removeToast} />
-        
+
         <div className="max-w-6xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-gray-900">Mes Spécialités</h1>
-            <p className="text-gray-600 mt-2">
-              Gérez vos compétences et domaines d'expertise
-            </p>
+            <p className="text-gray-600 mt-2">Gérez vos compétences et domaines d'expertise</p>
           </div>
 
           {/* Navigation breadcrumb */}

@@ -35,7 +35,10 @@ export class SpecialtiesController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateSpecialtyDto: UpdateSpecialtyDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateSpecialtyDto: UpdateSpecialtyDto,
+  ) {
     return this.specialtiesService.update(id, updateSpecialtyDto);
   }
 
@@ -54,7 +57,11 @@ export class SpecialtiesController {
   ) {
     // TODO: Remplacer par une vraie authentification
     const currentUserId = req.user?.id || providerId; // Fallback temporaire
-    return this.specialtiesService.addProviderSpecialty(providerId, currentUserId, addProviderSpecialtyDto);
+    return this.specialtiesService.addProviderSpecialty(
+      providerId,
+      currentUserId,
+      addProviderSpecialtyDto,
+    );
   }
 
   @Delete('provider/:providerId/:specialtyId')
@@ -65,7 +72,11 @@ export class SpecialtiesController {
   ) {
     // TODO: Remplacer par une vraie authentification
     const currentUserId = req.user?.id || providerId; // Fallback temporaire
-    return this.specialtiesService.removeProviderSpecialty(providerId, specialtyId, currentUserId);
+    return this.specialtiesService.removeProviderSpecialty(
+      providerId,
+      specialtyId,
+      currentUserId,
+    );
   }
 
   @Get('provider/:providerId')

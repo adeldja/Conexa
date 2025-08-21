@@ -8,7 +8,7 @@ import type { Specialty, ProviderSpecialty } from '@/types/profiles';
 export function useSpecialties() {
   const { user } = useAuth();
   const { success, error } = useToast();
-  
+
   // États
   const [allSpecialties, setAllSpecialties] = useState<Specialty[]>([]);
   const [mySpecialties, setMySpecialties] = useState<ProviderSpecialty[]>([]);
@@ -23,21 +23,20 @@ export function useSpecialties() {
 
       try {
         setLoading(true);
-        
+
         // Charger toutes les spécialités et celles du provider en parallèle
         const [specialtiesResponse, mySpecialtiesResponse] = await Promise.all([
           specialtyService.getAll(),
-          specialtyService.getProviderSpecialties(user.id)
+          specialtyService.getProviderSpecialties(user.id),
         ]);
 
         setAllSpecialties(specialtiesResponse);
-        
+
         // Déduplication des spécialités du provider (au cas où)
         const uniqueMySpecialties = mySpecialtiesResponse.filter(
-          (specialty, index, arr) => 
-            arr.findIndex(s => s.id === specialty.id) === index
+          (specialty, index, arr) => arr.findIndex(s => s.id === specialty.id) === index
         );
-        
+
         setMySpecialties(uniqueMySpecialties);
       } catch (err) {
         console.error('Erreur lors du chargement:', err);
@@ -51,12 +50,13 @@ export function useSpecialties() {
   }, [user?.id]); // Suppression de 'error' des dépendances
 
   // Filtrer les spécialités disponibles (non encore ajoutées)
-  const availableSpecialties = allSpecialties.filter(specialty => 
-    !mySpecialties.some(ms => ms.specialtyId === specialty.id) &&
-    (searchQuery === '' || 
-     specialty.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-     (specialty.description && specialty.description.toLowerCase().includes(searchQuery.toLowerCase()))
-    )
+  const availableSpecialties = allSpecialties.filter(
+    specialty =>
+      !mySpecialties.some(ms => ms.specialtyId === specialty.id) &&
+      (searchQuery === '' ||
+        specialty.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (specialty.description &&
+          specialty.description.toLowerCase().includes(searchQuery.toLowerCase())))
   );
 
   // Ajouter une spécialité
@@ -64,7 +64,7 @@ export function useSpecialties() {
     if (!user?.id) return;
 
     setProcessingIds(prev => new Set(prev).add(specialty.id));
-    
+
     try {
       // Optimistic update
       const newProviderSpecialty: ProviderSpecialty = {
@@ -85,21 +85,15 @@ export function useSpecialties() {
       });
 
       // Mettre à jour avec la réponse du serveur
-      setMySpecialties(prev => 
-        prev.map(ms => 
-          ms.id === newProviderSpecialty.id ? response : ms
-        )
-      );
+      setMySpecialties(prev => prev.map(ms => (ms.id === newProviderSpecialty.id ? response : ms)));
 
       success('Spécialité ajoutée', `${specialty.name} a été ajoutée à vos compétences`);
     } catch (err) {
       // Rollback en cas d'erreur
-      setMySpecialties(prev => 
-        prev.filter(ms => ms.specialtyId !== specialty.id)
-      );
-      
+      setMySpecialties(prev => prev.filter(ms => ms.specialtyId !== specialty.id));
+
       console.error('Erreur ajout spécialité:', err);
-      error('Erreur', 'Impossible d\'ajouter cette spécialité');
+      error('Erreur', "Impossible d'ajouter cette spécialité");
     } finally {
       setProcessingIds(prev => {
         const newSet = new Set(prev);
@@ -125,11 +119,14 @@ export function useSpecialties() {
       // Appel API
       await specialtyService.removeFromProvider(user.id, specialtyId);
 
-      success('Spécialité retirée', `${specialtyToRemove.specialty.name} a été retirée de vos compétences`);
+      success(
+        'Spécialité retirée',
+        `${specialtyToRemove.specialty.name} a été retirée de vos compétences`
+      );
     } catch (err) {
       // Rollback en cas d'erreur
       setMySpecialties(prev => [...prev, specialtyToRemove]);
-      
+
       console.error('Erreur suppression spécialité:', err);
       error('Erreur', 'Impossible de retirer cette spécialité');
     } finally {
@@ -145,8 +142,12 @@ export function useSpecialties() {
   const handleLevelChange = async (specialtyId: string, level: number) => {
     if (!user?.id) return;
 
-    const levelString = ['', 'Débutant', 'Intermédiaire', 'Confirmé', 'Avancé', 'Expert'][level] as 
-      'Débutant' | 'Intermédiaire' | 'Confirmé' | 'Avancé' | 'Expert';
+    const levelString = ['', 'Débutant', 'Intermédiaire', 'Confirmé', 'Avancé', 'Expert'][level] as
+      | 'Débutant'
+      | 'Intermédiaire'
+      | 'Confirmé'
+      | 'Avancé'
+      | 'Expert';
 
     const oldSpecialty = mySpecialties.find(ms => ms.specialtyId === specialtyId);
     if (!oldSpecialty) return;
@@ -155,25 +156,19 @@ export function useSpecialties() {
 
     try {
       // Optimistic update
-      setMySpecialties(prev => 
-        prev.map(ms => 
-          ms.specialtyId === specialtyId 
-            ? { ...ms, level: levelString } as ProviderSpecialty
-            : ms
+      setMySpecialties(prev =>
+        prev.map(ms =>
+          ms.specialtyId === specialtyId ? ({ ...ms, level: levelString } as ProviderSpecialty) : ms
         )
       );
 
       success('Niveau mis à jour', `Niveau de ${oldSpecialty.specialty.name} modifié`);
     } catch (err) {
       // Rollback en cas d'erreur
-      setMySpecialties(prev => 
-        prev.map(ms => 
-          ms.specialtyId === specialtyId 
-            ? oldSpecialty
-            : ms
-        )
+      setMySpecialties(prev =>
+        prev.map(ms => (ms.specialtyId === specialtyId ? oldSpecialty : ms))
       );
-      
+
       console.error('Erreur modification niveau:', err);
       error('Erreur', 'Impossible de modifier le niveau');
     } finally {
@@ -193,7 +188,7 @@ export function useSpecialties() {
     loading,
     searchQuery,
     processingIds,
-    
+
     // Actions
     setSearchQuery,
     handleAddSpecialty,

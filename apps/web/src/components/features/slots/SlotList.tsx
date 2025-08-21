@@ -19,7 +19,7 @@ export default function SlotList({ onEditSlot, onDeleteSlot, refreshTrigger }: S
   useEffect(() => {
     const fetchSlots = async () => {
       if (!user?.id) return;
-      
+
       try {
         setLoading(true);
         setError(null);
@@ -46,23 +46,22 @@ export default function SlotList({ onEditSlot, onDeleteSlot, refreshTrigger }: S
 
   if (error) {
     return (
-      <div className="my-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
-        {error}
-      </div>
+      <div className="my-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">{error}</div>
     );
   }
 
   if (slots.length === 0) {
     return (
       <div className="my-4 p-4 bg-gray-100 border border-gray-300 text-gray-700 rounded">
-        Aucun créneau n'a été créé. Utilisez le formulaire ci-dessus pour ajouter votre premier créneau.
+        Aucun créneau n'a été créé. Utilisez le formulaire ci-dessus pour ajouter votre premier
+        créneau.
       </div>
     );
   }
 
   // Trier les créneaux par date
-  const sortedSlots = [...slots].sort((a, b) => 
-    new Date(a.startTime).getTime() - new Date(b.startTime).getTime()
+  const sortedSlots = [...slots].sort(
+    (a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime()
   );
 
   return (
@@ -80,15 +79,13 @@ export default function SlotList({ onEditSlot, onDeleteSlot, refreshTrigger }: S
             </tr>
           </thead>
           <tbody>
-            {sortedSlots.map((slot) => {
+            {sortedSlots.map(slot => {
               const startDate = new Date(slot.startTime);
               const endDate = new Date(slot.endTime);
-              
+
               return (
                 <tr key={slot.id} className="hover:bg-gray-50">
-                  <td className="py-2 px-4 border-b">
-                    {startDate.toLocaleDateString('fr-FR')}
-                  </td>
+                  <td className="py-2 px-4 border-b">{startDate.toLocaleDateString('fr-FR')}</td>
                   <td className="py-2 px-4 border-b">
                     {startDate.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
                   </td>
@@ -96,22 +93,24 @@ export default function SlotList({ onEditSlot, onDeleteSlot, refreshTrigger }: S
                     {endDate.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
                   </td>
                   <td className="py-2 px-4 border-b">
-                    <span className={`inline-block rounded-full px-2 py-1 text-xs font-bold 
-                      ${slot.isAvailable 
-                        ? 'bg-green-100 text-green-800' 
-                        : 'bg-red-100 text-red-800'}`}>
+                    <span
+                      className={`inline-block rounded-full px-2 py-1 text-xs font-bold 
+                      ${
+                        slot.isAvailable ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                      }`}
+                    >
                       {slot.isAvailable ? 'Disponible' : 'Indisponible'}
                     </span>
                   </td>
                   <td className="py-2 px-4 border-b">
                     <div className="flex space-x-2">
-                      <button 
+                      <button
                         onClick={() => onEditSlot(slot)}
                         className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded text-sm"
                       >
                         Modifier
                       </button>
-                      <button 
+                      <button
                         onClick={() => onDeleteSlot(slot)}
                         className="bg-red-500 hover:bg-red-600 text-white py-1 px-2 rounded text-sm"
                       >

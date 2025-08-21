@@ -67,7 +67,10 @@ describe('BookingService', () => {
 
       mockPrismaService.slot.findUnique.mockResolvedValue(mockSlot);
       mockPrismaService.booking.create.mockResolvedValue(mockBooking);
-      mockPrismaService.slot.update.mockResolvedValue({ ...mockSlot, isAvailable: false });
+      mockPrismaService.slot.update.mockResolvedValue({
+        ...mockSlot,
+        isAvailable: false,
+      });
 
       // Act
       const result = await service.create(createBookingDto);
@@ -76,19 +79,19 @@ describe('BookingService', () => {
       expect(mockPrismaService.slot.findUnique).toHaveBeenCalledWith({
         where: { id: createBookingDto.slotId },
       });
-      
+
       expect(mockPrismaService.booking.create).toHaveBeenCalledWith({
         data: {
           slotId: createBookingDto.slotId,
           clientId: createBookingDto.clientId,
         },
       });
-      
+
       expect(mockPrismaService.slot.update).toHaveBeenCalledWith({
         where: { id: createBookingDto.slotId },
         data: { isAvailable: false },
       });
-      
+
       expect(result).toEqual(mockBooking);
     });
 
@@ -103,9 +106,9 @@ describe('BookingService', () => {
 
       // Act & Assert
       await expect(service.create(createBookingDto)).rejects.toThrow(
-        'Le créneau demandé n\'existe pas',
+        "Le créneau demandé n'existe pas",
       );
-      
+
       expect(mockPrismaService.booking.create).not.toHaveBeenCalled();
     });
 
@@ -129,9 +132,9 @@ describe('BookingService', () => {
 
       // Act & Assert
       await expect(service.create(createBookingDto)).rejects.toThrow(
-        'Ce créneau n\'est plus disponible',
+        "Ce créneau n'est plus disponible",
       );
-      
+
       expect(mockPrismaService.booking.create).not.toHaveBeenCalled();
     });
   });
@@ -182,7 +185,7 @@ describe('BookingService', () => {
           },
         },
       });
-      
+
       expect(result).toEqual(mockBookings);
     });
   });
@@ -226,17 +229,17 @@ describe('BookingService', () => {
         where: { id: bookingId },
         include: { slot: true },
       });
-      
+
       expect(mockPrismaService.booking.update).toHaveBeenCalledWith({
         where: { id: bookingId },
         data: { status: 'CANCELLED' },
       });
-      
+
       expect(mockPrismaService.slot.update).toHaveBeenCalledWith({
         where: { id: mockBooking.slotId },
         data: { isAvailable: true },
       });
-      
+
       expect(result).toEqual(updatedBooking);
     });
 
@@ -249,7 +252,7 @@ describe('BookingService', () => {
       await expect(service.cancel(bookingId)).rejects.toThrow(
         'Réservation non trouvée',
       );
-      
+
       expect(mockPrismaService.booking.update).not.toHaveBeenCalled();
       expect(mockPrismaService.slot.update).not.toHaveBeenCalled();
     });

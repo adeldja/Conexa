@@ -14,7 +14,12 @@ interface AuthLayoutProps {
   };
 }
 
-export default function AuthLayout({ children, title, subtitle, alternativeLink }: AuthLayoutProps) {
+export default function AuthLayout({
+  children,
+  title,
+  subtitle,
+  alternativeLink,
+}: AuthLayoutProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#F9FBFF] via-blue-50 to-slate-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative">
       {/* Background Pattern */}
@@ -31,8 +36,18 @@ export default function AuthLayout({ children, title, subtitle, alternativeLink 
           <div className="flex justify-center mb-6">
             <div className="flex items-center space-x-2">
               <div className="w-10 h-10 bg-gradient-to-br from-[#1D4FFF] to-blue-600 rounded-xl flex items-center justify-center">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                <svg
+                  className="w-6 h-6 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  />
                 </svg>
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-[#1D4FFF] to-blue-600 bg-clip-text text-transparent">
@@ -42,15 +57,9 @@ export default function AuthLayout({ children, title, subtitle, alternativeLink 
           </div>
 
           {/* Title */}
-          <h1 className="text-2xl font-bold text-slate-800 mb-2">
-            {title}
-          </h1>
-          
-          {subtitle && (
-            <p className="text-slate-600 text-sm mb-6">
-              {subtitle}
-            </p>
-          )}
+          <h1 className="text-2xl font-bold text-slate-800 mb-2">{title}</h1>
+
+          {subtitle && <p className="text-slate-600 text-sm mb-6">{subtitle}</p>}
 
           {/* Alternative Link */}
           <p className="text-sm text-slate-600">

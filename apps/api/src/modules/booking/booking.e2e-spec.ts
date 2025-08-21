@@ -110,7 +110,9 @@ describe('Booking Integration Tests', () => {
         .expect(200)
         .expect((res) => {
           expect(res.body).toEqual(mockResponse);
-          expect(mockBookingService.findByClient).toHaveBeenCalledWith(clientId);
+          expect(mockBookingService.findByClient).toHaveBeenCalledWith(
+            clientId,
+          );
         });
     });
   });

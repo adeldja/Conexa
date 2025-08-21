@@ -29,16 +29,16 @@ export interface ProviderProfile {
   website?: string;
   address?: string;
   avatar?: string;
-  
+
   // Tarification
   defaultPrice?: number;
   currency: string;
-  
+
   // Statistiques
   totalSlots: number;
   totalBookings: number;
   averageRating?: number;
-  
+
   // Planning par défaut
   defaultSchedule?: {
     [key: string]: {
@@ -46,12 +46,11 @@ export interface ProviderProfile {
       timeSlots: Array<{ start: string; end: string }>;
     };
   };
-  
+
   // Métadonnées
   isVerified: boolean;
   createdAt: string;
   updatedAt: string;
-  
 
   user?: {
     id: string;
@@ -89,7 +88,7 @@ export interface Review {
   bookingId?: string;
   createdAt: string;
   updatedAt: string;
-  
+
   // Relations populées
   client?: {
     id: string;

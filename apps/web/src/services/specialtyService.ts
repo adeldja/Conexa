@@ -41,8 +41,14 @@ export const specialtyService = {
   // === SPECIALITES PRESTATAIRE ===
 
   // Ajouter une spécialité à un prestataire
-  async addToProvider(providerId: string, data: AddProviderSpecialtyRequest): Promise<ProviderSpecialty> {
-    const response = await api.post(`${API_CONFIG.ENDPOINTS.SPECIALTIES}/provider/${providerId}`, data);
+  async addToProvider(
+    providerId: string,
+    data: AddProviderSpecialtyRequest
+  ): Promise<ProviderSpecialty> {
+    const response = await api.post(
+      `${API_CONFIG.ENDPOINTS.SPECIALTIES}/provider/${providerId}`,
+      data
+    );
     return response.data;
   },
 

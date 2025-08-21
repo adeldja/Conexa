@@ -28,7 +28,9 @@ export class ReviewsService {
 
     // Un client ne peut pas donner un avis sur lui-même
     if (clientId === providerId) {
-      throw new BadRequestException('Vous ne pouvez pas donner un avis sur vous-même');
+      throw new BadRequestException(
+        'Vous ne pouvez pas donner un avis sur vous-même',
+      );
     }
 
     // Si un booking est spécifié, vérifier qu'il appartient au client et au prestataire
@@ -46,20 +48,28 @@ export class ReviewsService {
       }
 
       if (booking.clientId !== clientId) {
-        throw new ForbiddenException('Cette réservation ne vous appartient pas');
+        throw new ForbiddenException(
+          'Cette réservation ne vous appartient pas',
+        );
       }
 
       if (booking.slot.providerId !== providerId) {
-        throw new BadRequestException('Cette réservation ne correspond pas au prestataire');
+        throw new BadRequestException(
+          'Cette réservation ne correspond pas au prestataire',
+        );
       }
 
       if (booking.review) {
-        throw new ConflictException('Un avis a déjà été donné pour cette réservation');
+        throw new ConflictException(
+          'Un avis a déjà été donné pour cette réservation',
+        );
       }
 
       // Seules les réservations confirmées peuvent avoir un avis
       if (booking.status !== 'CONFIRMED') {
-        throw new BadRequestException('Vous ne pouvez donner un avis que pour une réservation confirmée');
+        throw new BadRequestException(
+          'Vous ne pouvez donner un avis que pour une réservation confirmée',
+        );
       }
     }
 
@@ -129,7 +139,11 @@ export class ReviewsService {
     });
   }
 
-  async findByProvider(providerId: string, page: number = 1, limit: number = 10) {
+  async findByProvider(
+    providerId: string,
+    page: number = 1,
+    limit: number = 10,
+  ) {
     const skip = (page - 1) * limit;
 
     const [reviews, total] = await Promise.all([
@@ -214,7 +228,9 @@ export class ReviewsService {
     }
 
     if (review.clientId !== clientId) {
-      throw new ForbiddenException('Vous ne pouvez modifier que vos propres avis');
+      throw new ForbiddenException(
+        'Vous ne pouvez modifier que vos propres avis',
+      );
     }
 
     const updatedReview = await this.prisma.review.update({
@@ -253,7 +269,9 @@ export class ReviewsService {
     }
 
     if (review.clientId !== clientId) {
-      throw new ForbiddenException('Vous ne pouvez supprimer que vos propres avis');
+      throw new ForbiddenException(
+        'Vous ne pouvez supprimer que vos propres avis',
+      );
     }
 
     const deletedReview = await this.prisma.review.delete({
@@ -301,7 +319,7 @@ export class ReviewsService {
     return {
       totalReviews: stats._count,
       averageRating: stats._avg.rating || 0,
-      ratingBreakdown: ratingBreakdown.map(item => ({
+      ratingBreakdown: ratingBreakdown.map((item) => ({
         rating: item.rating,
         count: item._count,
       })),

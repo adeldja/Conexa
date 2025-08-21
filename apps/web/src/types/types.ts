@@ -21,7 +21,7 @@ export interface BackendSlot {
   id: string;
   providerId: string;
   startTime: string; // ISO string
-  endTime: string;   // ISO string
+  endTime: string; // ISO string
   isAvailable: boolean;
   createdAt: string;
   bookings?: BackendBooking[];
@@ -59,13 +59,13 @@ export interface GeneratedSlot {
 export interface CreateSlotRequest {
   providerId: string;
   startTime: string; // ISO string
-  endTime: string;   // ISO string
+  endTime: string; // ISO string
   isAvailable?: boolean;
 }
 
 export interface UpdateSlotRequest {
   startTime?: string; // ISO string
-  endTime?: string;   // ISO string
+  endTime?: string; // ISO string
   isAvailable?: boolean;
 }
 
@@ -84,42 +84,42 @@ export const DEFAULT_WEEKLY_SCHEDULE: WeeklySchedule = {
     day: 'monday',
     dayName: 'Lundi',
     enabled: true,
-    timeSlots: [{ start: '09:00', end: '17:00' }]
+    timeSlots: [{ start: '09:00', end: '17:00' }],
   },
   tuesday: {
     day: 'tuesday',
     dayName: 'Mardi',
     enabled: true,
-    timeSlots: [{ start: '09:00', end: '17:00' }]
+    timeSlots: [{ start: '09:00', end: '17:00' }],
   },
   wednesday: {
     day: 'wednesday',
     dayName: 'Mercredi',
     enabled: true,
-    timeSlots: [{ start: '09:00', end: '17:00' }]
+    timeSlots: [{ start: '09:00', end: '17:00' }],
   },
   thursday: {
     day: 'thursday',
     dayName: 'Jeudi',
     enabled: true,
-    timeSlots: [{ start: '09:00', end: '17:00' }]
+    timeSlots: [{ start: '09:00', end: '17:00' }],
   },
   friday: {
     day: 'friday',
     dayName: 'Vendredi',
     enabled: true,
-    timeSlots: [{ start: '09:00', end: '17:00' }]
+    timeSlots: [{ start: '09:00', end: '17:00' }],
   },
   saturday: {
     day: 'saturday',
     dayName: 'Samedi',
     enabled: false,
-    timeSlots: []
+    timeSlots: [],
   },
   sunday: {
     day: 'sunday',
     dayName: 'Dimanche',
     enabled: false,
-    timeSlots: []
+    timeSlots: [],
   },
 };

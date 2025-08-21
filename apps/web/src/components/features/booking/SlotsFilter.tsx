@@ -44,7 +44,7 @@ export default function SlotsFilter({ onFilterChange, totalSlots }: SlotsFilterP
             Période d'affichage
           </h3>
           <div className="flex flex-wrap gap-2">
-            {weekFilters.map((filter) => (
+            {weekFilters.map(filter => (
               <button
                 key={filter.value}
                 onClick={() => handleWeekFilterChange(filter.value)}
@@ -66,7 +66,7 @@ export default function SlotsFilter({ onFilterChange, totalSlots }: SlotsFilterP
             Moment de la journée
           </h3>
           <div className="flex flex-wrap gap-2">
-            {timeFilters.map((filter) => (
+            {timeFilters.map(filter => (
               <button
                 key={filter.value}
                 onClick={() => handleTimeFilterChange(filter.value)}
@@ -86,8 +86,18 @@ export default function SlotsFilter({ onFilterChange, totalSlots }: SlotsFilterP
         {/* Compteur */}
         <div className="flex items-center space-x-3 px-4 py-3 bg-blue-50 rounded-xl">
           <div className="p-2 bg-blue-100 rounded-lg">
-            <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            <svg
+              className="w-5 h-5 text-blue-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
             </svg>
           </div>
           <div>

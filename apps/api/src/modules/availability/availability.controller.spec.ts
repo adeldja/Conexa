@@ -27,7 +27,7 @@ describe('AvailabilityController', () => {
     }).compile();
 
     controller = module.get<AvailabilityController>(AvailabilityController);
-    
+
     // Réinitialiser tous les mocks après chaque test
     jest.clearAllMocks();
   });
@@ -43,7 +43,7 @@ describe('AvailabilityController', () => {
         providerId: 'provider-id',
         startTime: '2025-07-01T09:00:00.000Z',
         endTime: '2025-07-01T10:00:00.000Z',
-        isAvailable: true
+        isAvailable: true,
       };
 
       const expectedSlot = {
@@ -62,16 +62,18 @@ describe('AvailabilityController', () => {
 
       // Assert
       expect(result).toEqual(expectedSlot);
-      expect(mockAvailabilityService.create).toHaveBeenCalledWith(createSlotDto);
+      expect(mockAvailabilityService.create).toHaveBeenCalledWith(
+        createSlotDto,
+      );
     });
-    
+
     it('should handle errors during slot creation', async () => {
       // Arrange
       const createSlotDto: CreateSlotDto = {
         providerId: 'provider-id',
         startTime: '2025-07-01T09:00:00.000Z',
         endTime: '2025-07-01T10:00:00.000Z',
-        isAvailable: true
+        isAvailable: true,
       };
 
       const error = new Error('Test error');
@@ -104,7 +106,9 @@ describe('AvailabilityController', () => {
 
       // Assert
       expect(result).toEqual(expectedSlots);
-      expect(mockAvailabilityService.findByProvider).toHaveBeenCalledWith(providerId);
+      expect(mockAvailabilityService.findByProvider).toHaveBeenCalledWith(
+        providerId,
+      );
     });
   });
 
@@ -156,7 +160,10 @@ describe('AvailabilityController', () => {
 
       // Assert
       expect(result).toEqual(expectedSlot);
-      expect(mockAvailabilityService.update).toHaveBeenCalledWith(slotId, updateSlotDto);
+      expect(mockAvailabilityService.update).toHaveBeenCalledWith(
+        slotId,
+        updateSlotDto,
+      );
     });
   });
 
