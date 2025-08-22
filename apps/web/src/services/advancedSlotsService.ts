@@ -70,11 +70,7 @@ class AdvancedSlotsService {
       const endDateTime = new Date(request.endTime);
 
       return {
-        date: startDateTime.toLocaleDateString('fr-FR', {
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric',
-        }),
+        date: startDateTime.toISOString().split('T')[0], // Format YYYY-MM-DD
         startTime: startDateTime.toLocaleTimeString('fr-FR', {
           hour: '2-digit',
           minute: '2-digit',

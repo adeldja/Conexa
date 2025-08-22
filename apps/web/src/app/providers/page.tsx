@@ -1,10 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Input, Button, Select, Card } from '@/components/ui';
-import { ProviderCard } from '@/components/features';
 import { providerProfileService, specialtyService } from '@/services';
 import type { ProviderProfile, Specialty } from '@/types/profiles';
+import SearchFilters from './components/SearchFilters';
+import ProvidersGrid from './components/ProvidersGrid';
+import Pagination from './components/Pagination';
 
 export default function ProvidersPage() {
   const [providers, setProviders] = useState<ProviderProfile[]>([]);
@@ -58,6 +59,7 @@ export default function ProvidersPage() {
   // Recherche initiale au montage
   useEffect(() => {
     performSearch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Rechercher quand les filtres changent
@@ -101,138 +103,27 @@ export default function ProvidersPage() {
       </div>
 
       {/* Filtres de recherche */}
-      <Card className="p-6 mb-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
-          {/* Recherche par mot-clé */}
-          <div className="md:col-span-2">
-            <label htmlFor="search" className="block text-sm font-medium text-gray-700 mb-2">
-              Rechercher
-            </label>
-            <Input
-              id="search"
-              type="text"
-              placeholder="Nom, description, compétences..."
-              value={searchQuery}
-              onChange={e => setSearchQuery(e.target.value)}
-              onKeyPress={e => e.key === 'Enter' && handleSearch()}
-            />
-          </div>
+      <SearchFilters
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        selectedSpecialty={selectedSpecialty}
+        setSelectedSpecialty={setSelectedSpecialty}
+        specialties={specialties}
+        onSearch={handleSearch}
+        onReset={handleReset}
+        searchLoading={searchLoading}
+      />
 
-          {/* Filtre par spécialité */}
-          <div>
-            <label htmlFor="specialty" className="block text-sm font-medium text-gray-700 mb-2">
-              Spécialité
-            </label>
-            <Select
-              id="specialty"
-              value={selectedSpecialty}
-              onChange={e => setSelectedSpecialty(e.target.value)}
-            >
-              <option value="">Toutes les spécialités</option>
-              {specialties.map(specialty => (
-                <option key={specialty.id} value={specialty.id}>
-                  {specialty.icon} {specialty.name}
-                </option>
-              ))}
-            </Select>
-          </div>
+      {/* Grille des prestataires */}
+      <ProvidersGrid providers={providers} loading={searchLoading} />
 
-          {/* Actions */}
-          <div className="flex gap-2">
-            <Button onClick={handleSearch} disabled={searchLoading} className="flex-1">
-              {searchLoading ? 'Recherche...' : 'Rechercher'}
-            </Button>
-            <Button variant="outline" onClick={handleReset} disabled={searchLoading}>
-              Reset
-            </Button>
-          </div>
-        </div>
-      </Card>
-
-      {/* Résultats */}
-      {searchLoading ? (
-        <div className="flex items-center justify-center min-h-64">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
-            <p className="text-gray-600">Recherche en cours...</p>
-          </div>
-        </div>
-      ) : providers.length > 0 ? (
-        <>
-          {/* Nombre de résultats */}
-          <div className="mb-6">
-            <p className="text-gray-600">
-              {providers.length} prestataire{providers.length > 1 ? 's' : ''} trouvé
-              {providers.length > 1 ? 's' : ''}
-            </p>
-          </div>
-
-          {/* Grille des prestataires */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            {providers.map(provider => (
-              <ProviderCard
-                key={provider.id}
-                provider={provider}
-                onViewProfile={provider => {
-                  // TODO: Navigation vers le profil détaillé
-                  console.log('Voir profil:', provider);
-                }}
-              />
-            ))}
-          </div>
-
-          {/* Pagination */}
-          {totalPages > 1 && (
-            <div className="flex justify-center">
-              <div className="flex items-center gap-2">
-                <Button
-                  variant="outline"
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  disabled={currentPage === 1}
-                >
-                  Précédent
-                </Button>
-
-                <div className="flex items-center gap-1">
-                  {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                    const page = i + 1;
-                    return (
-                      <Button
-                        key={page}
-                        variant={page === currentPage ? 'primary' : 'outline'}
-                        onClick={() => handlePageChange(page)}
-                        className="w-10 h-10"
-                      >
-                        {page}
-                      </Button>
-                    );
-                  })}
-                </div>
-
-                <Button
-                  variant="outline"
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                >
-                  Suivant
-                </Button>
-              </div>
-            </div>
-          )}
-        </>
-      ) : (
-        <Card className="p-8 text-center">
-          <div className="text-gray-500">
-            <p className="text-lg mb-2">Aucun prestataire trouvé</p>
-            <p className="text-sm">
-              Essayez de modifier vos critères de recherche ou{' '}
-              <button onClick={handleReset} className="text-blue-600 hover:underline">
-                réinitialisez les filtres
-              </button>
-            </p>
-          </div>
-        </Card>
-      )}
+      {/* Pagination */}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+        loading={searchLoading}
+      />
     </div>
   );
 }

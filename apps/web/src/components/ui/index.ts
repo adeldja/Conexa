@@ -1,6 +1,7 @@
 export { Button } from './Button';
 export { Card, CardHeader, CardContent, CardFooter, CardTitle } from './Card';
 export { Input } from './Input';
+export { FormInput } from './FormInput';
 export { Select } from './Select';
 export { Badge } from './Badge';
 export { StarRating } from './StarRating';
