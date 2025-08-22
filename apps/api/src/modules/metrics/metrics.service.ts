@@ -74,8 +74,17 @@ export class MetricsService implements OnModuleInit {
   }
 
   // Méthodes utilitaires pour enregistrer des métriques
-  recordHttpRequest(method: string, route: string, statusCode: number, duration: number) {
-    this.httpRequestsTotal.inc({ method, route, status_code: statusCode.toString() });
+  recordHttpRequest(
+    method: string,
+    route: string,
+    statusCode: number,
+    duration: number,
+  ) {
+    this.httpRequestsTotal.inc({
+      method,
+      route,
+      status_code: statusCode.toString(),
+    });
     this.httpRequestDuration.observe(
       { method, route, status_code: statusCode.toString() },
       duration,

@@ -36,6 +36,7 @@
 #### Composants Features
 
 - **SlotList** : 97.14% de couverture
+
   - Affichage des données
   - Gestion des états de chargement
   - Gestion des erreurs

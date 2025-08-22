@@ -5,7 +5,8 @@
 **Date :** 22 août 2025  
 **Version :** 1.0  
 **Auditeur :** Assistant IA - Analyse de code  
-**Référentiel :** RGAA 4.1 (Référentiel Général d'Amélioration de l'Accessibilité)
+**Référentiel :** RGAA 4.1 (Référentiel Général d'Amélioration de
+l'Accessibilité)
 
 ---
 
@@ -18,7 +19,7 @@
 - **Pages auditées :** 8 pages principales
 - **Niveau de conformité visé :** AA (RGAA 4.1)
 
-### Score de Conformité Global : **48%** 
+### Score de Conformité Global : **48%**
 
 | Critère                   | Conforme | Non Conforme | Non Applicable | % Conformité |
 | ------------------------- | -------- | ------------ | -------------- | ------------ |
@@ -45,15 +46,21 @@
 #### ❌ **Non-conformités critiques**
 
 **1.1 - Alternatives textuelles** ❌
+
 ```tsx
 // Problème : SVG sans alternative textuelle
 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
-        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+  <path
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth={2}
+    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+  />
 </svg>
 ```
 
 **1.2 - Images porteuses d'information** ❌
+
 ```tsx
 // Problème : Logo sans texte alternatif
 <div className="w-10 h-10 bg-gradient-to-br from-[#1D4FFF] to-blue-600 rounded-xl">
@@ -73,19 +80,29 @@
 #### ❌ **Non-conformités critiques**
 
 **3.1 - Contraste des couleurs** ❌
+
 ```css
 /* Problème : Contraste insuffisant */
-.text-gray-400 { color: #9CA3AF; } /* Sur fond blanc = 2.5:1 (< 4.5:1) */
-.text-slate-500 { color: #64748B; } /* Sur fond blanc = 3.1:1 (< 4.5:1) */
-.bg-yellow-100.text-yellow-700 { /* 2.8:1 */ }
+.text-gray-400 {
+  color: #9ca3af;
+} /* Sur fond blanc = 2.5:1 (< 4.5:1) */
+.text-slate-500 {
+  color: #64748b;
+} /* Sur fond blanc = 3.1:1 (< 4.5:1) */
+.bg-yellow-100.text-yellow-700 {
+  /* 2.8:1 */
+}
 ```
 
 **3.2 - Information par la couleur** ❌
+
 ```tsx
 // Problème : Statut uniquement par couleur
-<span className={`px-3 py-1 rounded-full ${
-  slot.isAvailable ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-}`}>
+<span
+  className={`px-3 py-1 rounded-full ${
+    slot.isAvailable ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+  }`}
+>
   {slot.isAvailable ? 'Disponible' : 'Indisponible'}
 </span>
 ```
@@ -97,6 +114,7 @@
 #### ❌ **Non-conformités critiques**
 
 **11.1 - Étiquetage des champs** ❌
+
 ```tsx
 // Problème : Input sans label associé
 <input
@@ -107,21 +125,24 @@
 ```
 
 **11.2 - Messages d'erreur** ❌
+
 ```tsx
 // Problème : Erreur non associée au champ
-{error && <div className="text-red-500">{error}</div>}
-
+{
+  error && <div className="text-red-500">{error}</div>;
+}
 ```
 
 **11.10 - Contrôle de saisie** ❌
+
 ```tsx
 // Problème : Pas d'indication des champs obligatoires
 <Input label="Nom complet" />
 
 // Solution :
-<Input 
-  label="Nom complet" 
-  required 
+<Input
+  label="Nom complet"
+  required
   aria-required="true"
   aria-describedby="name-required"
 />
@@ -141,9 +162,11 @@
 #### ❌ **Non-conformités critiques**
 
 **12.1 - Plan du site** ❌
+
 - Aucun plan du site ou carte de navigation disponible
 
 **12.2 - Navigation principale** ❌
+
 ```tsx
 // Problème : Menu sans structure ARIA
 <div className="flex items-center space-x-4">
@@ -162,15 +185,17 @@
 ```
 
 **12.6 - Fil d'Ariane** ❌
+
 - Absence de fil d'Ariane sur les pages profondes
 
 **12.8 - Navigation au clavier** ❌
+
 ```tsx
 // Problème : Boutons sans gestion clavier
 <button onClick={handleClick}>Action</button>
 
 // Solution :
-<button 
+<button
   onClick={handleClick}
   onKeyDown={(e) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -189,6 +214,7 @@
 #### ❌ **Non-conformités critiques**
 
 **9.1 - Hiérarchie des titres** ❌
+
 ```tsx
 // Problème : Saut de niveau h1 → h3
 <h1>Tableau de bord</h1>
@@ -201,6 +227,7 @@
 ```
 
 **9.2 - Listes** ❌
+
 ```tsx
 // Problème : Liste non structurée
 <div>
@@ -222,26 +249,29 @@
 #### ❌ **Non-conformités critiques**
 
 **8.1 - Doctype et validation** ❌
+
 ```html
 <!-- Problème : Lang incorrect -->
 <html lang="en">
-
-<!-- Solution : -->
-<html lang="fr">
+  <!-- Solution : -->
+  <html lang="fr"></html>
+</html>
 ```
 
 **8.2 - Titre de page** ❌
+
 ```tsx
 // Problème : Titres génériques
-title: "Conexa - Gestion d'événements"
+title: "Conexa - Gestion d'événements";
 
 // Solution : Titres descriptifs
-title: "Connexion - Conexa"
-title: "Tableau de bord - Conexa"
-title: "Créer un créneau - Conexa"
+title: 'Connexion - Conexa';
+title: 'Tableau de bord - Conexa';
+title: 'Créer un créneau - Conexa';
 ```
 
 **8.6 - Liens d'évitement** ❌
+
 - Absence de liens d'évitement ("Aller au contenu principal")
 
 ---
@@ -251,27 +281,27 @@ title: "Créer un créneau - Conexa"
 #### ❌ **Non-conformités critiques**
 
 **7.1 - Compatibilité JavaScript** ❌
+
 ```tsx
 // Problème : Fonctionnalités critiques en JS uniquement
-<button onClick={() => setDropdownOpen(!dropdownOpen)}>
-  Menu
-</button>
+<button onClick={() => setDropdownOpen(!dropdownOpen)}>Menu</button>
 ```
 
 **7.3 - Messages de statut** ❌
+
 ```tsx
 // Problème : Pas d'annonce des changements
 setLoading(true);
-
 ```
 
 ## 🛠️ Actions Techniques Recommandées
-
 
 ## ✅ **Objectif post-correction**
 
 **Score cible : 85%+ (niveau AA)**
 
-Avec ces corrections, le projet Conexa pourra atteindre le niveau de conformité AA requis pour la validation BLOC 2, garantissant une accessibilité conforme aux standards RGAA 4.1.
+Avec ces corrections, le projet Conexa pourra atteindre le niveau de conformité
+AA requis pour la validation BLOC 2, garantissant une accessibilité conforme aux
+standards RGAA 4.1.
 
 **Délai estimé : 6-8 semaines** pour une conformité complète niveau AA.

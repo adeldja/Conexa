@@ -24,16 +24,17 @@ export class HealthController {
     return this.health.check([
       // Vérification de la base de données
       () => this.prismaHealth.pingCheck('database', this.prisma),
-      
+
       // Vérification de la mémoire (max 1GB)
       () => this.memory.checkHeap('memory_heap', 1024 * 1024 * 1024),
       () => this.memory.checkRSS('memory_rss', 1024 * 1024 * 1024),
-      
+
       // Vérification de l'espace disque (min 1GB libre)
-      () => this.disk.checkStorage('storage', {
-        path: '/',
-        thresholdPercent: 0.9,
-      }),
+      () =>
+        this.disk.checkStorage('storage', {
+          path: '/',
+          thresholdPercent: 0.9,
+        }),
     ]);
   }
 

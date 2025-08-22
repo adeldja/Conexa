@@ -26,7 +26,12 @@ export class MetricsInterceptor implements NestInterceptor {
         const statusCode = response.statusCode;
 
         // Enregistrer les métriques
-        this.metricsService.recordHttpRequest(method, route, statusCode, duration);
+        this.metricsService.recordHttpRequest(
+          method,
+          route,
+          statusCode,
+          duration,
+        );
       }),
     );
   }

@@ -15,38 +15,38 @@ jobs:
         id: health
         run: |
           echo "🏥 Checking API Health..."
-          
+
           # Health check principal
           HEALTH_STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://votre-app.onrender.com/health)
           echo "Health status: $HEALTH_STATUS"
-          
+
           # Readiness check
           READY_STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://votre-app.onrender.com/health/ready)
           echo "Readiness status: $READY_STATUS"
-          
+
           # Vérifier les métriques
           METRICS_STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://votre-app.onrender.com/metrics)
           echo "Metrics status: $METRICS_STATUS"
-          
+
           # Temps de réponse
           RESPONSE_TIME=$(curl -s -o /dev/null -w "%{time_total}" https://votre-app.onrender.com/health)
           echo "Response time: ${RESPONSE_TIME}s"
-          
+
           # Alertes si problème
           if [ "$HEALTH_STATUS" != "200" ]; then
             echo "::error::API Health Check Failed - Status: $HEALTH_STATUS"
             exit 1
           fi
-          
+
           if [ "$READY_STATUS" != "200" ]; then
             echo "::error::API Readiness Check Failed - Status: $READY_STATUS"
             exit 1
           fi
-          
+
           if [ "$METRICS_STATUS" != "200" ]; then
             echo "::warning::Metrics endpoint not accessible - Status: $METRICS_STATUS"
           fi
-          
+
           # Alerte si trop lent (> 3s)
           if (( $(echo "$RESPONSE_TIME > 3.0" | bc -l) )); then
             echo "::warning::API response time is slow: ${RESPONSE_TIME}s"
@@ -70,13 +70,13 @@ jobs:
       - name: Load Test (Light)
         run: |
           echo "⚡ Running light load test..."
-          
+
           # 10 requêtes parallèles
           for i in {1..10}; do
             curl -s -o /dev/null -w "Request $i: %{time_total}s\n" https://votre-app.onrender.com/health &
           done
           wait
-          
+
           echo "Load test completed"
 
   alerts:

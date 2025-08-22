@@ -11,7 +11,7 @@ scrape_configs:
       - targets: ['host.docker.internal:3001']
     scrape_interval: 5s
     metrics_path: /metrics
-    
+
   - job_name: 'conexa-health'
     static_configs:
       - targets: ['host.docker.internal:3001']
