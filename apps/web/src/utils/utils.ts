@@ -66,13 +66,45 @@ export const generateSlotsFromSchedule = (
 };
 
 export const formatDate = (dateString: string): string => {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('fr-FR', {
+  console.log('🔧 formatDate appelé avec:', dateString, 'type:', typeof dateString);
+
+  if (!dateString) {
+    console.log('🔧 formatDate: dateString est vide ou undefined');
+    return 'Date manquante';
+  }
+
+  let date: Date;
+
+  // Gestion des différents formats
+  if (dateString.includes('T')) {
+    // Format ISO avec heure (YYYY-MM-DDTHH:mm:ss)
+    date = new Date(dateString);
+  } else if (dateString.includes('/')) {
+    // Format DD/MM/YYYY (ancien format, à convertir)
+    const [day, month, year] = dateString.split('/');
+    date = new Date(`${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T12:00:00`);
+    console.log('🔧 formatDate: Format DD/MM/YYYY détecté, converti en:', date);
+  } else {
+    // Format YYYY-MM-DD (nouveau format standard)
+    date = new Date(dateString + 'T12:00:00');
+  }
+
+  console.log('🔧 formatDate: Date créée:', date, 'isValid:', !isNaN(date.getTime()));
+
+  if (isNaN(date.getTime())) {
+    console.log('🔧 formatDate: Date invalide pour:', dateString);
+    return 'Date invalide';
+  }
+
+  const formatted = date.toLocaleDateString('fr-FR', {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   });
+
+  console.log('🔧 formatDate: Résultat formaté:', formatted);
+  return formatted;
 };
 
 export const formatTime = (time: string): string => {
