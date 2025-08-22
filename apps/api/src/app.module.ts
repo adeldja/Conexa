@@ -9,6 +9,8 @@ import { ProfilesModule } from './modules/profiles/profiles.module';
 import { SpecialtiesModule } from './modules/specialties/specialties.module';
 import { ReviewsModule } from './modules/reviews/reviews.module';
 import { SeederModule } from './modules/seeder/seeder.module';
+import { HealthModule } from './modules/health/health.module';
+import { MetricsModule } from './modules/metrics/metrics.module';
 
 @Module({
   imports: [
@@ -22,6 +24,8 @@ import { SeederModule } from './modules/seeder/seeder.module';
     SpecialtiesModule,
     ReviewsModule,
     SeederModule,
+    HealthModule,
+    MetricsModule,
   ],
 })
 export class AppModule {}

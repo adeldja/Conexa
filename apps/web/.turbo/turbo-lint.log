@@ -26,4 +26,4 @@
 [33m50[39m:[33m6[39m  [33m[1mWarning[22m[39m: React Hook useEffect has a missing dependency: 'error'. Either include it or remove the dependency array.  [90m[1mreact-hooks/exhaustive-deps[22m[39m
 
 [36minfo[39m  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
-[2K[1G✨  Done in 2.74s.
+[2K[1G✨  Done in 2.02s.
