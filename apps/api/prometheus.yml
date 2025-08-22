@@ -1,0 +1,19 @@
+# Configuration Prometheus pour Conexa API
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files: []
+
+scrape_configs:
+  - job_name: 'conexa-api'
+    static_configs:
+      - targets: ['host.docker.internal:3001']
+    scrape_interval: 5s
+    metrics_path: /metrics
+    
+  - job_name: 'conexa-health'
+    static_configs:
+      - targets: ['host.docker.internal:3001']
+    scrape_interval: 30s
+    metrics_path: /health

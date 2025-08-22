@@ -2,9 +2,15 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { MetricsInterceptor } from './interceptors/metrics.interceptor';
+import { MetricsService } from './modules/metrics/metrics.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  // Configuration de l'intercepteur de métriques
+  const metricsService = app.get(MetricsService);
+  app.useGlobalInterceptors(new MetricsInterceptor(metricsService));
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -40,5 +46,7 @@ async function bootstrap() {
     process.env.RENDER_EXTERNAL_URL ?? `http://localhost:${port}`;
   console.log(`🚀 API started on ${publicUrl}`);
   console.log(`📚 Swagger docs: ${publicUrl}/docs`);
+  console.log(`🏥 Health checks: ${publicUrl}/health`);
+  console.log(`📊 Metrics: ${publicUrl}/metrics`);
 }
 void bootstrap();

@@ -1,0 +1,20 @@
+# Configuration Grafana Cloud pour scraper Render
+# À copier dans Grafana Cloud > Configuration > Data Sources > Prometheus
+
+global:
+  scrape_interval: 60s
+
+scrape_configs:
+  - job_name: 'conexa-render-api'
+    static_configs:
+      - targets: ['votre-app.onrender.com']
+    scrape_interval: 60s
+    metrics_path: /metrics
+    scheme: https
+    
+  - job_name: 'conexa-render-health'
+    static_configs:
+      - targets: ['votre-app.onrender.com']
+    scrape_interval: 120s
+    metrics_path: /health
+    scheme: https
