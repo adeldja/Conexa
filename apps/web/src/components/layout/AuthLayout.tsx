@@ -34,11 +34,7 @@ export default function AuthLayout({
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/50 p-8 text-center">
           {/* Logo */}
           <div className="flex justify-center mb-6">
-            <img
-              src="/logo-conexa.svg"
-              alt="Conexa"
-              className="h-16 w-auto"
-            />
+            <img src="/logo-conexa.svg" alt="Conexa" className="h-16 w-auto" />
           </div>
 
           {/* Title */}

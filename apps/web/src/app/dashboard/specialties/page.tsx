@@ -72,31 +72,31 @@ export default function SpecialtiesPage() {
               <p className="text-gray-600 mt-2">Gérez vos compétences et domaines d'expertise</p>
             </div>
 
-          {loading ? (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <Skeleton className="h-96 w-full rounded-lg" />
-              <Skeleton className="h-96 w-full rounded-lg" />
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Mes spécialités */}
-              <MySpecialtiesSection
-                mySpecialties={mySpecialties}
-                processingIds={processingIds}
-                onRemove={handleRemoveSpecialty}
-                onLevelChange={handleLevelChange}
-              />
+            {loading ? (
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <Skeleton className="h-96 w-full rounded-lg" />
+                <Skeleton className="h-96 w-full rounded-lg" />
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* Mes spécialités */}
+                <MySpecialtiesSection
+                  mySpecialties={mySpecialties}
+                  processingIds={processingIds}
+                  onRemove={handleRemoveSpecialty}
+                  onLevelChange={handleLevelChange}
+                />
 
-              {/* Spécialités disponibles */}
-              <AvailableSpecialtiesSection
-                availableSpecialties={availableSpecialties}
-                processingIds={processingIds}
-                searchQuery={searchQuery}
-                onSearchChange={setSearchQuery}
-                onAdd={handleAddSpecialty}
-              />
-            </div>
-          )}
+                {/* Spécialités disponibles */}
+                <AvailableSpecialtiesSection
+                  availableSpecialties={availableSpecialties}
+                  processingIds={processingIds}
+                  searchQuery={searchQuery}
+                  onSearchChange={setSearchQuery}
+                  onAdd={handleAddSpecialty}
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>

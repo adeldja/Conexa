@@ -31,11 +31,7 @@ export default function Header({ user, onLogout }: HeaderProps) {
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 flex items-center justify-center">
-                <img 
-                  src="/logo-c.svg" 
-                  alt="Conexa Logo" 
-                  className="w-8 h-8"
-                />
+                <img src="/logo-c.svg" alt="Conexa Logo" className="w-8 h-8" />
               </div>
               <div>
                 <h1 className="text-xl font-bold text-slate-900">Conexa</h1>
@@ -44,11 +40,7 @@ export default function Header({ user, onLogout }: HeaderProps) {
             </div>
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 flex items-center justify-center">
-                <img 
-                  src="/conexa-logo-small.svg" 
-                  alt="Conexa Logo" 
-                  className="w-10 h-10"
-                />
+                <img src="/conexa-logo-small.svg" alt="Conexa Logo" className="w-10 h-10" />
               </div>
               <div>
                 <h1 className="text-xl font-bold text-slate-900">Conexa</h1>
@@ -62,11 +54,9 @@ export default function Header({ user, onLogout }: HeaderProps) {
                 <span className="text-slate-400">|</span>
                 {breadcrumb.map((item, index) => (
                   <div key={index} className="flex items-center">
-                    {index > 0 && (
-                      <span className="text-slate-400 mx-2">/</span>
-                    )}
+                    {index > 0 && <span className="text-slate-400 mx-2">/</span>}
                     {item.href ? (
-                      <Link 
+                      <Link
                         href={item.href}
                         className="text-blue-600 hover:text-blue-800 font-medium"
                       >

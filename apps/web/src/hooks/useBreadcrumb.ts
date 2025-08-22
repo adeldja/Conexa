@@ -38,8 +38,8 @@ export function useBreadcrumb(): BreadcrumbItem[] {
     // Fallback pour les routes dynamiques
     const segments = pathname.split('/').filter(Boolean);
     const lastSegment = segments[segments.length - 1];
-    breadcrumb.push({ 
-      label: lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1) 
+    breadcrumb.push({
+      label: lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1),
     });
   }
 

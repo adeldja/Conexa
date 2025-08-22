@@ -50,7 +50,7 @@ export default function SlotsPage() {
               Configurez vos horaires et gérez vos disponibilités
             </p>
           </div>
-          
+
           <AdvancedSlotsManagerNew />
         </div>
       </div>

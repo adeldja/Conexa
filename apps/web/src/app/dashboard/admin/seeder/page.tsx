@@ -122,7 +122,9 @@ export default function AdminSeederPage() {
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-6xl mx-auto">
             <div className="mb-8">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">🛠️ Administration - Création BDD</h1>
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                🛠️ Administration - Création BDD
+              </h1>
               <p className="text-gray-600">
                 Outils pour initialiser et gérer les données de la base de données
               </p>
