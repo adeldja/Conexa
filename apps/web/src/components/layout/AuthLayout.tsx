@@ -34,26 +34,11 @@ export default function AuthLayout({
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/50 p-8 text-center">
           {/* Logo */}
           <div className="flex justify-center mb-6">
-            <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-to-br from-[#1D4FFF] to-blue-600 rounded-xl flex items-center justify-center">
-                <svg
-                  className="w-6 h-6 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 10V3L4 14h7v7l9-11h-7z"
-                  />
-                </svg>
-              </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-[#1D4FFF] to-blue-600 bg-clip-text text-transparent">
-                Conexa
-              </span>
-            </div>
+            <img
+              src="/logo-conexa.svg"
+              alt="Conexa"
+              className="h-16 w-auto"
+            />
           </div>
 
           {/* Title */}

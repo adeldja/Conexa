@@ -1,0 +1,10 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Conexa Logo -->
+  <g fill="#0ea5e9">
+    <!-- Letter C shape -->
+    <path d="M50 60 C30 60, 20 80, 20 100 C20 120, 30 140, 50 140 C60 140, 70 135, 75 128 L90 135 C82 150, 66 160, 50 160 C18 160, 0 138, 0 100 C0 62, 18 40, 50 40 C66 40, 82 50, 90 65 L75 72 C70 65, 60 60, 50 60"/>
+    
+    <!-- CONEXA text -->
+    <text x="90" y="110" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#0ea5e9">CONEXA</text>
+  </g>
+</svg>

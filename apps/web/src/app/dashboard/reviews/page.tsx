@@ -2,6 +2,7 @@
 
 import { useAuth } from '@/contexts/AuthContext';
 import ProtectedRoute from '@/components/shared/ProtectedRoute';
+import Header from '@/components/layout/Header';
 import { useState, useEffect } from 'react';
 import { reviewService } from '@/services/reviewService';
 import type { Review } from '@/types/profiles';
@@ -21,7 +22,7 @@ interface ReviewFilters {
 }
 
 export default function ReviewsPage() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
   // États pour les données
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -158,26 +159,15 @@ export default function ReviewsPage() {
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-        <div className="max-w-6xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900">Avis Reçus</h1>
-            <p className="text-gray-600 mt-2">Consultez les évaluations laissées par vos clients</p>
-          </div>
-
-          {/* Navigation breadcrumb */}
-          <nav className="mb-6">
-            <ol className="flex items-center space-x-2 text-sm">
-              <li>
-                <a href="/dashboard" className="text-blue-600 hover:text-blue-800">
-                  Dashboard
-                </a>
-              </li>
-              <li className="text-gray-500">/</li>
-              <li className="text-gray-900 font-medium">Avis reçus</li>
-            </ol>
-          </nav>
+      <div className="min-h-screen bg-gray-50">
+        <Header user={user} onLogout={logout} />
+        <div className="container mx-auto px-4 py-8">
+          <div className="max-w-6xl mx-auto">
+            {/* Header */}
+            <div className="mb-8">
+              <h1 className="text-3xl font-bold text-gray-900">Avis Reçus</h1>
+              <p className="text-gray-600 mt-2">Consultez les évaluations laissées par vos clients</p>
+            </div>
 
           {error && (
             <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
@@ -494,6 +484,7 @@ export default function ReviewsPage() {
               )}
             </div>
           </Card>
+          </div>
         </div>
       </div>
     </ProtectedRoute>

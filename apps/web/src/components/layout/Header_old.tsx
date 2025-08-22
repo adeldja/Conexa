@@ -39,12 +39,20 @@ export default function Header({ user, onLogout }: HeaderProps) {
               </div>
               <div>
                 <h1 className="text-xl font-bold text-slate-900">Conexa</h1>
-                <p className="text-xs text-slate-500">
-                  {user?.role === 'ADMIN' ? 'Panneau Administrateur' : 
-                   user?.role === 'PROVIDER' ? 'Tableau de bord Prestataire' : 
-                   user?.role === 'USER' ? 'Espace Client' : 
-                   'Dashboard'}
-                </p>
+                <p className="text-xs text-slate-500">Dashboard Provider</p>
+              </div>
+            </div>
+            <div className="flex items-center space-x-3">
+              <div className="w-12 h-12 flex items-center justify-center">
+                <img 
+                  src="/conexa-logo-small.svg" 
+                  alt="Conexa Logo" 
+                  className="w-10 h-10"
+                />
+              </div>
+              <div>
+                <h1 className="text-xl font-bold text-slate-900">Conexa</h1>
+                <p className="text-xs text-slate-500">Dashboard Provider</p>
               </div>
             </div>
 

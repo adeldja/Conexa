@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import ProtectedRoute from '@/components/shared/ProtectedRoute';
+import Header from '@/components/layout/Header';
 import { Button, Input, Card, ToastContainer, useToast, Skeleton } from '@/components/ui';
 import type { UserProfileData, User } from '@/types/auth';
 
@@ -366,7 +367,7 @@ function ProfileForm({ user, onSave, loading }: ProfileFormProps) {
 }
 
 export default function ProfilePage() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const { toasts, removeToast } = useToast();
   const [loading, setLoading] = useState(true);
 
@@ -396,41 +397,30 @@ export default function ProfilePage() {
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      <div className="min-h-screen bg-gray-50">
+        <Header user={user} onLogout={logout} />
         <ToastContainer toasts={toasts} onRemove={removeToast} />
+        <div className="container mx-auto px-4 py-8">
+          <div className="max-w-4xl mx-auto">
+            {/* Header */}
+            <div className="mb-8">
+              <h1 className="text-3xl font-bold text-gray-900">Profil</h1>
+              <p className="text-gray-600 mt-2">
+                Gérez vos informations personnelles et professionnelles
+              </p>
+            </div>
 
-        <div className="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900">Mon Profil</h1>
-            <p className="text-gray-600 mt-2">
-              Gérez vos informations personnelles et professionnelles
-            </p>
-          </div>
-
-          {/* Navigation breadcrumb */}
-          <nav className="mb-6">
-            <ol className="flex items-center space-x-2 text-sm">
-              <li>
-                <a href="/dashboard" className="text-blue-600 hover:text-blue-800">
-                  Dashboard
-                </a>
-              </li>
-              <li className="text-gray-500">/</li>
-              <li className="text-gray-900 font-medium">Profil</li>
-            </ol>
-          </nav>
-
-          {/* Contenu principal */}
-          {loading ? (
-            <div className="space-y-6">
-              <Skeleton className="h-32 w-full rounded-lg" />
+            {/* Contenu principal */}
+            {loading ? (
+              <div className="space-y-6">
+                <Skeleton className="h-32 w-full rounded-lg" />
               <Skeleton className="h-96 w-full rounded-lg" />
               {user.role === 'PROVIDER' && <Skeleton className="h-96 w-full rounded-lg" />}
             </div>
           ) : (
             <ProfileForm user={user} onSave={handleSaveProfile} loading={loading} />
           )}
+          </div>
         </div>
       </div>
     </ProtectedRoute>

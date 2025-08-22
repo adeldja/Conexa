@@ -1,10 +1,13 @@
 'use client';
 
 import ProtectedRoute from '@/components/shared/ProtectedRoute';
+import Header from '@/components/layout/Header';
+import { useAuth } from '@/contexts/AuthContext';
 import { ProviderSelector, SlotsGrid, NotificationMessages } from '@/components/features/booking';
 import { useBookingLogic } from '@/hooks/useBookingLogic';
 
 export default function BookingsPage() {
+  const { user, logout } = useAuth();
   const {
     providers,
     selectedProviderId,
@@ -19,17 +22,19 @@ export default function BookingsPage() {
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-        <div className="max-w-6xl mx-auto px-4 py-8">
-          {/* Header Section */}
-          <div className="text-center mb-10">
-            <h1 className="text-4xl font-bold text-gray-900 mb-3 tracking-tight">
-              Prendre un rendez-vous
-            </h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Choisissez un créneau et réservez en un clic. Simple, rapide et efficace.
-            </p>
-          </div>
+      <div className="min-h-screen bg-gray-50">
+        <Header user={user} onLogout={logout} />
+        <div className="container mx-auto px-4 py-8">
+          <div className="max-w-6xl mx-auto">
+            {/* Header Section */}
+            <div className="text-center mb-10">
+              <h1 className="text-4xl font-bold text-gray-900 mb-3 tracking-tight">
+                Réservations
+              </h1>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Choisissez un créneau et réservez en un clic. Simple, rapide et efficace.
+              </p>
+            </div>
 
           <NotificationMessages error={error} success={success} />
 
@@ -73,6 +78,7 @@ export default function BookingsPage() {
               </div>
             </div>
           )}
+          </div>
         </div>
       </div>
     </ProtectedRoute>
