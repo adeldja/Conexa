@@ -62,7 +62,7 @@ export class MetricsService implements OnModuleInit {
   }
 
   onModuleInit() {
-    console.log('✅ Métriques Prometheus initialisées');
+    console.log('✅ Métriques test:covheus initialisées');
   }
 
   getMetrics(): Promise<string> {

@@ -1,9 +1,9 @@
 name: Production Monitoring
 
 on:
-  schedule:
-    # Check toutes les 5 minutes
-    - cron: '*/5 * * * *'
+  # schedule:
+  #   # Check toutes les 5 minutes - DÉSACTIVÉ pour éviter les emails
+  #   - cron: '*/5 * * * *'
   workflow_dispatch:
 
 jobs:

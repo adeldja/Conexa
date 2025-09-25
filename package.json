@@ -21,7 +21,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "turbo run test",
-    "test:coverage": "turbo run test:cov",
+    "test:cov": "turbo run test:cov",
     "quality": "yarn lint && yarn format:check && yarn test",
     "ci": "yarn install --frozen-lockfile && yarn quality && yarn build",
     "ci:lint": "yarn lint",

@@ -106,7 +106,7 @@
 - **[MILESTONE]** Lancement public officiel
   - Interface complète patient/provider
   - Système de réservation fonctionnel
-  - Paiement intégré (Stripe)
+  - Gestion des prix (préparation paiement)
   - Base utilisateurs : 0 → 500 users en 2 semaines
 
 ### ✨ **Fonctionnalités Principales**
